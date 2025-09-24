@@ -64,241 +64,329 @@ const StationFinder = () => {
     }
   ];
 
-  const getBatteryStatusColor = (type: string, count: number) => {
-    if (type === "full" && count > 0) return "text-success";
-    if (type === "charging" && count > 0) return "text-charging";
-    return "text-muted-foreground";
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-electric-blue-light via-background to-accent/30">
-      {/* Enhanced Header */}
-      <header className="bg-gradient-primary relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="w-full h-full bg-repeat" style={{
-            backgroundImage: `url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.1"><circle cx="30" cy="30" r="2"/></g></g></svg>')`
-          }}></div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      {/* Enhanced Header with Glass Effect */}
+      <header className="relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 overflow-hidden">
+        {/* Animated Background Pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div 
+            className="absolute inset-0 bg-repeat animate-pulse"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='grid' width='10' height='10' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 10 0 L 0 0 0 10' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grid)'/%3E%3C/svg%3E")`
+            }}
+          ></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
+          <div 
+            className="absolute top-10 right-1/4 w-72 h-72 bg-gradient-to-r from-indigo-400 to-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"
+            style={{ animationDelay: '2s' }}
+          ></div>
         </div>
-        <div className="container mx-auto p-6 relative z-10">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4 animate-fade-in">
-              <div className="relative">
-                <MapPin className="h-8 w-8 text-white animate-float" />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full animate-pulse-glow"></div>
+        
+        {/* Header Content */}
+        <div className="relative z-20 container mx-auto px-6 py-8">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-6">
+              <div className="relative p-3 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                <MapPin className="h-10 w-10 text-white" />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-ping"></div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"></div>
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-white">Tìm trạm thông minh</h1>
-                <p className="text-white/80 text-sm">Khám phá trạm pin gần nhất với bạn</p>
+                <h1 className="text-4xl font-bold text-white mb-2">Trạm Pin Thông Minh</h1>
+                <p className="text-white/90 text-lg">Tìm kiếm và đặt lịch trạm pin gần bạn</p>
+                <div className="flex items-center mt-2 space-x-4 text-white/80 text-sm">
+                  <span className="flex items-center gap-1">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    15 trạm đang hoạt động
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Zap className="h-4 w-4" />
+                    Sạc nhanh 2-5 phút
+                  </span>
+                </div>
               </div>
             </div>
             <Link to="/driver">
-              <Button variant="ghost" className="text-white hover:bg-white/20 glass-effect animate-slide-in-right">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Quay lại
+              <Button 
+                variant="ghost" 
+                className="text-white hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105"
+              >
+                <ArrowLeft className="h-5 w-5 mr-2" />
+                Quay lại Dashboard
               </Button>
             </Link>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto p-6 space-y-8">
-        {/* Enhanced Location Card */}
-        <Card className="card-gradient hover-lift animate-fade-in border-0 shadow-xl">
-          <CardHeader className="pb-4">
-            <CardTitle className="flex items-center text-primary">
-              <Navigation className="h-6 w-6 mr-3 animate-pulse-glow" />
-              Vị trí hiện tại
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex gap-4">
-              <div className="relative flex-1">
-                <Input 
-                  placeholder="Địa chỉ hiện tại..." 
-                  className="pr-12 bg-white/50 border-primary/20 focus:border-primary focus:bg-white transition-all duration-300"
-                  defaultValue="123 Lê Lợi, Quận 1, TP.HCM"
-                />
-                <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <Zap className="h-4 w-4 text-primary animate-pulse" />
-                </div>
-              </div>
-              <Button className="bg-gradient-electric hover:scale-105 transition-all duration-300 shadow-lg">
-                <Map className="h-4 w-4 mr-2" />
-                Chọn trên bản đồ
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Enhanced Filters */}
-        <Card className="card-gradient hover-lift animate-slide-up border-0 shadow-xl">
-          <CardHeader className="pb-4">
-            <CardTitle className="flex items-center text-primary">
-              <Filter className="h-6 w-6 mr-3" />
-              Bộ lọc thông minh
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="animate-slide-in-right" style={{ animationDelay: '0.1s' }}>
-                <label className="text-sm font-semibold mb-3 block text-primary">Khoảng cách</label>
-                <Select onValueChange={(value) => setFilters({...filters, distance: value})}>
-                  <SelectTrigger className="bg-white/50 border-primary/20 hover:border-primary transition-all duration-300">
-                    <SelectValue placeholder="Tất cả khoảng cách" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="1">Dưới 1 km</SelectItem>
-                    <SelectItem value="5">Dưới 5 km</SelectItem>
-                    <SelectItem value="10">Dưới 10 km</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="animate-slide-in-right" style={{ animationDelay: '0.2s' }}>
-                <label className="text-sm font-semibold mb-3 block text-primary">Số lượng pin</label>
-                <Select onValueChange={(value) => setFilters({...filters, batteryCount: value})}>
-                  <SelectTrigger className="bg-white/50 border-primary/20 hover:border-primary transition-all duration-300">
-                    <SelectValue placeholder="Tất cả số lượng" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="5">Trên 5 pin</SelectItem>
-                    <SelectItem value="10">Trên 10 pin</SelectItem>
-                    <SelectItem value="15">Trên 15 pin</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Enhanced Station List */}
-        <div className="space-y-6 animate-scale-in">
-          {mockStations.map((station, index) => (
-            <Card 
-              key={station.id} 
-              className="card-gradient hover-lift border-0 shadow-xl overflow-hidden relative group"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-electric"></div>
-              <CardContent className="p-8">
-                {/* Station Header */}
-                <div className="flex justify-between items-start mb-6">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-3">
-                      <h3 className="text-2xl font-bold bg-gradient-electric bg-clip-text text-transparent">
-                        {station.name}
-                      </h3>
-                      <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 fill-warning text-warning" />
-                        <span className="text-sm font-semibold text-warning">{station.rating}</span>
-                      </div>
-                    </div>
-                    <p className="text-muted-foreground flex items-center gap-2">
-                      <MapPin className="h-4 w-4" />
-                      {station.address}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm">
-                      <span className="flex items-center gap-1 text-primary font-medium">
-                        <Navigation className="h-4 w-4" />
-                        Cách {station.distance}
-                      </span>
-                      <span className="flex items-center gap-1 text-success font-medium">
-                        <Clock className="h-4 w-4" />
-                        {station.estimatedTime}
-                      </span>
-                    </div>
+      {/* Main Content with Better Spacing */}
+      <div className="container mx-auto px-6 py-8 max-w-7xl">
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Left Column - Search & Filters */}
+          <div className="lg:col-span-1 space-y-6">
+            {/* Location Search Card */}
+            <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center text-lg font-semibold">
+                  <div className="p-2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg mr-3">
+                    <Navigation className="h-5 w-5 text-white" />
                   </div>
-                  <Badge variant="secondary" className="bg-gradient-success text-white px-4 py-2 font-semibold">
-                    {station.status}
-                  </Badge>
-                </div>
-
-                {/* Battery Status Grid */}
-                <div className="grid lg:grid-cols-2 gap-8 mb-6">
-                  {/* Battery Counts */}
-                  <div className="space-y-4">
-                    <h4 className="text-lg font-semibold text-primary">Trạng thái pin</h4>
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="text-center p-4 rounded-xl bg-gradient-success/10 border border-success/20">
-                        <div className={`text-3xl font-bold mb-1 ${getBatteryStatusColor("full", station.batteries.full)}`}>
-                          {station.batteries.full}
-                        </div>
-                        <div className="text-xs text-success font-medium">Pin đầy</div>
-                        <div className="w-full h-2 bg-success/20 rounded-full mt-2">
-                          <div className="h-full bg-gradient-success rounded-full" style={{ width: '100%' }}></div>
-                        </div>
-                      </div>
-                      <div className="text-center p-4 rounded-xl bg-gradient-electric/10 border border-charging/20">
-                        <div className={`text-3xl font-bold mb-1 ${getBatteryStatusColor("charging", station.batteries.charging)}`}>
-                          {station.batteries.charging}
-                        </div>
-                        <div className="text-xs text-charging font-medium">Đang sạc</div>
-                        <div className="w-full h-2 bg-charging/20 rounded-full mt-2">
-                          <div className="h-full bg-gradient-electric rounded-full animate-pulse" style={{ width: '75%' }}></div>
-                        </div>
-                      </div>
-                      <div className="text-center p-4 rounded-xl bg-muted/50 border border-muted">
-                        <div className={`text-3xl font-bold mb-1 ${getBatteryStatusColor("empty", station.batteries.empty)}`}>
-                          {station.batteries.empty}
-                        </div>
-                        <div className="text-xs text-muted-foreground font-medium">Pin rỗng</div>
-                        <div className="w-full h-2 bg-muted rounded-full mt-2">
-                          <div className="h-full bg-muted-foreground/30 rounded-full" style={{ width: '20%' }}></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Battery Types */}
-                  <div className="space-y-4">
-                    <h4 className="text-lg font-semibold text-primary">Loại pin có sẵn</h4>
-                    <div className="space-y-3">
-                      {Object.entries(station.batteryTypes).map(([type, counts]) => (
-                        counts.full > 0 && (
-                          <div key={type} className="flex items-center justify-between p-3 rounded-lg bg-white/50 border border-primary/10">
-                            <div className="flex items-center gap-3">
-                              <Battery className={`h-5 w-5 ${type === "Lithium-ion" ? "text-electric-blue" : "text-primary"}`} />
-                              <span className={`font-medium ${type === "Lithium-ion" ? "text-electric-blue" : ""}`}>
-                                {type}
-                              </span>
-                            </div>
-                            <Badge variant="secondary" className="bg-gradient-success text-white font-semibold">
-                              {counts.full} pin
-                            </Badge>
-                          </div>
-                        )
-                      ))}
-                    </div>
+                  Vị trí của bạn
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="relative">
+                  <Input 
+                    placeholder="Nhập địa chỉ hoặc chọn trên bản đồ..." 
+                    className="pl-12 pr-4 py-3 bg-gray-50 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-xl text-sm"
+                    defaultValue="123 Lê Lợi, Quận 1, TP.HCM"
+                  />
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                    <MapPin className="h-4 w-4 text-gray-400" />
                   </div>
                 </div>
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white rounded-xl py-3 transition-all duration-300 hover:scale-105 shadow-lg">
+                  <Map className="h-4 w-4 mr-2" />
+                  Chọn trên bản đồ
+                </Button>
+              </CardContent>
+            </Card>
 
-                {/* Amenities */}
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-primary mb-3">Tiện ích</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {station.amenities.map((amenity, idx) => (
-                      <Badge key={idx} variant="outline" className="bg-primary/5 text-primary border-primary/20 hover:bg-primary/10 transition-colors">
-                        {amenity}
-                      </Badge>
-                    ))}
+            {/* Enhanced Filters */}
+            <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center text-lg font-semibold">
+                  <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg mr-3">
+                    <Filter className="h-5 w-5 text-white" />
                   </div>
+                  Bộ lọc tìm kiếm
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <label className="text-sm font-semibold mb-3 block text-gray-700">Khoảng cách</label>
+                  <Select onValueChange={(value) => setFilters({...filters, distance: value})}>
+                    <SelectTrigger className="bg-gray-50 border-gray-200 focus:border-purple-500 rounded-xl">
+                      <SelectValue placeholder="Chọn khoảng cách" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1">📍 Dưới 1 km</SelectItem>
+                      <SelectItem value="5">🚗 Dưới 5 km</SelectItem>
+                      <SelectItem value="10">🏃 Dưới 10 km</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-4">
-                  <Link to="/driver/reservation" className="flex-1">
-                    <Button className="w-full bg-gradient-electric hover:scale-105 transition-all duration-300 shadow-lg text-lg py-6">
-                      <Battery className="h-5 w-5 mr-3" />
-                      Đặt lịch ngay
-                    </Button>
-                  </Link>
-                  <Button variant="outline" className="px-8 hover:scale-105 transition-all duration-300 border-primary text-primary hover:bg-primary/10">
-                    <MapPin className="h-5 w-5 mr-2" />
-                    Chỉ đường
-                  </Button>
+                <div>
+                  <label className="text-sm font-semibold mb-3 block text-gray-700">Số lượng pin</label>
+                  <Select onValueChange={(value) => setFilters({...filters, batteryCount: value})}>
+                    <SelectTrigger className="bg-gray-50 border-gray-200 focus:border-purple-500 rounded-xl">
+                      <SelectValue placeholder="Chọn số lượng pin" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="5">🔋 Trên 5 pin</SelectItem>
+                      <SelectItem value="10">🔋🔋 Trên 10 pin</SelectItem>
+                      <SelectItem value="15">🔋🔋🔋 Trên 15 pin</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </CardContent>
             </Card>
-          ))}
+
+            {/* Quick Stats Card */}
+            <Card className="border-0 shadow-xl bg-gradient-to-br from-green-50 to-emerald-50">
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-gray-800 mb-4">Thống kê nhanh</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Trạm gần nhất</span>
+                    <span className="font-semibold text-green-600">2.5 km</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Pin có sẵn</span>
+                    <span className="font-semibold text-blue-600">25 pin</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Thời gian ước tính</span>
+                    <span className="font-semibold text-purple-600">2-5 phút</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Right Column - Station List */}
+          <div className="lg:col-span-2 space-y-6">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-800">Trạm pin gần bạn</h2>
+              <Badge variant="secondary" className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full">
+                {mockStations.length} trạm tìm thấy
+              </Badge>
+            </div>
+
+            {/* Enhanced Station Cards */}
+            <div className="space-y-6">
+              {mockStations.map((station, index) => (
+                <Card 
+                  key={station.id} 
+                  className="border-0 shadow-xl bg-white hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 overflow-hidden group"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {/* Card Header with Gradient */}
+                  <div className="h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                  
+                  <CardContent className="p-8">
+                    {/* Station Header */}
+                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-8 gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-4 mb-3">
+                          <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl">
+                            <Zap className="h-6 w-6 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-2xl font-bold text-gray-800 mb-1">{station.name}</h3>
+                            <div className="flex items-center gap-2">
+                              <div className="flex items-center gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star 
+                                    key={i} 
+                                    className={`h-4 w-4 ${i < Math.floor(station.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
+                                  />
+                                ))}
+                              </div>
+                              <span className="text-sm font-semibold text-yellow-600">{station.rating}</span>
+                              <span className="text-sm text-gray-500">• 128 đánh giá</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-2 text-sm text-gray-600">
+                          <p className="flex items-center gap-2">
+                            <MapPin className="h-4 w-4 text-gray-400" />
+                            {station.address}
+                          </p>
+                          <div className="flex items-center gap-6">
+                            <span className="flex items-center gap-1 font-medium text-blue-600">
+                              <Navigation className="h-4 w-4" />
+                              {station.distance}
+                            </span>
+                            <span className="flex items-center gap-1 font-medium text-green-600">
+                              <Clock className="h-4 w-4" />
+                              {station.estimatedTime}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <Badge 
+                        variant="secondary" 
+                        className="bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-4 py-2 rounded-full font-semibold"
+                      >
+                        ✅ {station.status}
+                      </Badge>
+                    </div>
+
+                    {/* Battery Status with Enhanced Design */}
+                    <div className="grid md:grid-cols-2 gap-8 mb-8">
+                      {/* Battery Counts */}
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                          <Battery className="h-5 w-5 text-blue-500" />
+                          Trạng thái pin
+                        </h4>
+                        <div className="grid grid-cols-3 gap-3">
+                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-2xl border border-green-200 text-center group-hover:scale-105 transition-transform duration-300">
+                            <div className="text-3xl font-bold text-green-600 mb-1">{station.batteries.full}</div>
+                            <div className="text-xs font-medium text-green-700">Pin đầy</div>
+                            <div className="w-full h-2 bg-green-200 rounded-full mt-3 overflow-hidden">
+                              <div className="h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-2xl border border-blue-200 text-center group-hover:scale-105 transition-transform duration-300">
+                            <div className="text-3xl font-bold text-blue-600 mb-1">{station.batteries.charging}</div>
+                            <div className="text-xs font-medium text-blue-700">Đang sạc</div>
+                            <div className="w-full h-2 bg-blue-200 rounded-full mt-3 overflow-hidden">
+                              <div className="h-full bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full animate-pulse" style={{ width: '75%' }}></div>
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-br from-gray-50 to-slate-50 p-4 rounded-2xl border border-gray-200 text-center group-hover:scale-105 transition-transform duration-300">
+                            <div className="text-3xl font-bold text-gray-500 mb-1">{station.batteries.empty}</div>
+                            <div className="text-xs font-medium text-gray-600">Pin rỗng</div>
+                            <div className="w-full h-2 bg-gray-200 rounded-full mt-3 overflow-hidden">
+                              <div className="h-full bg-gray-400 rounded-full" style={{ width: '25%' }}></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Battery Types */}
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                          <Zap className="h-5 w-5 text-purple-500" />
+                          Loại pin có sẵn
+                        </h4>
+                        <div className="space-y-3">
+                          {Object.entries(station.batteryTypes).map(([type, counts]) => (
+                            counts.full > 0 && (
+                              <div key={type} className="flex items-center justify-between p-4 bg-gradient-to-r from-white to-gray-50 rounded-xl border border-gray-100 group-hover:shadow-md transition-all duration-300">
+                                <div className="flex items-center gap-3">
+                                  <div className={`p-2 rounded-lg ${type === "Lithium-ion" ? "bg-blue-100" : "bg-purple-100"}`}>
+                                    <Battery className={`h-4 w-4 ${type === "Lithium-ion" ? "text-blue-600" : "text-purple-600"}`} />
+                                  </div>
+                                  <span className="font-medium text-gray-700">{type}</span>
+                                </div>
+                                <Badge 
+                                  variant="secondary" 
+                                  className="bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 font-semibold px-3 py-1 rounded-full"
+                                >
+                                  {counts.full} pin
+                                </Badge>
+                              </div>
+                            )
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Amenities */}
+                    <div className="mb-8">
+                      <h4 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                        ⭐ Tiện ích & Dịch vụ
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {station.amenities.map((amenity, idx) => (
+                          <Badge 
+                            key={idx} 
+                            variant="outline" 
+                            className="bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border-blue-200 hover:bg-blue-100 transition-colors px-3 py-1 rounded-full"
+                          >
+                            {amenity}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-4">
+                      <Link to="/driver/reservation" className="flex-1">
+                        <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                          <Battery className="h-5 w-5 mr-3" />
+                          Đặt lịch ngay
+                        </Button>
+                      </Link>
+                      <Button 
+                        variant="outline" 
+                        className="px-8 py-4 border-2 border-blue-200 text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-300 hover:scale-105 font-semibold"
+                      >
+                        <MapPin className="h-5 w-5 mr-2" />
+                        Chỉ đường
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
