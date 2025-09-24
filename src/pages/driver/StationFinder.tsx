@@ -10,8 +10,7 @@ import { Link } from "react-router-dom";
 const StationFinder = () => {
   const [filters, setFilters] = useState({
     distance: "",
-    batteryCount: "",
-    crowdLevel: ""
+    batteryCount: ""
   });
 
   const mockStations = [
@@ -109,7 +108,7 @@ const StationFinder = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="text-sm font-medium mb-2 block">Khoảng cách</label>
                 <Select onValueChange={(value) => setFilters({...filters, distance: value})}>
@@ -133,19 +132,6 @@ const StationFinder = () => {
                     <SelectItem value="5">Trên 5 pin</SelectItem>
                     <SelectItem value="10">Trên 10 pin</SelectItem>
                     <SelectItem value="15">Trên 15 pin</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <label className="text-sm font-medium mb-2 block">Mức độ đông người</label>
-                <Select onValueChange={(value) => setFilters({...filters, crowdLevel: value})}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Tất cả" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="low">Thấp</SelectItem>
-                    <SelectItem value="medium">Trung bình</SelectItem>
-                    <SelectItem value="high">Cao</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -182,12 +168,6 @@ const StationFinder = () => {
                         <div className="text-lg font-bold text-muted-foreground">{station.batteries.empty}</div>
                         <div className="text-xs text-muted-foreground">Pin rỗng</div>
                       </div>
-                    </div>
-                    <div className="text-center">
-                      <Badge variant={station.crowdLevel === "Thấp" ? "secondary" : station.crowdLevel === "Trung bình" ? "default" : "destructive"}>
-                        {station.crowdLevel}
-                      </Badge>
-                      <div className="text-xs text-muted-foreground">Đông người</div>
                     </div>
                   </div>
                   
