@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Car, MapPin, Calendar, CreditCard, Battery, Home, Settings } from "lucide-react";
+import { Car, MapPin, Calendar, CreditCard, Battery, Home, Settings, Zap, Star, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import AccountSettings from "@/components/AccountSettings";
@@ -10,161 +10,168 @@ const DriverDashboard = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-gradient-primary text-white p-6">
-        <div className="container mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Battery className="h-8 w-8" />
-            <h1 className="text-2xl font-bold">Dashboard Tài xế</h1>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
-              <DialogTrigger asChild>
-                <Button variant="ghost" className="text-white hover:bg-white/20">
-                  <Settings className="h-4 w-4 mr-2" />
-                  Cài đặt
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      {/* Enhanced Header with Glass Effect */}
+      <header className="relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 overflow-hidden">
+        {/* Animated Background Pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div 
+            className="absolute inset-0 bg-repeat animate-pulse"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='grid' width='10' height='10' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 10 0 L 0 0 0 10' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grid)'/%3E%3C/svg%3E")`
+            }}
+          ></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
+          <div 
+            className="absolute top-10 right-1/4 w-72 h-72 bg-gradient-to-r from-indigo-400 to-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"
+            style={{ animationDelay: '2s' }}
+          ></div>
+        </div>
+
+        {/* Header Content */}
+        <div className="relative z-20 container mx-auto px-6 py-8">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-6">
+              <div className="relative p-3 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                <Battery className="h-10 w-10 text-white" />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-ping"></div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"></div>
+              </div>
+              <div>
+                <h1 className="text-4xl font-bold text-white mb-2">Dashboard Tài xế</h1>
+                <p className="text-white/90 text-lg">Quản lý xe điện và dịch vụ đổi pin của bạn</p>
+                <div className="flex items-center mt-2 space-x-4 text-white/80 text-sm">
+                  <span className="flex items-center gap-1">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    12 trạm đang hoạt động
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Zap className="h-4 w-4" />
+                    Sạc nhanh 2-5 phút
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="ghost" className="text-white hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105">
+                    <Settings className="h-5 w-5 mr-2" />
+                    Cài đặt
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle>Cài đặt tài khoản</DialogTitle>
+                  </DialogHeader>
+                  <AccountSettings userRole="driver" />
+                </DialogContent>
+              </Dialog>
+              <Link to="/">
+                <Button variant="ghost" className="text-white hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105">
+                  <Home className="h-5 w-5 mr-2" />
+                  Trang chủ
                 </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-                <DialogHeader>
-                  <DialogTitle>Cài đặt tài khoản</DialogTitle>
-                </DialogHeader>
-                <AccountSettings userRole="driver" />
-              </DialogContent>
-            </Dialog>
-            <Link to="/">
-              <Button variant="ghost" className="text-white hover:bg-white/20">
-                <Home className="h-4 w-4 mr-2" />
-                Trang chủ
-              </Button>
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto p-6">
+      {/* Main Content */}
+      <div className="container mx-auto px-6 py-8 max-w-7xl">
         <div className="mb-8 animate-fade-in">
-          <h2 className="text-3xl font-bold text-foreground mb-2">Chào mừng bạn!</h2>
-          <p className="text-muted-foreground">Quản lý xe điện và dịch vụ đổi pin của bạn</p>
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">Chào mừng bạn!</h2>
+          <p className="text-gray-600">Quản lý xe điện và dịch vụ đổi pin của bạn</p>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8 animate-slide-up">
-          <Card className="hover-scale">
-            <CardContent className="p-6 text-center">
-              <Car className="h-12 w-12 text-electric-blue mx-auto mb-4" />
-              <h3 className="text-2xl font-bold">1</h3>
-              <p className="text-muted-foreground">Xe đã đăng ký</p>
-            </CardContent>
-          </Card>
-          <Card className="hover-scale">
-            <CardContent className="p-6 text-center">
-              <MapPin className="h-12 w-12 text-success mx-auto mb-4" />
-              <h3 className="text-2xl font-bold">12</h3>
-              <p className="text-muted-foreground">Trạm gần đây</p>
-            </CardContent>
-          </Card>
-          <Card className="hover-scale">
-            <CardContent className="p-6 text-center">
-              <Calendar className="h-12 w-12 text-warning mx-auto mb-4" />
-              <h3 className="text-2xl font-bold">3</h3>
-              <p className="text-muted-foreground">Lịch hẹn</p>
-            </CardContent>
-          </Card>
-          <Card className="hover-scale">
-            <CardContent className="p-6 text-center">
-              <CreditCard className="h-12 w-12 text-charging mx-auto mb-4" />
-              <h3 className="text-2xl font-bold">5</h3>
-              <p className="text-muted-foreground">Gói thuê bao</p>
-            </CardContent>
-          </Card>
+        {/* Enhanced Quick Stats */}
+        <div className="grid md:grid-cols-4 gap-6 mb-8">
+          {[
+            { icon: Car, count: "1", label: "Xe đã đăng ký", color: "from-blue-500 to-indigo-500", bgColor: "from-blue-50 to-indigo-50" },
+            { icon: MapPin, count: "12", label: "Trạm gần đây", color: "from-green-500 to-emerald-500", bgColor: "from-green-50 to-emerald-50" },
+            { icon: Calendar, count: "3", label: "Lịch hẹn", color: "from-orange-500 to-yellow-500", bgColor: "from-orange-50 to-yellow-50" },
+            { icon: CreditCard, count: "5", label: "Gói thuê bao", color: "from-purple-500 to-pink-500", bgColor: "from-purple-50 to-pink-50" }
+          ].map((stat, index) => (
+            <Card 
+              key={index} 
+              className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 group overflow-hidden"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className={`h-2 bg-gradient-to-r ${stat.color}`}></div>
+              <CardContent className={`p-6 text-center bg-gradient-to-br ${stat.bgColor} group-hover:scale-105 transition-transform duration-300`}>
+                <div className={`p-3 bg-gradient-to-r ${stat.color} rounded-xl mx-auto mb-4 w-fit`}>
+                  <stat.icon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-3xl font-bold mb-2 text-gray-800">{stat.count}</h3>
+                <p className="text-gray-600 font-medium">{stat.label}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
-        {/* Hero Section with Background */}
-        <div className="relative mb-8 rounded-xl overflow-hidden animate-fade-in">
-          <div className="absolute inset-0 bg-gradient-to-r from-electric-blue/20 to-charging/20" />
+        {/* Enhanced Hero Section */}
+        <div className="relative mb-8 rounded-2xl overflow-hidden animate-fade-in group">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 via-indigo-600/90 to-purple-600/90" />
           <img 
             src="/src/assets/ev-station-hero.jpg" 
             alt="EV Station" 
-            className="w-full h-48 object-cover"
+            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-          <div className="absolute bottom-4 left-4 text-white">
-            <h2 className="text-2xl font-bold mb-1">Hệ thống đổi pin thông minh</h2>
-            <p className="text-white/80">Trải nghiệm dịch vụ nhanh chóng và tiện lợi</p>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          <div className="absolute inset-6 flex flex-col justify-center">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl font-bold mb-3 text-white">Hệ thống đổi pin thông minh</h2>
+              <p className="text-white/90 text-lg mb-6">Trải nghiệm dịch vụ nhanh chóng và tiện lợi với công nghệ AI hiện đại</p>
+              <div className="flex items-center space-x-6 text-white/80 text-sm">
+                <span className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5" />
+                  99.8% uptime
+                </span>
+                <span className="flex items-center gap-2">
+                  <Star className="h-5 w-5" />
+                  4.9/5 đánh giá
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Main Features */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 animate-scale-in">
-          <Card className="hover-glow">
-            <CardHeader>
-              <CardTitle className="flex items-center text-electric-blue">
-                <Car className="h-6 w-6 mr-2" />
-                Đăng ký & Liên kết xe
-              </CardTitle>
-              <CardDescription>
-                Đăng ký thông tin xe VINFAST và loại pin
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link to="/driver/register-vehicle">
-                <Button className="w-full">Quản lý xe</Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card className="hover-glow">
-            <CardHeader>
-              <CardTitle className="flex items-center text-electric-blue">
-                <MapPin className="h-6 w-6 mr-2" />
-                Tìm trạm & Tồn kho pin
-              </CardTitle>
-              <CardDescription>
-                Tìm trạm gần nhất và kiểm tra tình trạng pin
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link to="/driver/find-stations">
-                <Button className="w-full">Tìm trạm</Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card className="hover-glow">
-            <CardHeader>
-              <CardTitle className="flex items-center text-electric-blue">
-                <Calendar className="h-6 w-6 mr-2" />
-                Lịch sử đặt chỗ
-              </CardTitle>
-              <CardDescription>
-                Xem lại thông tin booking đã đăng ký
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link to="/driver/booking-history">
-                <Button className="w-full">Xem lịch sử</Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card className="hover-glow">
-            <CardHeader>
-              <CardTitle className="flex items-center text-electric-blue">
-                <Battery className="h-6 w-6 mr-2" />
-                Gói thuê pin
-              </CardTitle>
-              <CardDescription>
-                Đăng ký gói thuê bao pin hàng tháng
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link to="/driver/subscriptions">
-                <Button className="w-full">Xem gói</Button>
-              </Link>
-            </CardContent>
-          </Card>
+        {/* Enhanced Main Features */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+          {[
+            { icon: Car, title: "Đăng ký & Liên kết xe", desc: "Đăng ký thông tin xe VINFAST và loại pin", link: "/driver/register-vehicle", color: "from-blue-500 to-indigo-500" },
+            { icon: MapPin, title: "Tìm trạm & Tồn kho pin", desc: "Tìm trạm gần nhất và kiểm tra tình trạng pin", link: "/driver/find-stations", color: "from-green-500 to-emerald-500" },
+            { icon: Calendar, title: "Lịch sử đặt chỗ", desc: "Xem lại thông tin booking đã đăng ký", link: "/driver/booking-history", color: "from-orange-500 to-yellow-500" },
+            { icon: Battery, title: "Gói thuê pin", desc: "Đăng ký gói thuê bao pin hàng tháng", link: "/driver/subscriptions", color: "from-purple-500 to-pink-500" }
+          ].map((feature, index) => (
+            <Card 
+              key={index} 
+              className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className={`h-2 bg-gradient-to-r ${feature.color}`}></div>
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
+                  <div className={`p-3 bg-gradient-to-r ${feature.color} rounded-xl mr-4`}>
+                    <feature.icon className="h-6 w-6 text-white" />
+                  </div>
+                  {feature.title}
+                </CardTitle>
+                <CardDescription className="text-gray-600 text-base">
+                  {feature.desc}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <Link to={feature.link}>
+                  <Button className={`w-full bg-gradient-to-r ${feature.color} hover:opacity-90 text-white rounded-xl py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl`}>
+                    <Zap className="h-5 w-5 mr-2" />
+                    Truy cập ngay
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </div>
