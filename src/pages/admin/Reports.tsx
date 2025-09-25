@@ -125,11 +125,16 @@ const Reports = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="bg-gradient-primary text-white p-6">
+      <header className="bg-gradient-to-r from-blue-600 to-blue-500 text-white p-6">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <BarChart3 className="h-8 w-8" />
-            <h1 className="text-2xl font-bold">Báo cáo tổng hợp</h1>
+            <div className="bg-white/20 p-2 rounded-lg">
+              <BarChart3 className="h-6 w-6" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold">Báo cáo tổng hợp</h1>
+              <p className="text-blue-100 text-sm">Phân tích dữ liệu và thống kê</p>
+            </div>
           </div>
           <Link to="/admin">
             <Button variant="ghost" className="text-white hover:bg-white/20">
@@ -142,9 +147,14 @@ const Reports = () => {
 
       <div className="container mx-auto p-6">
         {/* Filters */}
-        <Card className="mb-8 animate-fade-in">
+        <Card className="mb-8 bg-gradient-to-br from-purple-50 to-purple-100 border-l-4 border-purple-500 hover:shadow-lg transition-all duration-300">
           <CardHeader>
-            <CardTitle>Bộ lọc báo cáo</CardTitle>
+            <CardTitle className="flex items-center">
+              <div className="bg-gradient-to-r from-purple-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
+                <Search className="h-5 w-5 text-white" />
+              </div>
+              Bộ lọc báo cáo
+            </CardTitle>
             <CardDescription>Tùy chỉnh thời gian và trạm để xem báo cáo chi tiết</CardDescription>
           </CardHeader>
           <CardContent>
@@ -178,45 +188,57 @@ const Reports = () => {
         </Card>
 
         {/* KPI Overview */}
-        <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8 animate-slide-up">
-          <Card className="hover-scale">
+        <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+          <Card className="bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-green-500">
             <CardContent className="p-4 text-center">
-              <DollarSign className="h-8 w-8 text-success mx-auto mb-2" />
+              <div className="bg-gradient-to-r from-green-500 to-green-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
+                <DollarSign className="h-5 w-5 text-white" />
+              </div>
               <h3 className="text-lg font-bold">{kpiData.totalRevenue}</h3>
               <p className="text-xs text-muted-foreground">Tổng doanh thu (VNĐ)</p>
             </CardContent>
           </Card>
-          <Card className="hover-scale">
+          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-blue-500">
             <CardContent className="p-4 text-center">
-              <TrendingUp className="h-8 w-8 text-electric-blue mx-auto mb-2" />
+              <div className="bg-gradient-to-r from-blue-500 to-blue-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
+                <TrendingUp className="h-5 w-5 text-white" />
+              </div>
               <h3 className="text-lg font-bold">{kpiData.totalTransactions}</h3>
               <p className="text-xs text-muted-foreground">Tổng giao dịch</p>
             </CardContent>
           </Card>
-          <Card className="hover-scale">
+          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-orange-500">
             <CardContent className="p-4 text-center">
-              <DollarSign className="h-8 w-8 text-warning mx-auto mb-2" />
+              <div className="bg-gradient-to-r from-orange-500 to-orange-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
+                <DollarSign className="h-5 w-5 text-white" />
+              </div>
               <h3 className="text-lg font-bold">{kpiData.avgTransaction}</h3>
               <p className="text-xs text-muted-foreground">TB/giao dịch (VNĐ)</p>
             </CardContent>
           </Card>
-          <Card className="hover-scale">
+          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-purple-500">
             <CardContent className="p-4 text-center">
-              <Users className="h-8 w-8 text-charging mx-auto mb-2" />
+              <div className="bg-gradient-to-r from-purple-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
+                <Users className="h-5 w-5 text-white" />
+              </div>
               <h3 className="text-lg font-bold">{kpiData.customerSatisfaction}</h3>
               <p className="text-xs text-muted-foreground">Hài lòng KH</p>
             </CardContent>
           </Card>
-          <Card className="hover-scale">
+          <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-emerald-500">
             <CardContent className="p-4 text-center">
-              <TrendingUp className="h-8 w-8 text-success mx-auto mb-2" />
+              <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
+                <TrendingUp className="h-5 w-5 text-white" />
+              </div>
               <h3 className="text-lg font-bold">{kpiData.systemUptime}</h3>
               <p className="text-xs text-muted-foreground">Uptime hệ thống</p>
             </CardContent>
           </Card>
-          <Card className="hover-scale">
+          <Card className="bg-gradient-to-br from-indigo-50 to-indigo-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-indigo-500">
             <CardContent className="p-4 text-center">
-              <Battery className="h-8 w-8 text-electric-blue mx-auto mb-2" />
+              <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
+                <Battery className="h-5 w-5 text-white" />
+              </div>
               <h3 className="text-lg font-bold">{kpiData.batteryUtilization}</h3>
               <p className="text-xs text-muted-foreground">Sử dụng pin</p>
             </CardContent>

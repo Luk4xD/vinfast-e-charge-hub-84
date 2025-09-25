@@ -142,11 +142,16 @@ const BatteryDispatch = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="bg-gradient-primary text-white p-6">
+      <header className="bg-gradient-to-r from-blue-600 to-blue-500 text-white p-6">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Battery className="h-8 w-8" />
-            <h1 className="text-2xl font-bold">Điều phối pin giữa các trạm</h1>
+            <div className="bg-white/20 p-2 rounded-lg">
+              <Battery className="h-6 w-6" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold">Điều phối pin giữa các trạm</h1>
+              <p className="text-blue-100 text-sm">Quản lý phân phối pin tối ưu</p>
+            </div>
           </div>
           <Link to="/admin">
             <Button variant="ghost" className="text-white hover:bg-white/20">
@@ -161,11 +166,13 @@ const BatteryDispatch = () => {
         {/* Station Overview */}
         <div className="grid md:grid-cols-5 gap-4 mb-8 animate-fade-in">
           {stations.map((station) => (
-            <Card key={station.id} className="hover-scale">
+            <Card key={station.id} className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-blue-500">
               <CardContent className="p-4 text-center">
-                <MapPin className="h-8 w-8 text-electric-blue mx-auto mb-2" />
+                <div className="bg-gradient-to-r from-blue-500 to-blue-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
+                  <MapPin className="h-5 w-5 text-white" />
+                </div>
                 <h3 className="font-semibold text-sm">{station.name}</h3>
-                <p className="text-2xl font-bold text-charging mt-2">{station.availableBatteries}</p>
+                <p className="text-2xl font-bold text-blue-600 mt-2">{station.availableBatteries}</p>
                 <p className="text-xs text-muted-foreground">Pin có sẵn</p>
               </CardContent>
             </Card>
@@ -173,10 +180,12 @@ const BatteryDispatch = () => {
         </div>
 
         {/* AI Heuristic Suggestions */}
-        <Card className="mb-8 animate-slide-up">
+        <Card className="mb-8 bg-gradient-to-br from-orange-50 to-orange-100 border-l-4 border-orange-500 hover:shadow-lg transition-all duration-300">
           <CardHeader>
             <CardTitle className="flex items-center">
-              <Battery className="h-6 w-6 mr-2 text-electric-blue" />
+              <div className="bg-gradient-to-r from-orange-500 to-orange-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
+                <Battery className="h-5 w-5 text-white" />
+              </div>
               Gợi ý điều phối từ thuật toán AI
             </CardTitle>
             <CardDescription>
@@ -185,13 +194,13 @@ const BatteryDispatch = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="bg-gradient-to-r from-warning/10 to-orange-100/50 border border-warning/20 rounded-lg p-4">
+              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg p-4 hover:shadow-md transition-all duration-300">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
-                    <AlertCircle className="h-5 w-5 text-warning" />
-                    <span className="font-semibold text-warning">Ưu tiên cao</span>
+                    <AlertCircle className="h-5 w-5 text-orange-500" />
+                    <span className="font-semibold text-orange-600">Ưu tiên cao</span>
                   </div>
-                  <Badge className="bg-warning text-warning-foreground">Khuyến nghị</Badge>
+                  <Badge className="bg-gradient-to-r from-orange-500 to-orange-600 text-white">Khuyến nghị</Badge>
                 </div>
                 <div className="flex items-center space-x-4 mb-2">
                   <span className="font-semibold">Trạm Quận 7</span>
@@ -203,19 +212,19 @@ const BatteryDispatch = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium">Độ tin cậy: 92%</span>
-                  <Button size="sm" variant="outline">
+                  <Button size="sm" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white">
                     Áp dụng gợi ý
                   </Button>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-electric-blue/10 to-blue-100/50 border border-electric-blue/20 rounded-lg p-4">
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4 hover:shadow-md transition-all duration-300">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-5 w-5 text-electric-blue" />
-                    <span className="font-semibold text-electric-blue">Ưu tiên trung bình</span>
+                    <CheckCircle className="h-5 w-5 text-blue-500" />
+                    <span className="font-semibold text-blue-600">Ưu tiên trung bình</span>
                   </div>
-                  <Badge className="bg-electric-blue text-white">Tối ưu hóa</Badge>
+                  <Badge className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">Tối ưu hóa</Badge>
                 </div>
                 <div className="flex items-center space-x-4 mb-2">
                   <span className="font-semibold">Kho trung tâm</span>
@@ -227,19 +236,19 @@ const BatteryDispatch = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium">Độ tin cậy: 85%</span>
-                  <Button size="sm" variant="outline">
+                  <Button size="sm" className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white">
                     Áp dụng gợi ý
                   </Button>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-success/10 to-green-100/50 border border-success/20 rounded-lg p-4">
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4 hover:shadow-md transition-all duration-300">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
-                    <Clock className="h-5 w-5 text-success" />
-                    <span className="font-semibold text-success">Ưu tiên thấp</span>
+                    <Clock className="h-5 w-5 text-green-500" />
+                    <span className="font-semibold text-green-600">Ưu tiên thấp</span>
                   </div>
-                  <Badge className="bg-success text-success-foreground">Dự phòng</Badge>
+                  <Badge className="bg-gradient-to-r from-green-500 to-green-600 text-white">Dự phòng</Badge>
                 </div>
                 <div className="flex items-center space-x-4 mb-2">
                   <span className="font-semibold">Trạm Bình Thạnh</span>
@@ -251,7 +260,7 @@ const BatteryDispatch = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium">Độ tin cậy: 78%</span>
-                  <Button size="sm" variant="outline">
+                  <Button size="sm" className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white">
                     Áp dụng gợi ý
                   </Button>
                 </div>
@@ -261,16 +270,21 @@ const BatteryDispatch = () => {
         </Card>
 
         {/* Controls */}
-        <Card className="mb-8 animate-slide-up">
+        <Card className="mb-8 bg-gradient-to-br from-green-50 to-green-100 border-l-4 border-green-500 hover:shadow-lg transition-all duration-300">
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
-                <CardTitle>Quản lý điều phối pin</CardTitle>
+                <CardTitle className="flex items-center">
+                  <div className="bg-gradient-to-r from-green-500 to-green-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
+                    <Battery className="h-5 w-5 text-white" />
+                  </div>
+                  Quản lý điều phối pin
+                </CardTitle>
                 <CardDescription>Theo dõi và tạo lệnh chuyển pin giữa các trạm</CardDescription>
               </div>
               <Dialog open={isNewDispatchOpen} onOpenChange={setIsNewDispatchOpen}>
                 <DialogTrigger asChild>
-                  <Button>
+                  <Button className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 shadow-md">
                     <Plus className="h-4 w-4 mr-2" />
                     Tạo lệnh điều phối
                   </Button>
@@ -351,7 +365,7 @@ const BatteryDispatch = () => {
                         onChange={(e) => setDispatchNote(e.target.value)}
                       />
                     </div>
-                    <Button onClick={handleCreateDispatch} className="w-full">
+                    <Button onClick={handleCreateDispatch} className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800">
                       Tạo lệnh điều phối
                     </Button>
                   </div>
@@ -369,7 +383,7 @@ const BatteryDispatch = () => {
                   className="w-full"
                 />
               </div>
-              <Button variant="outline">
+              <Button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white">
                 <Search className="h-4 w-4" />
               </Button>
             </div>

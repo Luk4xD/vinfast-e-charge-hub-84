@@ -153,11 +153,16 @@ const StaffManagement = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-gradient-primary text-white p-6">
+      <header className="bg-gradient-to-r from-blue-600 to-blue-500 text-white p-6">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Users className="h-8 w-8" />
-            <h1 className="text-2xl font-bold">Quản lý nhân viên</h1>
+            <div className="bg-white/20 p-2 rounded-lg">
+              <Users className="h-6 w-6" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold">Quản lý nhân viên</h1>
+              <p className="text-blue-100 text-sm">Phân công và điều hành nhân sự</p>
+            </div>
           </div>
           <Link to="/admin">
             <Button variant="ghost" className="text-white hover:bg-white/20">
@@ -170,24 +175,30 @@ const StaffManagement = () => {
 
       <div className="container mx-auto p-6">
         {/* Statistics */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8 animate-slide-up">
-          <Card className="hover-scale">
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-blue-500">
             <CardContent className="p-6 text-center">
-              <Users className="h-12 w-12 text-electric-blue mx-auto mb-4" />
+              <div className="bg-gradient-to-r from-blue-500 to-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
+                <Users className="h-6 w-6 text-white" />
+              </div>
               <h3 className="text-2xl font-bold">{totalStaff}</h3>
               <p className="text-muted-foreground">Tổng nhân viên</p>
             </CardContent>
           </Card>
-          <Card className="hover-scale">
+          <Card className="bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-green-500">
             <CardContent className="p-6 text-center">
-              <UserPlus className="h-12 w-12 text-success mx-auto mb-4" />
+              <div className="bg-gradient-to-r from-green-500 to-green-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
+                <UserPlus className="h-6 w-6 text-white" />
+              </div>
               <h3 className="text-2xl font-bold">{assignedStaff}</h3>
               <p className="text-muted-foreground">Đã phân công</p>
             </CardContent>
           </Card>
-          <Card className="hover-scale">
+          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-orange-500">
             <CardContent className="p-6 text-center">
-              <Users className="h-12 w-12 text-warning mx-auto mb-4" />
+              <div className="bg-gradient-to-r from-orange-500 to-orange-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
+                <Users className="h-6 w-6 text-white" />
+              </div>
               <h3 className="text-2xl font-bold">{unassignedStaff}</h3>
               <p className="text-muted-foreground">Chưa phân công</p>
             </CardContent>
@@ -195,16 +206,21 @@ const StaffManagement = () => {
         </div>
 
         {/* Staff Management */}
-        <Card>
+        <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-l-4 border-purple-500 hover:shadow-lg transition-all duration-300">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Danh sách nhân viên</CardTitle>
+                <CardTitle className="flex items-center">
+                  <div className="bg-gradient-to-r from-purple-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
+                    <Users className="h-5 w-5 text-white" />
+                  </div>
+                  Danh sách nhân viên
+                </CardTitle>
                 <CardDescription>Quản lý tất cả nhân viên trong hệ thống</CardDescription>
               </div>
               <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button>
+                  <Button className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 shadow-md">
                     <Plus className="h-4 w-4 mr-2" />
                     Thêm nhân viên
                   </Button>
