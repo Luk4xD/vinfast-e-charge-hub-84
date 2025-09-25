@@ -166,7 +166,8 @@ const BatteryDispatch = () => {
         {/* Station Overview */}
         <div className="grid md:grid-cols-5 gap-4 mb-8 animate-fade-in">
           {stations.map((station) => (
-            <Card key={station.id} className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-blue-500">
+            <Card key={station.id} className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
+              <div className="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
               <CardContent className="p-4 text-center">
                 <div className="bg-gradient-to-r from-blue-500 to-blue-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
                   <MapPin className="h-5 w-5 text-white" />
@@ -180,7 +181,8 @@ const BatteryDispatch = () => {
         </div>
 
         {/* AI Heuristic Suggestions */}
-        <Card className="mb-8 bg-gradient-to-br from-orange-50 to-orange-100 border-l-4 border-orange-500 hover:shadow-lg transition-all duration-300">
+        <Card className="mb-8 bg-gradient-to-br from-orange-50 to-orange-100 overflow-hidden hover:shadow-lg transition-all duration-300">
+          <div className="h-2 bg-gradient-to-r from-orange-500 to-orange-600"></div>
           <CardHeader>
             <CardTitle className="flex items-center">
               <div className="bg-gradient-to-r from-orange-500 to-orange-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
@@ -270,7 +272,8 @@ const BatteryDispatch = () => {
         </Card>
 
         {/* Controls */}
-        <Card className="mb-8 bg-gradient-to-br from-green-50 to-green-100 border-l-4 border-green-500 hover:shadow-lg transition-all duration-300">
+        <Card className="mb-8 bg-gradient-to-br from-green-50 to-green-100 overflow-hidden hover:shadow-lg transition-all duration-300">
+          <div className="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>

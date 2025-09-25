@@ -115,7 +115,8 @@ const AdminDashboard = () => {
 
             {/* Quick Actions */}
             <div className="grid md:grid-cols-3 gap-6">
-              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-xl transition-all duration-300 hover:scale-105 border-l-4 border-blue-500">
+            <Card className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
+              <div className="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
                 <CardHeader>
                   <CardTitle className="flex items-center text-gray-800">
                     <div className="bg-gradient-to-r from-blue-500 to-blue-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
@@ -136,7 +137,8 @@ const AdminDashboard = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-xl transition-all duration-300 hover:scale-105 border-l-4 border-orange-500">
+              <Card className="bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
+                <div className="h-2 bg-gradient-to-r from-orange-500 to-orange-600"></div>
                 <CardHeader>
                   <CardTitle className="flex items-center text-gray-800">
                     <div className="bg-gradient-to-r from-orange-500 to-orange-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
@@ -157,7 +159,8 @@ const AdminDashboard = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-green-50 to-green-100 hover:shadow-xl transition-all duration-300 hover:scale-105 border-l-4 border-green-500">
+              <Card className="bg-gradient-to-br from-green-50 to-green-100 hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
+                <div className="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
                 <CardHeader>
                   <CardTitle className="flex items-center text-gray-800">
                     <div className="bg-gradient-to-r from-green-500 to-green-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">

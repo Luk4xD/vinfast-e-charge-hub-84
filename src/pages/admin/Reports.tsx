@@ -147,7 +147,8 @@ const Reports = () => {
 
       <div className="container mx-auto p-6">
         {/* Filters */}
-        <Card className="mb-8 bg-gradient-to-br from-purple-50 to-purple-100 border-l-4 border-purple-500 hover:shadow-lg transition-all duration-300">
+        <Card className="mb-8 bg-gradient-to-br from-purple-50 to-purple-100 overflow-hidden hover:shadow-lg transition-all duration-300">
+          <div className="h-2 bg-gradient-to-r from-purple-500 to-purple-600"></div>
           <CardHeader>
             <CardTitle className="flex items-center">
               <div className="bg-gradient-to-r from-purple-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
@@ -189,7 +190,8 @@ const Reports = () => {
 
         {/* KPI Overview */}
         <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-green-500">
+          <Card className="bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
+            <div className="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
             <CardContent className="p-4 text-center">
               <div className="bg-gradient-to-r from-green-500 to-green-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
                 <DollarSign className="h-5 w-5 text-white" />
@@ -198,7 +200,8 @@ const Reports = () => {
               <p className="text-xs text-muted-foreground">Tổng doanh thu (VNĐ)</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-blue-500">
+          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
+            <div className="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
             <CardContent className="p-4 text-center">
               <div className="bg-gradient-to-r from-blue-500 to-blue-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
                 <TrendingUp className="h-5 w-5 text-white" />
@@ -207,7 +210,8 @@ const Reports = () => {
               <p className="text-xs text-muted-foreground">Tổng giao dịch</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-orange-500">
+          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
+            <div className="h-2 bg-gradient-to-r from-orange-500 to-orange-600"></div>
             <CardContent className="p-4 text-center">
               <div className="bg-gradient-to-r from-orange-500 to-orange-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
                 <DollarSign className="h-5 w-5 text-white" />
@@ -216,7 +220,8 @@ const Reports = () => {
               <p className="text-xs text-muted-foreground">TB/giao dịch (VNĐ)</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-purple-500">
+          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
+            <div className="h-2 bg-gradient-to-r from-purple-500 to-purple-600"></div>
             <CardContent className="p-4 text-center">
               <div className="bg-gradient-to-r from-purple-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
                 <Users className="h-5 w-5 text-white" />
@@ -225,7 +230,8 @@ const Reports = () => {
               <p className="text-xs text-muted-foreground">Hài lòng KH</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-emerald-500">
+          <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
+            <div className="h-2 bg-gradient-to-r from-emerald-500 to-emerald-600"></div>
             <CardContent className="p-4 text-center">
               <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
                 <TrendingUp className="h-5 w-5 text-white" />
@@ -234,7 +240,8 @@ const Reports = () => {
               <p className="text-xs text-muted-foreground">Uptime hệ thống</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-indigo-50 to-indigo-100 hover:shadow-lg transition-all duration-300 hover:scale-105 border-l-4 border-indigo-500">
+          <Card className="bg-gradient-to-br from-indigo-50 to-indigo-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
+            <div className="h-2 bg-gradient-to-r from-indigo-500 to-indigo-600"></div>
             <CardContent className="p-4 text-center">
               <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
                 <Battery className="h-5 w-5 text-white" />
