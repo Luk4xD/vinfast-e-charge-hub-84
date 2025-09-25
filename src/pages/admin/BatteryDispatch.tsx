@@ -142,18 +142,28 @@ const BatteryDispatch = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="bg-gradient-primary text-white p-6">
-        <div className="container mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Battery className="h-8 w-8" />
-            <h1 className="text-2xl font-bold">Điều phối pin giữa các trạm</h1>
+      {/* Enhanced Header */}
+      <header className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white p-8">
+        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+        <div className="container mx-auto relative">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4 animate-slide-up">
+              <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
+                <Battery className="h-8 w-8" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold mb-1">Điều phối pin</h1>
+                <p className="text-white/80">Quản lý phân phối pin giữa các trạm</p>
+              </div>
+            </div>
+            <Link to="/admin">
+              <Button variant="ghost" className="text-white border-white/20 hover:bg-white/20 backdrop-blur-sm">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Quay lại
+              </Button>
+            </Link>
           </div>
-          <Link to="/admin">
-            <Button variant="ghost" className="text-white hover:bg-white/20">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Quay lại
-            </Button>
-          </Link>
         </div>
       </header>
 
