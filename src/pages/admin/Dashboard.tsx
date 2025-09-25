@@ -11,99 +11,151 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Modern Header */}
-      <div className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <BarChart3 className="h-6 w-6 text-primary" />
-              <h1 className="text-xl font-semibold text-foreground">Dashboard Quản trị</h1>
+      {/* Header with gradient background like the image */}
+      <header className="bg-gradient-to-r from-blue-600 to-blue-500 text-white p-6">
+        <div className="container mx-auto flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="bg-white/20 p-2 rounded-lg">
+              <BarChart3 className="h-6 w-6" />
             </div>
-            <div className="flex items-center space-x-2">
-              <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
-                <DialogTrigger asChild>
-                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                    <Settings className="h-4 w-4 mr-2" />
-                    Cài đặt
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-                  <DialogHeader>
-                    <DialogTitle>Cài đặt tài khoản</DialogTitle>
-                  </DialogHeader>
-                  <AccountSettings userRole="admin" />
-                </DialogContent>
-              </Dialog>
-              <Link to="/">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                  <Home className="h-4 w-4" />
-                </Button>
-              </Link>
+            <div>
+              <h1 className="text-xl font-bold">Dashboard Quản trị</h1>
+              <p className="text-blue-100 text-sm">Quản lý toàn bộ hệ thống trạm đổi pin</p>
             </div>
           </div>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span className="text-sm">Hệ thống hoạt động</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+              <span className="text-sm">Hiệu suất cao</span>
+            </div>
+            <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
+              <DialogTrigger asChild>
+                <Button variant="ghost" className="text-white hover:bg-white/20">
+                  <Settings className="h-4 w-4 mr-2" />
+                  Cài đặt
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Cài đặt tài khoản</DialogTitle>
+                </DialogHeader>
+                <AccountSettings userRole="admin" />
+              </DialogContent>
+            </Dialog>
+            <Link to="/">
+              <Button variant="ghost" className="text-white hover:bg-white/20">
+                <Home className="h-4 w-4 mr-2" />
+                Trang chủ
+              </Button>
+            </Link>
+          </div>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto px-6 py-8">
-        {/* Welcome Section */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-foreground mb-2">Tổng quan hệ thống</h2>
-          <p className="text-muted-foreground">Quản lý và giám sát toàn bộ mạng lưới trạm đổi pin</p>
-        </div>
+      <div className="container mx-auto p-6">
+        <div className="grid lg:grid-cols-4 gap-6">
+          {/* Main content area */}
+          <div className="lg:col-span-3">
+            {/* Welcome message */}
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Chào mừng quản trị viên!</h2>
+              <p className="text-gray-600">Theo dõi và quản lý toàn bộ mạng lưới trạm đổi pin</p>
+            </div>
 
-        {/* Modern KPI Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="border-l-4 border-l-green-500 bg-card/50 hover:bg-card/80 transition-colors">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Doanh thu</p>
-                  <p className="text-2xl font-bold text-foreground">2.85M</p>
-                  <p className="text-xs text-green-600 mt-1">+12% so với tháng trước</p>
+            {/* Stats Cards */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <Card className="relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-blue-500"></div>
+                <CardContent className="p-6 text-center">
+                  <div className="bg-blue-500 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <Users className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-800">1,248</h3>
+                  <p className="text-gray-600 text-sm">Người dùng hôm nay</p>
+                </CardContent>
+              </Card>
+
+              <Card className="relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-green-500"></div>
+                <CardContent className="p-6 text-center">
+                  <div className="bg-green-500 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <TrendingUp className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-800">156</h3>
+                  <p className="text-gray-600 text-sm">Giao dịch thành công</p>
+                </CardContent>
+              </Card>
+
+              <Card className="relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-orange-500"></div>
+                <CardContent className="p-6 text-center">
+                  <div className="bg-orange-500 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <Battery className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-800">45</h3>
+                  <p className="text-gray-600 text-sm">Pin trong kho</p>
+                </CardContent>
+              </Card>
+
+              <Card className="relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-purple-500"></div>
+                <CardContent className="p-6 text-center">
+                  <div className="bg-purple-500 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <MapPin className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-800">12</h3>
+                  <p className="text-gray-600 text-sm">Trạm hoạt động</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Sidebar info card */}
+          <div className="lg:col-span-1">
+            <Card className="relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-blue-500"></div>
+              <CardHeader className="bg-blue-50">
+                <CardTitle className="flex items-center text-blue-600">
+                  <BarChart3 className="h-5 w-5 mr-2" />
+                  Hệ thống quản trị
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6 space-y-4">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Tổng trạm:</span>
+                  <span className="font-semibold">Toàn quốc</span>
                 </div>
-                <TrendingUp className="h-8 w-8 text-green-500 opacity-80" />
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="border-l-4 border-l-blue-500 bg-card/50 hover:bg-card/80 transition-colors">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Người dùng</p>
-                  <p className="text-2xl font-bold text-foreground">1,248</p>
-                  <p className="text-xs text-blue-600 mt-1">+8% so với tuần trước</p>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Quyền truy cập:</span>
+                  <span className="font-semibold">Quản trị viên</span>
                 </div>
-                <Users className="h-8 w-8 text-blue-500 opacity-80" />
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="border-l-4 border-l-orange-500 bg-card/50 hover:bg-card/80 transition-colors">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Đổi pin hôm nay</p>
-                  <p className="text-2xl font-bold text-foreground">156</p>
-                  <p className="text-xs text-orange-600 mt-1">+3% so với hôm qua</p>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Trạng thái:</span>
+                  <span className="flex items-center">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    <span className="text-green-600 font-semibold">Đang hoạt động</span>
+                  </span>
                 </div>
-                <Battery className="h-8 w-8 text-orange-500 opacity-80" />
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="border-l-4 border-l-primary bg-card/50 hover:bg-card/80 transition-colors">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Trạm hoạt động</p>
-                  <p className="text-2xl font-bold text-foreground">12</p>
-                  <p className="text-xs text-primary mt-1">100% uptime</p>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Doanh thu hôm nay:</span>
+                  <span className="font-semibold text-green-600">2.85M VNĐ</span>
                 </div>
-                <MapPin className="h-8 w-8 text-primary opacity-80" />
-              </div>
-            </CardContent>
-          </Card>
+                <div className="pt-2">
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="text-gray-600">Hiệu suất:</span>
+                    <span className="font-semibold">95/100</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="bg-blue-500 h-2 rounded-full" style={{width: '95%'}}></div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
 
