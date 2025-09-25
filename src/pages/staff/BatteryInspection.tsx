@@ -167,38 +167,52 @@ const BatteryInspection = () => {
 
     return (
       <div className="space-y-4">
-        <div className="bg-electric-blue-light p-4 rounded-lg">
-          <h3 className="font-semibold mb-2">Thông tin pin: {battery.id}</h3>
-          <div className="grid grid-cols-2 gap-2 text-sm">
-            <span>Loại: {battery.type}</span>
-            <span>SoH hiện tại: {battery.soh}</span>
-            <span>Chu kỳ: {battery.cycles}</span>
-            <span>Vị trí: {battery.location}</span>
+        <div className="bg-primary/10 border border-primary/20 p-4 rounded-lg">
+          <h3 className="font-semibold mb-3 text-foreground">Thông tin pin: {battery.id}</h3>
+          <div className="grid grid-cols-2 gap-3 text-sm">
+            <div className="space-y-1">
+              <span className="text-muted-foreground">Loại:</span>
+              <p className="font-medium">{battery.type}</p>
+            </div>
+            <div className="space-y-1">
+              <span className="text-muted-foreground">SoH:</span>
+              <p className="font-medium">{battery.soh}</p>
+            </div>
+            <div className="space-y-1">
+              <span className="text-muted-foreground">Chu kỳ:</span>
+              <p className="font-medium">{battery.cycles}</p>
+            </div>
+            <div className="space-y-1">
+              <span className="text-muted-foreground">Vị trí:</span>
+              <p className="font-medium">{battery.location}</p>
+            </div>
           </div>
         </div>
 
-        <div className="space-y-3">
-          <div>
+        <div className="space-y-4">
+          <div className="space-y-2">
             <Label htmlFor="physical">Tình trạng vật lý</Label>
             <Textarea
               id="physical"
               placeholder="Mô tả tình trạng vật lý của pin..."
               value={physicalCondition}
               onChange={(e) => setPhysicalCondition(e.target.value)}
+              className="min-h-[80px]"
             />
           </div>
 
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="notes">Ghi chú về pin</Label>
             <Textarea
               id="notes"
               placeholder="Ghi chú thêm về pin..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
+              className="min-h-[80px]"
             />
           </div>
 
-          <div>
+          <div className="space-y-2">
             <Label>Người thực hiện kiểm tra</Label>
             <Select value={inspector} onValueChange={setInspector}>
               <SelectTrigger>
@@ -215,7 +229,7 @@ const BatteryInspection = () => {
           </div>
         </div>
 
-        <div className="flex gap-3 pt-4">
+        <div className="flex gap-2 pt-4">
           <Button 
             className="flex-1"
             onClick={handleSubmit}
@@ -241,25 +255,68 @@ const BatteryInspection = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="bg-gradient-primary text-white p-6">
-        <div className="container mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Search className="h-8 w-8" />
-            <h1 className="text-2xl font-bold">Kiểm tra/Giám định pin</h1>
+      {/* Modern Header */}
+      <div className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Search className="h-6 w-6 text-primary" />
+              <h1 className="text-xl font-semibold text-foreground">Kiểm tra & Giám định pin</h1>
+            </div>
+            <Link to="/staff">
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Quay lại
+              </Button>
+            </Link>
           </div>
-          <Link to="/staff">
-            <Button variant="ghost" className="text-white hover:bg-white/20">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Quay lại
-            </Button>
-          </Link>
         </div>
-      </header>
+      </div>
 
-      <div className="container mx-auto p-6">
-        <Card className="mb-6 animate-fade-in">
+      <div className="container mx-auto px-6 py-8">
+        {/* Inspection Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card className="border-l-4 border-l-orange-500 bg-card/50 hover:bg-card/80 transition-colors">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground mb-1">Cần kiểm tra</p>
+                  <p className="text-2xl font-bold text-foreground">3</p>
+                </div>
+                <AlertTriangle className="h-8 w-8 text-orange-500 opacity-80" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="border-l-4 border-l-red-500 bg-card/50 hover:bg-card/80 transition-colors">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground mb-1">Gửi bảo trì</p>
+                  <p className="text-2xl font-bold text-foreground">2</p>
+                </div>
+                <Wrench className="h-8 w-8 text-red-500 opacity-80" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="border-l-4 border-l-green-500 bg-card/50 hover:bg-card/80 transition-colors">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground mb-1">Đạt chuẩn</p>
+                  <p className="text-2xl font-bold text-foreground">8</p>
+                </div>
+                <CheckCircle className="h-8 w-8 text-green-500 opacity-80" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Batteries Requiring Inspection */}
+        <Card className="mb-6 bg-card/50">
           <CardHeader>
-            <CardTitle>Pin cần kiểm tra</CardTitle>
+            <CardTitle className="text-lg font-semibold">Pin cần kiểm tra</CardTitle>
             <CardDescription>
               Danh sách pin cần được kiểm tra tình trạng
             </CardDescription>
@@ -267,79 +324,76 @@ const BatteryInspection = () => {
           <CardContent>
             <div className="space-y-4">
               {emptyBatteries.map((battery) => (
-                <div key={battery.id} className="border rounded-lg p-4 hover-glow">
-                  <div className="grid lg:grid-cols-4 gap-4 items-center">
-                    <div>
-                      <h3 className="font-semibold text-electric-blue">{battery.id}</h3>
-                      <p className="text-sm text-muted-foreground">{battery.type}</p>
-                      <p className="text-sm text-muted-foreground">Vị trí: {battery.location}</p>
-                    </div>
-                    
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-sm">
-                        <span>SoH:</span>
-                        <span className={`font-medium ${
-                          parseInt(battery.soh) > 90 ? 'text-success' : 
-                          parseInt(battery.soh) > 80 ? 'text-warning' : 'text-destructive'
+                <Card key={battery.id} className="bg-background/50 hover:bg-background/80 transition-colors">
+                  <CardContent className="p-4">
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+                      <div className="space-y-1">
+                        <h3 className="font-semibold text-foreground">{battery.id}</h3>
+                        <p className="text-sm text-muted-foreground">{battery.type}</p>
+                      </div>
+                      
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">Vị trí</p>
+                        <p className="text-sm font-medium">{battery.location}</p>
+                      </div>
+                      
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">SoH</p>
+                        <p className={`font-semibold ${
+                          parseInt(battery.soh) > 90 ? 'text-green-600' : 
+                          parseInt(battery.soh) > 80 ? 'text-orange-500' : 'text-red-500'
                         }`}>
                           {battery.soh}
-                        </span>
+                        </p>
                       </div>
-                      <div className="flex justify-between text-sm">
-                        <span>Chu kỳ:</span>
-                        <span>{battery.cycles}</span>
+                      
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">Chu kỳ</p>
+                        <p className="text-sm font-medium">{battery.cycles}</p>
+                      </div>
+                      
+                      <div className="flex justify-end">
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button 
+                              size="sm"
+                              onClick={() => setSelectedBattery(battery)}
+                              className="bg-primary hover:bg-primary/90"
+                            >
+                              <Search className="h-4 w-4 mr-2" />
+                              Kiểm tra
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-md">
+                            <DialogHeader>
+                              <DialogTitle>Kiểm tra pin {battery.id}</DialogTitle>
+                              <DialogDescription>
+                                Thực hiện kiểm tra tình trạng pin
+                              </DialogDescription>
+                            </DialogHeader>
+                            {selectedBattery && (
+                              <InspectionForm 
+                                battery={selectedBattery} 
+                                onClose={() => setSelectedBattery(null)}
+                              />
+                            )}
+                          </DialogContent>
+                        </Dialog>
                       </div>
                     </div>
-                    
-                    <div>
-                      <p className="text-xs text-muted-foreground">
-                        Sử dụng cuối: {battery.lastUsed}
-                      </p>
-                    </div>
-                    
-                    <div className="flex flex-col gap-2">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => {
-                              setSelectedBattery(battery);
-                            }}
-                          >
-                            <Search className="h-4 w-4 mr-2" />
-                            Kiểm tra pin
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent className="max-w-md">
-                          <DialogHeader>
-                            <DialogTitle>Kiểm tra pin</DialogTitle>
-                            <DialogDescription>
-                              Thực hiện kiểm tra tình trạng pin
-                            </DialogDescription>
-                          </DialogHeader>
-                          {selectedBattery && (
-                            <InspectionForm 
-                              battery={selectedBattery} 
-                              onClose={() => setSelectedBattery(null)}
-                            />
-                          )}
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </CardContent>
         </Card>
 
         {/* Inspection History */}
-        <Card className="mb-6 animate-slide-up">
+        <Card className="mb-6 bg-card/50">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Lịch sử kiểm tra pin</CardTitle>
+                <CardTitle className="text-lg font-semibold">Lịch sử kiểm tra pin</CardTitle>
                 <CardDescription>
                   {showFullHistory ? "Lịch sử tổng hợp tất cả pin đã kiểm tra" : "Danh sách pin đã được kiểm tra gần đây"}
                 </CardDescription>
@@ -347,76 +401,56 @@ const BatteryInspection = () => {
               <Button 
                 variant="outline" 
                 onClick={() => setShowFullHistory(!showFullHistory)}
+                className="bg-background hover:bg-muted"
               >
-                {showFullHistory ? "Thu gọn" : "Xem lịch sử tổng hợp"}
+                {showFullHistory ? "Thu gọn" : "Xem tổng hợp"}
               </Button>
             </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {displayedHistory.map((record) => (
-                <div key={record.id} className="border rounded-lg p-4">
-                  <div className="grid lg:grid-cols-5 gap-4 items-center">
-                    <div>
-                      <h3 className="font-semibold text-electric-blue">{record.id}</h3>
-                      <p className="text-sm text-muted-foreground">{record.type}</p>
-                    </div>
-                    
-                    <div>
-                      <div className="flex items-center text-sm text-muted-foreground mb-1">
-                        <Clock className="h-4 w-4 mr-1" />
-                        {record.inspectionDate}
+                <Card key={record.id} className="bg-background/50">
+                  <CardContent className="p-4">
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-start">
+                      <div className="space-y-1">
+                        <h3 className="font-semibold text-foreground">{record.id}</h3>
+                        <p className="text-sm text-muted-foreground">{record.type}</p>
                       </div>
-                      <div className="flex items-center text-sm">
-                        <User className="h-4 w-4 mr-1" />
-                        {record.inspector}
+                      
+                      <div className="space-y-1">
+                        <div className="flex items-center text-xs text-muted-foreground">
+                          <Clock className="h-3 w-3 mr-1" />
+                          {record.inspectionDate}
+                        </div>
+                        <div className="flex items-center text-xs">
+                          <User className="h-3 w-3 mr-1" />
+                          {record.inspector}
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-1">
+                        <p className="text-xs font-medium text-muted-foreground">Tình trạng</p>
+                        <p className="text-sm">{record.physicalCondition}</p>
+                      </div>
+                      
+                      <div className="space-y-1">
+                        <p className="text-xs font-medium text-muted-foreground">Ghi chú</p>
+                        <p className="text-sm">{record.notes}</p>
+                      </div>
+                      
+                      <div className="flex justify-end">
+                        <Badge 
+                          variant={record.status === "Đạt chuẩn" ? "default" : "destructive"}
+                          className="text-xs"
+                        >
+                          {record.status}
+                        </Badge>
                       </div>
                     </div>
-                    
-                    <div>
-                      <p className="text-sm font-medium">Tình trạng vật lý:</p>
-                      <p className="text-sm text-muted-foreground">{record.physicalCondition}</p>
-                    </div>
-                    
-                    <div>
-                      <p className="text-sm font-medium">Ghi chú:</p>
-                      <p className="text-sm text-muted-foreground">{record.notes}</p>
-                    </div>
-                    
-                    <div>
-                      <Badge variant={record.status === "Đạt chuẩn" ? "default" : "destructive"}>
-                        {record.status}
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Inspection Summary */}
-        <Card className="animate-slide-up">
-          <CardHeader>
-            <CardTitle>Thống kê kiểm tra hôm nay</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-3 gap-6 text-center">
-              <div>
-                <AlertTriangle className="h-12 w-12 text-warning mx-auto mb-2" />
-                <h3 className="text-2xl font-bold">3</h3>
-                <p className="text-muted-foreground">Cần kiểm tra</p>
-              </div>
-              <div>
-                <Wrench className="h-12 w-12 text-destructive mx-auto mb-2" />
-                <h3 className="text-2xl font-bold">2</h3>
-                <p className="text-muted-foreground">Gửi bảo trì</p>
-              </div>
-              <div>
-                <CheckCircle className="h-12 w-12 text-success mx-auto mb-2" />
-                <h3 className="text-2xl font-bold">8</h3>
-                <p className="text-muted-foreground">Đạt chuẩn</p>
-              </div>
             </div>
           </CardContent>
         </Card>
