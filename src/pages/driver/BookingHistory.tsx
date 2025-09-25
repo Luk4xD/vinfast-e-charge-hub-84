@@ -163,377 +163,320 @@ const BookingHistory = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-gradient-primary text-white p-6">
-        <div className="container mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Calendar className="h-8 w-8" />
-            <h1 className="text-2xl font-bold">Lịch sử đặt chỗ</h1>
-          </div>
-          <div className="flex space-x-2">
-            <Link to="/driver">
-              <Button variant="ghost" className="text-white hover:bg-white/20">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Dashboard
-              </Button>
-            </Link>
-            <Link to="/">
-              <Button variant="ghost" className="text-white hover:bg-white/20">
-                <Home className="h-4 w-4 mr-2" />
-                Trang chủ
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
-
-      <div className="container mx-auto p-6">
-        {/* Hero Section */}
-        <div className="relative mb-8 rounded-xl overflow-hidden animate-fade-in">
-          <div className="absolute inset-0 bg-gradient-to-r from-electric-blue/20 to-charging/20" />
-          <img 
-            src={batteryIcon}
-            alt="Battery Management" 
-            className="w-full h-32 object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-          <div className="absolute bottom-4 left-4 text-white">
-            <h2 className="text-xl font-bold mb-1">Quản lý lịch sử đặt chỗ</h2>
-            <p className="text-white/80">Theo dõi và quản lý các đơn đặt chỗ của bạn</p>
-          </div>
-        </div>
-
-        {/* Booking Summary Stats */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8 animate-slide-up">
-          <Card className="hover-scale">
-            <CardContent className="p-6 text-center">
-              <Calendar className="h-12 w-12 text-electric-blue mx-auto mb-4" />
-              <h3 className="text-2xl font-bold">{bookings.length}</h3>
-              <p className="text-muted-foreground">Tổng đặt chỗ</p>
-            </CardContent>
-          </Card>
-          <Card className="hover-scale">
-            <CardContent className="p-6 text-center">
-              <CreditCard className="h-12 w-12 text-success mx-auto mb-4" />
-              <h3 className="text-2xl font-bold">{bookings.filter(b => !b.canCancel).length}</h3>
-              <p className="text-muted-foreground">Hoàn thành</p>
-            </CardContent>
-          </Card>
-          <Card className="hover-scale">
-            <CardContent className="p-6 text-center">
-              <Battery className="h-12 w-12 text-warning mx-auto mb-4" />
-              <h3 className="text-2xl font-bold">{bookings.filter(b => b.canCancel).length}</h3>
-              <p className="text-muted-foreground">Đang cọc</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Filter Section */}
-        <Card className="mb-6 animate-slide-up">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Filter className="h-5 w-5 mr-2" />
-              Bộ lọc
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-4 gap-4">
-              <div>
-                <Label htmlFor="search">Tìm kiếm</Label>
-                <div className="relative">
-                  <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="search"
-                    placeholder="Mã đặt chỗ, trạm, xe..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
-              </div>
-              <div>
-                <Label>Trạng thái</Label>
-                <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Chọn trạng thái" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Tất cả</SelectItem>
-                    <SelectItem value="Hoàn thành">Hoàn thành</SelectItem>
-                    <SelectItem value="Đã thanh toán">Đã thanh toán</SelectItem>
-                    <SelectItem value="Đã cọc">Đã cọc</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label>Phương thức</Label>
-                <Select value={methodFilter} onValueChange={setMethodFilter}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Chọn phương thức" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Tất cả</SelectItem>
-                    <SelectItem value="Thanh toán đầy đủ">Thanh toán đầy đủ</SelectItem>
-                    <SelectItem value="Đặt cọc">Đặt cọc</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="flex items-end">
-                <Button 
-                  variant="outline" 
-                  onClick={() => {
-                    setSearchTerm("");
-                    setStatusFilter("all");
-                    setMethodFilter("all");
-                  }}
-                  className="w-full"
-                >
-                  Xóa lọc
+      <div className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Calendar className="h-6 w-6 text-primary" />
+              <h1 className="text-xl font-semibold text-foreground">Lịch sử đặt chỗ</h1>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Link to="/driver">
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Dashboard
                 </Button>
+              </Link>
+              <Link to="/">
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+                  <Home className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-6 py-8">
+        {/* Stats Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card className="border-l-4 border-l-primary bg-card/50">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground mb-1">Tổng đặt chỗ</p>
+                  <p className="text-2xl font-bold text-foreground">{bookings.length}</p>
+                </div>
+                <Calendar className="h-8 w-8 text-primary opacity-80" />
               </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="border-l-4 border-l-green-500 bg-card/50">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground mb-1">Đã hoàn thành</p>
+                  <p className="text-2xl font-bold text-foreground">{bookings.filter(b => b.status === "Hoàn thành").length}</p>
+                </div>
+                <CreditCard className="h-8 w-8 text-green-500 opacity-80" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="border-l-4 border-l-orange-500 bg-card/50">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground mb-1">Đang chờ</p>
+                  <p className="text-2xl font-bold text-foreground">{bookings.filter(b => b.canCancel).length}</p>
+                </div>
+                <Battery className="h-8 w-8 text-orange-500 opacity-80" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Search and Filter */}
+        <Card className="mb-6 bg-card/50">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Tìm kiếm mã đặt chỗ, trạm..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 bg-background"
+                />
+              </div>
+              
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="bg-background">
+                  <SelectValue placeholder="Trạng thái" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Tất cả trạng thái</SelectItem>
+                  <SelectItem value="Hoàn thành">Hoàn thành</SelectItem>
+                  <SelectItem value="Đã thanh toán">Đã thanh toán</SelectItem>
+                  <SelectItem value="Đã cọc">Đã cọc</SelectItem>
+                </SelectContent>
+              </Select>
+              
+              <Select value={methodFilter} onValueChange={setMethodFilter}>
+                <SelectTrigger className="bg-background">
+                  <SelectValue placeholder="Phương thức" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Tất cả phương thức</SelectItem>
+                  <SelectItem value="Thanh toán đầy đủ">Thanh toán đầy đủ</SelectItem>
+                  <SelectItem value="Đặt cọc">Đặt cọc</SelectItem>
+                </SelectContent>
+              </Select>
+              
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  setSearchTerm("");
+                  setStatusFilter("all");
+                  setMethodFilter("all");
+                }}
+                className="bg-background hover:bg-muted"
+              >
+                <X className="h-4 w-4 mr-2" />
+                Xóa bộ lọc
+              </Button>
             </div>
           </CardContent>
         </Card>
 
         {/* Bookings List */}
-        <Card className="animate-scale-in">
-          <CardHeader>
-            <CardTitle>Danh sách đặt chỗ ({bookings.length} kết quả)</CardTitle>
-            <CardDescription>
-              Chi tiết các lần đặt chỗ đổi pin của bạn (sắp xếp theo thời gian mới nhất)
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-6">
+        <div className="space-y-4">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-semibold text-foreground">
+              Danh sách đặt chỗ 
+              <span className="text-sm font-normal text-muted-foreground ml-2">({bookings.length} kết quả)</span>
+            </h2>
+          </div>
+
+          {bookings.length === 0 ? (
+            <Card className="bg-card/50">
+              <CardContent className="p-12 text-center">
+                <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                <p className="text-muted-foreground">Không tìm thấy đặt chỗ nào</p>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="space-y-4">
               {bookings.map((booking) => (
-                <div key={booking.id} className="border rounded-lg p-6 hover-glow">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="font-semibold text-lg text-electric-blue">#{booking.id}</h3>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <Badge variant={getStatusColor(booking.status)}>{booking.status}</Badge>
-                        <Badge variant={getMethodColor(booking.bookingMethod)}>{booking.bookingMethod}</Badge>
+                <Card key={booking.id} className="bg-card/50 hover:bg-card/80 transition-colors duration-200">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-3">
+                          <h3 className="font-semibold text-foreground">#{booking.id}</h3>
+                          <Badge 
+                            variant={getStatusColor(booking.status)}
+                            className="text-xs"
+                          >
+                            {booking.status}
+                          </Badge>
+                          <Badge 
+                            variant={getMethodColor(booking.bookingMethod)}
+                            className="text-xs"
+                          >
+                            {booking.bookingMethod}
+                          </Badge>
+                        </div>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Calendar className="h-4 w-4 mr-2" />
+                          {booking.bookingTime}
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex space-x-2">
-                      {booking.canCancel && booking.status === "Đã cọc" && (
-                        <Dialog open={cancelDepositDialogOpen} onOpenChange={setCancelDepositDialogOpen}>
-                          <DialogTrigger asChild>
-                            <Button 
-                              variant="destructive" 
-                              size="sm"
-                              onClick={() => setSelectedBooking(booking)}
-                            >
-                              <X className="h-4 w-4 mr-1" />
-                              Hủy lịch
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent className="sm:max-w-md">
-                            <DialogHeader>
-                              <DialogTitle>Xác nhận hủy lịch</DialogTitle>
-                              <DialogDescription>
-                                Bạn có chắc chắn muốn hủy lịch cho đặt chỗ #{selectedBooking?.id}?
-                              </DialogDescription>
-                            </DialogHeader>
-                            
-                            <div className="text-center p-6">
-                              <AlertTriangle className="h-16 w-16 mx-auto mb-4 text-warning" />
-                              <p className="text-sm mb-2">
-                                <strong>Số tiền:</strong> {selectedBooking?.amount} VNĐ
-                              </p>
-                              <p className="text-sm text-muted-foreground mb-4">
-                                Tiền sẽ được hoàn lại trong vòng 24 giờ
-                              </p>
-                            </div>
-
-                            <DialogFooter className="flex space-x-2">
-                              <Button 
-                                variant="outline" 
-                                onClick={() => setCancelDepositDialogOpen(false)}
-                                className="flex-1"
-                              >
-                                Hủy
-                              </Button>
+                      <div className="flex items-center space-x-2">
+                        {booking.canCancel && (
+                          <Dialog open={cancelDepositDialogOpen} onOpenChange={setCancelDepositDialogOpen}>
+                            <DialogTrigger asChild>
                               <Button 
                                 variant="destructive" 
-                                onClick={handleCancelDeposit}
-                                className="flex-1"
+                                size="sm"
+                                onClick={() => setSelectedBooking(booking)}
                               >
-                                Xác nhận hủy lịch
+                                <X className="h-4 w-4 mr-1" />
+                                Hủy lịch
                               </Button>
-                            </DialogFooter>
-                          </DialogContent>
-                        </Dialog>
-                      )}
-                      
-                      {booking.status === "Đã thanh toán" && (
-                        <Dialog open={cancelDepositDialogOpen} onOpenChange={setCancelDepositDialogOpen}>
-                          <DialogTrigger asChild>
-                            <Button 
-                              variant="destructive" 
-                              size="sm"
-                              onClick={() => setSelectedBooking(booking)}
-                            >
-                              <X className="h-4 w-4 mr-1" />
-                              Hủy lịch
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent className="sm:max-w-md">
-                            <DialogHeader>
-                              <DialogTitle>Xác nhận hủy lịch</DialogTitle>
-                              <DialogDescription>
-                                Bạn có chắc chắn muốn hủy lịch cho đặt chỗ #{selectedBooking?.id}?
-                              </DialogDescription>
-                            </DialogHeader>
-                            
-                            <div className="text-center p-6">
-                              <AlertTriangle className="h-16 w-16 mx-auto mb-4 text-warning" />
-                              <p className="text-sm mb-2">
-                                <strong>Số tiền:</strong> {selectedBooking?.amount} VNĐ
-                              </p>
-                              <p className="text-sm text-muted-foreground mb-4">
-                                Tiền sẽ được hoàn lại trong vòng 24 giờ
-                              </p>
-                            </div>
-
-                            <DialogFooter className="flex space-x-2">
-                              <Button 
-                                variant="outline" 
-                                onClick={() => setCancelDepositDialogOpen(false)}
-                                className="flex-1"
-                              >
-                                Hủy
-                              </Button>
-                              <Button 
-                                variant="destructive" 
-                                onClick={handleCancelDeposit}
-                                className="flex-1"
-                              >
-                                Xác nhận hủy lịch
-                              </Button>
-                            </DialogFooter>
-                          </DialogContent>
-                        </Dialog>
-                      )}
-                      
-                      {!booking.canCancel && booking.status !== "Đã cọc" && booking.status !== "Đã thanh toán" && (
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button 
-                              variant="default" 
-                              size="sm"
-                            >
-                              <CreditCard className="h-4 w-4 mr-1" />
-                              Xem QR
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent className="sm:max-w-md">
-                            <DialogHeader>
-                              <DialogTitle>QR Code đổi pin</DialogTitle>
-                              <DialogDescription>
-                                Xuất trình QR này cho nhân viên tại trạm để đổi pin
-                              </DialogDescription>
-                            </DialogHeader>
-                            
-                            <div className="text-center p-6">
-                              <div className="w-48 h-48 mx-auto bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-                                <div className="text-center">
-                                  <CreditCard className="h-16 w-16 mx-auto mb-2 text-electric-blue" />
-                                  <p className="text-sm font-medium">QR Code #{booking.id}</p>
-                                </div>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-md">
+                              <DialogHeader>
+                                <DialogTitle>Xác nhận hủy lịch</DialogTitle>
+                                <DialogDescription>
+                                  Bạn có chắc chắn muốn hủy lịch cho đặt chỗ #{selectedBooking?.id}?
+                                </DialogDescription>
+                              </DialogHeader>
+                              
+                              <div className="text-center p-6">
+                                <AlertTriangle className="h-16 w-16 mx-auto mb-4 text-orange-500" />
+                                <p className="text-sm mb-2">
+                                  <strong>Số tiền:</strong> {selectedBooking?.amount} VNĐ
+                                </p>
+                                <p className="text-sm text-muted-foreground mb-4">
+                                  Tiền sẽ được hoàn lại trong vòng 24 giờ
+                                </p>
                               </div>
-                              <p className="text-sm text-muted-foreground">
-                                Mã đặt chỗ: {booking.id}
-                              </p>
-                              <p className="text-sm text-muted-foreground">
-                                Trạm: {booking.stationLocation}
-                              </p>
-                            </div>
 
-                            <DialogFooter>
-                              <Button variant="outline" className="w-full">
-                                Đóng
+                              <DialogFooter className="flex space-x-2">
+                                <Button 
+                                  variant="outline" 
+                                  onClick={() => setCancelDepositDialogOpen(false)}
+                                  className="flex-1"
+                                >
+                                  Hủy
+                                </Button>
+                                <Button 
+                                  variant="destructive" 
+                                  onClick={handleCancelDeposit}
+                                  className="flex-1"
+                                >
+                                  Xác nhận hủy lịch
+                                </Button>
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+                        )}
+                        
+                        {booking.status === "Hoàn thành" && (
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm">
+                                <CreditCard className="h-4 w-4 mr-1" />
+                                Xem QR
                               </Button>
-                            </DialogFooter>
-                          </DialogContent>
-                        </Dialog>
-                      )}
-                    </div>
-                  </div>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-md">
+                              <DialogHeader>
+                                <DialogTitle>QR Code đổi pin</DialogTitle>
+                                <DialogDescription>
+                                  Mã QR đã được sử dụng cho giao dịch này
+                                </DialogDescription>
+                              </DialogHeader>
+                              
+                              <div className="text-center p-6">
+                                <div className="w-48 h-48 mx-auto bg-muted rounded-lg flex items-center justify-center mb-4">
+                                  <div className="text-center">
+                                    <CreditCard className="h-16 w-16 mx-auto mb-2 text-primary" />
+                                    <p className="text-sm font-medium">QR Code #{booking.id}</p>
+                                  </div>
+                                </div>
+                                <p className="text-sm text-muted-foreground">
+                                  Mã đặt chỗ: {booking.id}
+                                </p>
+                                <p className="text-sm text-muted-foreground">
+                                  Trạm: {booking.stationLocation}
+                                </p>
+                              </div>
 
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-                    <div>
-                      <div className="flex items-center text-sm text-muted-foreground mb-1">
-                        <Car className="h-4 w-4 mr-1" />
-                        Loại xe & pin
+                              <DialogFooter>
+                                <Button variant="outline" className="w-full">
+                                  Đóng
+                                </Button>
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+                        )}
                       </div>
-                      <p className="font-medium">{booking.vehicleType}</p>
-                      <p className="text-sm text-muted-foreground">{booking.batteryType}</p>
                     </div>
 
-                    <div>
-                      <div className="flex items-center text-sm text-muted-foreground mb-1">
-                        <Calendar className="h-4 w-4 mr-1" />
-                        Thời gian đặt
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                      <div className="space-y-1">
+                        <div className="flex items-center text-xs text-muted-foreground">
+                          <Car className="h-3 w-3 mr-1" />
+                          Phương tiện
+                        </div>
+                        <p className="font-medium text-sm">{booking.vehicleType}</p>
+                        <p className="text-xs text-muted-foreground">{booking.batteryType}</p>
                       </div>
-                      <p className="font-medium">{booking.bookingTime}</p>
-                      <p className="text-sm text-muted-foreground">TT: {booking.paymentTime}</p>
-                    </div>
 
-                    <div>
-                      <div className="flex items-center text-sm text-muted-foreground mb-1">
-                        <MapPin className="h-4 w-4 mr-1" />
-                        Địa điểm
+                      <div className="space-y-1">
+                        <div className="flex items-center text-xs text-muted-foreground">
+                          <MapPin className="h-3 w-3 mr-1" />
+                          Địa điểm
+                        </div>
+                        <p className="font-medium text-sm">{booking.stationLocation}</p>
                       </div>
-                      <p className="font-medium">{booking.stationLocation}</p>
-                    </div>
 
-                    <div>
-                      <div className="flex items-center text-sm text-muted-foreground mb-1">
-                        <CreditCard className="h-4 w-4 mr-1" />
-                        Thanh toán
+                      <div className="space-y-1">
+                        <div className="flex items-center text-xs text-muted-foreground">
+                          <CreditCard className="h-3 w-3 mr-1" />
+                          Số tiền
+                        </div>
+                        <p className="font-semibold text-sm text-green-600">{booking.amount.toLocaleString()} VNĐ</p>
                       </div>
-                      <p className="font-medium text-success">{booking.amount.toLocaleString()} VNĐ</p>
-                    </div>
-                  </div>
 
-                  {/* Battery Information */}
-                  <div className="border-t pt-4">
-                    <h4 className="flex items-center text-sm font-medium text-muted-foreground mb-3">
-                      <Battery className="h-4 w-4 mr-1" />
-                      Thông tin chi tiết pin
-                    </h4>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-                      <div>
-                        <p className="text-xs text-muted-foreground">Mã pin</p>
-                        <p className="font-medium text-sm">{booking.batteryInfo?.code}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">SoH</p>
-                        <p className="font-medium text-sm">
-                          <span className={`${booking.batteryInfo?.soh >= 90 ? 'text-success' : booking.batteryInfo?.soh >= 70 ? 'text-warning' : 'text-destructive'}`}>
+                      <div className="space-y-1">
+                        <div className="flex items-center text-xs text-muted-foreground">
+                          <Battery className="h-3 w-3 mr-1" />
+                          Pin {booking.batteryInfo?.code}
+                        </div>
+                        <p className="text-sm">
+                          SoH: <span className={`font-semibold ${booking.batteryInfo?.soh >= 90 ? 'text-green-600' : booking.batteryInfo?.soh >= 70 ? 'text-orange-500' : 'text-red-500'}`}>
                             {booking.batteryInfo?.soh}%
                           </span>
                         </p>
                       </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">Chu kỳ sạc/xả</p>
-                        <p className="font-medium text-sm">{booking.batteryInfo?.chargeCycles} lần</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">Ngày sản xuất</p>
-                        <p className="font-medium text-sm">{booking.batteryInfo?.manufactureDate}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">Hạn sử dụng</p>
-                        <p className="font-medium text-sm">{booking.batteryInfo?.expiryDate}</p>
+                    </div>
+
+                    <div className="border-t pt-3 mt-4">
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs text-muted-foreground">
+                        <div>
+                          <span>Chu kỳ: </span>
+                          <span className="font-medium">{booking.batteryInfo?.chargeCycles} lần</span>
+                        </div>
+                        <div>
+                          <span>SX: </span>
+                          <span className="font-medium">{booking.batteryInfo?.manufactureDate}</span>
+                        </div>
+                        <div>
+                          <span>HSD: </span>
+                          <span className="font-medium">{booking.batteryInfo?.expiryDate}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          )}
+        </div>
       </div>
     </div>
   );
