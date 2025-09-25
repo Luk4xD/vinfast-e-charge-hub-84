@@ -11,43 +11,34 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Enhanced Header */}
-      <header className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white p-8">
-        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
-        <div className="container mx-auto relative">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4 animate-slide-up">
-              <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
-                <BarChart3 className="h-8 w-8" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold mb-1">Dashboard Quản trị</h1>
-                <p className="text-white/80">Trung tâm điều khiển hệ thống</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-2 animate-fade-in">
-              <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
-                <DialogTrigger asChild>
-                  <Button variant="ghost" className="text-white border-white/20 hover:bg-white/20 backdrop-blur-sm">
-                    <Settings className="h-4 w-4 mr-2" />
-                    Cài đặt
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-                  <DialogHeader>
-                    <DialogTitle>Cài đặt tài khoản</DialogTitle>
-                  </DialogHeader>
-                  <AccountSettings userRole="admin" />
-                </DialogContent>
-              </Dialog>
-              <Link to="/">
-                <Button variant="ghost" className="text-white border-white/20 hover:bg-white/20 backdrop-blur-sm">
-                  <Home className="h-4 w-4 mr-2" />
-                  Trang chủ
+      {/* Header */}
+      <header className="bg-gradient-primary text-white p-6">
+        <div className="container mx-auto flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <BarChart3 className="h-8 w-8" />
+            <h1 className="text-2xl font-bold">Dashboard Quản trị</h1>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
+              <DialogTrigger asChild>
+                <Button variant="ghost" className="text-white hover:bg-white/20">
+                  <Settings className="h-4 w-4 mr-2" />
+                  Cài đặt
                 </Button>
-              </Link>
-            </div>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Cài đặt tài khoản</DialogTitle>
+                </DialogHeader>
+                <AccountSettings userRole="admin" />
+              </DialogContent>
+            </Dialog>
+            <Link to="/">
+              <Button variant="ghost" className="text-white hover:bg-white/20">
+                <Home className="h-4 w-4 mr-2" />
+                Trang chủ
+              </Button>
+            </Link>
           </div>
         </div>
       </header>

@@ -161,105 +161,99 @@ const BookingHistory = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted/20">
-      {/* Clean Header */}
-      <header className="relative bg-white/80 backdrop-blur-md border-b shadow-sm">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <Calendar className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-foreground">Lịch sử đặt chỗ</h1>
-                <p className="text-sm text-muted-foreground">Theo dõi và quản lý các đơn đặt chỗ của bạn</p>
-              </div>
-            </div>
-            <div className="flex space-x-2">
-              <Link to="/driver">
-                <Button variant="ghost" size="sm">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Dashboard
-                </Button>
-              </Link>
-              <Link to="/">
-                <Button variant="ghost" size="sm">
-                  <Home className="h-4 w-4 mr-2" />
-                  Trang chủ
-                </Button>
-              </Link>
-            </div>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="bg-gradient-primary text-white p-6">
+        <div className="container mx-auto flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Calendar className="h-8 w-8" />
+            <h1 className="text-2xl font-bold">Lịch sử đặt chỗ</h1>
+          </div>
+          <div className="flex space-x-2">
+            <Link to="/driver">
+              <Button variant="ghost" className="text-white hover:bg-white/20">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Dashboard
+              </Button>
+            </Link>
+            <Link to="/">
+              <Button variant="ghost" className="text-white hover:bg-white/20">
+                <Home className="h-4 w-4 mr-2" />
+                Trang chủ
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8 space-y-8">
-        {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="border-0 shadow-sm bg-white/60 backdrop-blur-sm">
-            <CardContent className="p-6">
-              <div className="flex items-center space-x-4">
-                <div className="p-3 bg-blue-50 rounded-lg">
-                  <Calendar className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">Tổng đặt chỗ</p>
-                  <p className="text-2xl font-bold text-foreground">{bookings.length}</p>
-                </div>
-              </div>
+      <div className="container mx-auto p-6">
+        {/* Hero Section */}
+        <div className="relative mb-8 rounded-xl overflow-hidden animate-fade-in">
+          <div className="absolute inset-0 bg-gradient-to-r from-electric-blue/20 to-charging/20" />
+          <img 
+            src={batteryIcon}
+            alt="Battery Management" 
+            className="w-full h-32 object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+          <div className="absolute bottom-4 left-4 text-white">
+            <h2 className="text-xl font-bold mb-1">Quản lý lịch sử đặt chỗ</h2>
+            <p className="text-white/80">Theo dõi và quản lý các đơn đặt chỗ của bạn</p>
+          </div>
+        </div>
+
+        {/* Booking Summary Stats */}
+        <div className="grid md:grid-cols-3 gap-6 mb-8 animate-slide-up">
+          <Card className="hover-scale">
+            <CardContent className="p-6 text-center">
+              <Calendar className="h-12 w-12 text-electric-blue mx-auto mb-4" />
+              <h3 className="text-2xl font-bold">{bookings.length}</h3>
+              <p className="text-muted-foreground">Tổng đặt chỗ</p>
             </CardContent>
           </Card>
-          
-          <Card className="border-0 shadow-sm bg-white/60 backdrop-blur-sm">
-            <CardContent className="p-6">
-              <div className="flex items-center space-x-4">
-                <div className="p-3 bg-green-50 rounded-lg">
-                  <CreditCard className="h-6 w-6 text-green-600" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">Hoàn thành</p>
-                  <p className="text-2xl font-bold text-foreground">{bookings.filter(b => !b.canCancel).length}</p>
-                </div>
-              </div>
+          <Card className="hover-scale">
+            <CardContent className="p-6 text-center">
+              <CreditCard className="h-12 w-12 text-success mx-auto mb-4" />
+              <h3 className="text-2xl font-bold">{bookings.filter(b => !b.canCancel).length}</h3>
+              <p className="text-muted-foreground">Hoàn thành</p>
             </CardContent>
           </Card>
-          
-          <Card className="border-0 shadow-sm bg-white/60 backdrop-blur-sm">
-            <CardContent className="p-6">
-              <div className="flex items-center space-x-4">
-                <div className="p-3 bg-orange-50 rounded-lg">
-                  <Battery className="h-6 w-6 text-orange-600" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">Đang chờ</p>
-                  <p className="text-2xl font-bold text-foreground">{bookings.filter(b => b.canCancel).length}</p>
-                </div>
-              </div>
+          <Card className="hover-scale">
+            <CardContent className="p-6 text-center">
+              <Battery className="h-12 w-12 text-warning mx-auto mb-4" />
+              <h3 className="text-2xl font-bold">{bookings.filter(b => b.canCancel).length}</h3>
+              <p className="text-muted-foreground">Đang cọc</p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Search and Filter */}
-        <Card className="border-0 shadow-sm bg-white/60 backdrop-blur-sm">
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {/* Filter Section */}
+        <Card className="mb-6 animate-slide-up">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <Filter className="h-5 w-5 mr-2" />
+              Bộ lọc
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-4 gap-4">
               <div>
-                <Label htmlFor="search" className="text-sm font-medium">Tìm kiếm</Label>
-                <div className="relative mt-1">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Label htmlFor="search">Tìm kiếm</Label>
+                <div className="relative">
+                  <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="search"
-                    placeholder="Mã đặt chỗ, trạm..."
+                    placeholder="Mã đặt chỗ, trạm, xe..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 border-0 bg-white/80"
+                    className="pl-10"
                   />
                 </div>
               </div>
               <div>
-                <Label className="text-sm font-medium">Trạng thái</Label>
+                <Label>Trạng thái</Label>
                 <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger className="mt-1 border-0 bg-white/80">
+                  <SelectTrigger>
                     <SelectValue placeholder="Chọn trạng thái" />
                   </SelectTrigger>
                   <SelectContent>
@@ -271,9 +265,9 @@ const BookingHistory = () => {
                 </Select>
               </div>
               <div>
-                <Label className="text-sm font-medium">Phương thức</Label>
+                <Label>Phương thức</Label>
                 <Select value={methodFilter} onValueChange={setMethodFilter}>
-                  <SelectTrigger className="mt-1 border-0 bg-white/80">
+                  <SelectTrigger>
                     <SelectValue placeholder="Chọn phương thức" />
                   </SelectTrigger>
                   <SelectContent>
@@ -291,9 +285,9 @@ const BookingHistory = () => {
                     setStatusFilter("all");
                     setMethodFilter("all");
                   }}
-                  className="w-full mt-1 border-0 bg-white/80"
+                  className="w-full"
                 >
-                  Xóa bộ lọc
+                  Xóa lọc
                 </Button>
               </div>
             </div>
@@ -301,60 +295,25 @@ const BookingHistory = () => {
         </Card>
 
         {/* Bookings List */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-foreground">Danh sách đặt chỗ</h2>
-            <Badge variant="secondary" className="text-sm">{bookings.length} kết quả</Badge>
-          </div>
-          
-          <div className="space-y-4">
-            {bookings.map((booking) => (
-              <Card key={booking.id} className="border-0 shadow-sm bg-white/60 backdrop-blur-sm hover:shadow-md transition-all duration-200">
-                <CardContent className="p-6">
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
-                    {/* Left Side - Main Info */}
-                    <div className="flex-1 space-y-3">
-                      <div className="flex items-center space-x-3">
-                        <h3 className="text-lg font-semibold text-foreground">#{booking.id}</h3>
-                        <Badge 
-                          variant={getStatusColor(booking.status)}
-                          className="px-2 py-1"
-                        >
-                          {booking.status}
-                        </Badge>
-                        <Badge 
-                          variant={getMethodColor(booking.bookingMethod)}
-                          className="px-2 py-1"
-                        >
-                          {booking.bookingMethod}
-                        </Badge>
-                      </div>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        <div className="flex items-center space-x-2">
-                          <Car className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-muted-foreground">Xe:</span>
-                          <span className="font-medium">{booking.vehicleType}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <MapPin className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-muted-foreground">Trạm:</span>
-                          <span className="font-medium truncate">{booking.stationLocation}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Calendar className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-muted-foreground">Thời gian:</span>
-                          <span className="font-medium">{booking.bookingTime}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <CreditCard className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-muted-foreground">Số tiền:</span>
-                          <span className="font-medium text-green-600">{booking.amount} VNĐ</span>
-                        </div>
+        <Card className="animate-scale-in">
+          <CardHeader>
+            <CardTitle>Danh sách đặt chỗ ({bookings.length} kết quả)</CardTitle>
+            <CardDescription>
+              Chi tiết các lần đặt chỗ đổi pin của bạn (sắp xếp theo thời gian mới nhất)
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              {bookings.map((booking) => (
+                <div key={booking.id} className="border rounded-lg p-6 hover-glow">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="font-semibold text-lg text-electric-blue">#{booking.id}</h3>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <Badge variant={getStatusColor(booking.status)}>{booking.status}</Badge>
+                        <Badge variant={getMethodColor(booking.bookingMethod)}>{booking.bookingMethod}</Badge>
                       </div>
                     </div>
-
-                    {/* Right Side - Actions */}
                     <div className="flex space-x-2">
                       {booking.canCancel && booking.status === "Đã cọc" && (
                         <Dialog open={cancelDepositDialogOpen} onOpenChange={setCancelDepositDialogOpen}>
@@ -377,7 +336,7 @@ const BookingHistory = () => {
                             </DialogHeader>
                             
                             <div className="text-center p-6">
-                              <AlertTriangle className="h-16 w-16 mx-auto mb-4 text-orange-500" />
+                              <AlertTriangle className="h-16 w-16 mx-auto mb-4 text-warning" />
                               <p className="text-sm mb-2">
                                 <strong>Số tiền:</strong> {selectedBooking?.amount} VNĐ
                               </p>
@@ -406,11 +365,61 @@ const BookingHistory = () => {
                         </Dialog>
                       )}
                       
-                      {booking.status === "Hoàn thành" && (
+                      {booking.status === "Đã thanh toán" && (
+                        <Dialog open={cancelDepositDialogOpen} onOpenChange={setCancelDepositDialogOpen}>
+                          <DialogTrigger asChild>
+                            <Button 
+                              variant="destructive" 
+                              size="sm"
+                              onClick={() => setSelectedBooking(booking)}
+                            >
+                              <X className="h-4 w-4 mr-1" />
+                              Hủy lịch
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-md">
+                            <DialogHeader>
+                              <DialogTitle>Xác nhận hủy lịch</DialogTitle>
+                              <DialogDescription>
+                                Bạn có chắc chắn muốn hủy lịch cho đặt chỗ #{selectedBooking?.id}?
+                              </DialogDescription>
+                            </DialogHeader>
+                            
+                            <div className="text-center p-6">
+                              <AlertTriangle className="h-16 w-16 mx-auto mb-4 text-warning" />
+                              <p className="text-sm mb-2">
+                                <strong>Số tiền:</strong> {selectedBooking?.amount} VNĐ
+                              </p>
+                              <p className="text-sm text-muted-foreground mb-4">
+                                Tiền sẽ được hoàn lại trong vòng 24 giờ
+                              </p>
+                            </div>
+
+                            <DialogFooter className="flex space-x-2">
+                              <Button 
+                                variant="outline" 
+                                onClick={() => setCancelDepositDialogOpen(false)}
+                                className="flex-1"
+                              >
+                                Hủy
+                              </Button>
+                              <Button 
+                                variant="destructive" 
+                                onClick={handleCancelDeposit}
+                                className="flex-1"
+                              >
+                                Xác nhận hủy lịch
+                              </Button>
+                            </DialogFooter>
+                          </DialogContent>
+                        </Dialog>
+                      )}
+                      
+                      {!booking.canCancel && booking.status !== "Đã cọc" && booking.status !== "Đã thanh toán" && (
                         <Dialog>
                           <DialogTrigger asChild>
                             <Button 
-                              variant="secondary" 
+                              variant="default" 
                               size="sm"
                             >
                               <CreditCard className="h-4 w-4 mr-1" />
@@ -421,14 +430,14 @@ const BookingHistory = () => {
                             <DialogHeader>
                               <DialogTitle>QR Code đổi pin</DialogTitle>
                               <DialogDescription>
-                                Mã QR đã hoàn thành cho lần đổi pin này
+                                Xuất trình QR này cho nhân viên tại trạm để đổi pin
                               </DialogDescription>
                             </DialogHeader>
                             
                             <div className="text-center p-6">
                               <div className="w-48 h-48 mx-auto bg-gray-100 rounded-lg flex items-center justify-center mb-4">
                                 <div className="text-center">
-                                  <CreditCard className="h-16 w-16 mx-auto mb-2 text-blue-600" />
+                                  <CreditCard className="h-16 w-16 mx-auto mb-2 text-electric-blue" />
                                   <p className="text-sm font-medium">QR Code #{booking.id}</p>
                                 </div>
                               </div>
@@ -451,46 +460,80 @@ const BookingHistory = () => {
                     </div>
                   </div>
 
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                    <div>
+                      <div className="flex items-center text-sm text-muted-foreground mb-1">
+                        <Car className="h-4 w-4 mr-1" />
+                        Loại xe & pin
+                      </div>
+                      <p className="font-medium">{booking.vehicleType}</p>
+                      <p className="text-sm text-muted-foreground">{booking.batteryType}</p>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center text-sm text-muted-foreground mb-1">
+                        <Calendar className="h-4 w-4 mr-1" />
+                        Thời gian đặt
+                      </div>
+                      <p className="font-medium">{booking.bookingTime}</p>
+                      <p className="text-sm text-muted-foreground">TT: {booking.paymentTime}</p>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center text-sm text-muted-foreground mb-1">
+                        <MapPin className="h-4 w-4 mr-1" />
+                        Địa điểm
+                      </div>
+                      <p className="font-medium">{booking.stationLocation}</p>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center text-sm text-muted-foreground mb-1">
+                        <CreditCard className="h-4 w-4 mr-1" />
+                        Thanh toán
+                      </div>
+                      <p className="font-medium text-success">{booking.amount.toLocaleString()} VNĐ</p>
+                    </div>
+                  </div>
+
                   {/* Battery Information */}
-                  <div className="mt-4 pt-4 border-t border-gray-200">
+                  <div className="border-t pt-4">
                     <h4 className="flex items-center text-sm font-medium text-muted-foreground mb-3">
                       <Battery className="h-4 w-4 mr-1" />
                       Thông tin chi tiết pin
                     </h4>
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
                       <div>
-                        <p className="text-xs text-muted-foreground mb-1">Mã pin</p>
-                        <p className="font-medium">{booking.batteryInfo?.code}</p>
+                        <p className="text-xs text-muted-foreground">Mã pin</p>
+                        <p className="font-medium text-sm">{booking.batteryInfo?.code}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-muted-foreground mb-1">SoH</p>
-                        <p className={`font-medium ${
-                          booking.batteryInfo?.soh >= 90 ? 'text-green-600' : 
-                          booking.batteryInfo?.soh >= 70 ? 'text-orange-600' : 
-                          'text-red-600'
-                        }`}>
-                          {booking.batteryInfo?.soh}%
+                        <p className="text-xs text-muted-foreground">SoH</p>
+                        <p className="font-medium text-sm">
+                          <span className={`${booking.batteryInfo?.soh >= 90 ? 'text-success' : booking.batteryInfo?.soh >= 70 ? 'text-warning' : 'text-destructive'}`}>
+                            {booking.batteryInfo?.soh}%
+                          </span>
                         </p>
                       </div>
                       <div>
-                        <p className="text-xs text-muted-foreground mb-1">Chu kỳ sạc</p>
-                        <p className="font-medium">{booking.batteryInfo?.chargeCycles} lần</p>
+                        <p className="text-xs text-muted-foreground">Chu kỳ sạc/xả</p>
+                        <p className="font-medium text-sm">{booking.batteryInfo?.chargeCycles} lần</p>
                       </div>
                       <div>
-                        <p className="text-xs text-muted-foreground mb-1">Ngày sản xuất</p>
-                        <p className="font-medium">{booking.batteryInfo?.manufactureDate}</p>
+                        <p className="text-xs text-muted-foreground">Ngày sản xuất</p>
+                        <p className="font-medium text-sm">{booking.batteryInfo?.manufactureDate}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-muted-foreground mb-1">Hạn sử dụng</p>
-                        <p className="font-medium">{booking.batteryInfo?.expiryDate}</p>
+                        <p className="text-xs text-muted-foreground">Hạn sử dụng</p>
+                        <p className="font-medium text-sm">{booking.batteryInfo?.expiryDate}</p>
                       </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
