@@ -39,7 +39,7 @@ const BookingHistory = () => {
       paymentTime: "17/01/2024 16:50",
       stationLocation: "Trạm Quận 3 - 456 Lê Văn Sỹ",
       bookingMethod: "Thanh toán đầy đủ",
-      status: "Đã thanh toán",
+      status: "Hoàn thành",
       amount: "110,000",
       canCancel: false,
       batteryInfo: {
@@ -58,7 +58,7 @@ const BookingHistory = () => {
       paymentTime: "16/01/2024 09:20",
       stationLocation: "Trạm Bình Thạnh - 789 Xô Viết Nghệ Tĩnh",
       bookingMethod: "Thanh toán đầy đủ",
-      status: "Hoàn thành",
+      status: "Đã thanh toán",
       amount: "120,000",
       canCancel: false,
       batteryInfo: {
@@ -77,7 +77,7 @@ const BookingHistory = () => {
       paymentTime: "15/01/2024 14:35",
       stationLocation: "Trạm Quận 1 - 123 Nguyễn Huệ",
       bookingMethod: "Thanh toán đầy đủ",
-      status: "Đã thanh toán",
+      status: "Hoàn thành",
       amount: "120,000",
       canCancel: false,
       batteryInfo: {
