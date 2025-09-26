@@ -134,19 +134,19 @@ const Reports = () => {
                 <BarChart3 className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-slate-900">Analytics Dashboard</h1>
-                <p className="text-slate-500 text-sm">Comprehensive data insights and reports</p>
+                <h1 className="text-2xl font-bold text-slate-900">Bảng Điều Khiển Phân Tích</h1>
+                <p className="text-slate-500 text-sm">Thông tin chi tiết và báo cáo toàn diện</p>
               </div>
             </div>
             <div className="flex items-center space-x-3">
               <Button variant="outline" size="sm" className="gap-2 bg-white/80 backdrop-blur-sm">
                 <Download className="h-4 w-4" />
-                Export
+                Xuất Dữ Liệu
               </Button>
               <Link to="/admin">
                 <Button variant="ghost" size="sm" className="gap-2">
                   <ArrowLeft className="h-4 w-4" />
-                  Back
+                  Quay Lại
                 </Button>
               </Link>
             </div>
@@ -166,23 +166,23 @@ const Reports = () => {
                     <Filter className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg text-slate-900">Advanced Filters</CardTitle>
-                    <CardDescription className="text-slate-600">Customize your analytics view</CardDescription>
+                    <CardTitle className="text-lg text-slate-900">Bộ Lọc Nâng Cao</CardTitle>
+                    <CardDescription className="text-slate-600">Tùy chỉnh chế độ xem phân tích của bạn</CardDescription>
                   </div>
                 </div>
                 <Badge variant="secondary" className="bg-blue-100 text-blue-700 border-blue-200">
-                  Real-time
+                  Thời Gian Thực
                 </Badge>
               </div>
             </CardHeader>
             <CardContent>
               <div className="grid lg:grid-cols-3 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Search Stations</label>
+                  <label className="text-sm font-medium text-slate-700">Tìm Kiếm Trạm</label>
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                     <Input
-                      placeholder="Station name or location..."
+                      placeholder="Tên trạm hoặc địa điểm..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10 bg-white/80 backdrop-blur-sm border-slate-200"
@@ -190,13 +190,13 @@ const Reports = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Station Filter</label>
+                  <label className="text-sm font-medium text-slate-700">Lọc Trạm</label>
                   <Select onValueChange={setSelectedStation}>
                     <SelectTrigger className="bg-white/80 backdrop-blur-sm border-slate-200">
-                      <SelectValue placeholder="All stations" />
+                      <SelectValue placeholder="Tất cả trạm" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All stations</SelectItem>
+                      <SelectItem value="all">Tất cả trạm</SelectItem>
                       {stations.map((station) => (
                         <SelectItem key={station.id} value={station.id}>
                           {station.name}
@@ -206,12 +206,12 @@ const Reports = () => {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Date Range</label>
+                  <label className="text-sm font-medium text-slate-700">Khoảng Thời Gian</label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button variant="outline" className="w-full justify-start bg-white/80 backdrop-blur-sm border-slate-200">
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        Last 7 days
+                        7 ngày qua
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
@@ -235,7 +235,7 @@ const Reports = () => {
                 </div>
                 <div className="space-y-1">
                   <h3 className="text-xl font-bold text-slate-900">{kpiData.totalRevenue}</h3>
-                  <p className="text-xs text-slate-500 font-medium">Total Revenue (VNĐ)</p>
+                  <p className="text-xs text-slate-500 font-medium">Tổng Doanh Thu (VNĐ)</p>
                   <div className="flex items-center justify-center text-emerald-600 text-xs">
                     <TrendingUp className="h-3 w-3 mr-1" />
                     +12.5%
@@ -252,7 +252,7 @@ const Reports = () => {
                 </div>
                 <div className="space-y-1">
                   <h3 className="text-xl font-bold text-slate-900">{kpiData.totalTransactions}</h3>
-                  <p className="text-xs text-slate-500 font-medium">Total Transactions</p>
+                  <p className="text-xs text-slate-500 font-medium">Tổng Giao Dịch</p>
                   <div className="flex items-center justify-center text-blue-600 text-xs">
                     <TrendingUp className="h-3 w-3 mr-1" />
                     +8.3%
@@ -269,7 +269,7 @@ const Reports = () => {
                 </div>
                 <div className="space-y-1">
                   <h3 className="text-xl font-bold text-slate-900">{kpiData.avgTransaction}</h3>
-                  <p className="text-xs text-slate-500 font-medium">Avg/Transaction (VNĐ)</p>
+                  <p className="text-xs text-slate-500 font-medium">TB/Giao Dịch (VNĐ)</p>
                   <div className="flex items-center justify-center text-orange-600 text-xs">
                     <TrendingUp className="h-3 w-3 mr-1" />
                     +3.1%
@@ -286,7 +286,7 @@ const Reports = () => {
                 </div>
                 <div className="space-y-1">
                   <h3 className="text-xl font-bold text-slate-900">{kpiData.customerSatisfaction}</h3>
-                  <p className="text-xs text-slate-500 font-medium">Customer Satisfaction</p>
+                  <p className="text-xs text-slate-500 font-medium">Hài Lòng Khách Hàng</p>
                   <div className="flex items-center justify-center text-purple-600 text-xs">
                     <TrendingUp className="h-3 w-3 mr-1" />
                     +1.2%
@@ -303,7 +303,7 @@ const Reports = () => {
                 </div>
                 <div className="space-y-1">
                   <h3 className="text-xl font-bold text-slate-900">{kpiData.systemUptime}</h3>
-                  <p className="text-xs text-slate-500 font-medium">System Uptime</p>
+                  <p className="text-xs text-slate-500 font-medium">Thời Gian Hoạt Động</p>
                   <div className="flex items-center justify-center text-teal-600 text-xs">
                     <TrendingUp className="h-3 w-3 mr-1" />
                     +0.1%
@@ -320,7 +320,7 @@ const Reports = () => {
                 </div>
                 <div className="space-y-1">
                   <h3 className="text-xl font-bold text-slate-900">{kpiData.batteryUtilization}</h3>
-                  <p className="text-xs text-slate-500 font-medium">Battery Utilization</p>
+                  <p className="text-xs text-slate-500 font-medium">Sử Dụng Pin</p>
                   <div className="flex items-center justify-center text-indigo-600 text-xs">
                     <TrendingUp className="h-3 w-3 mr-1" />
                     +5.7%
@@ -341,14 +341,14 @@ const Reports = () => {
                   <MapPin className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl text-slate-900">Station Performance Overview</CardTitle>
+                  <CardTitle className="text-xl text-slate-900">Tổng Quan Hiệu Suất Trạm</CardTitle>
                   <CardDescription className="text-slate-600">
-                    Detailed insights into revenue, transactions and efficiency metrics
+                    Thông tin chi tiết về doanh thu, giao dịch và chỉ số hiệu quả
                   </CardDescription>
                 </div>
               </div>
               <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                {stations.length} Active Stations
+                {stations.length} Trạm Hoạt Động
               </Badge>
             </div>
           </CardHeader>
@@ -370,7 +370,7 @@ const Reports = () => {
                           </h3>
                           <p className="text-sm text-slate-500 mb-2">{station.address}</p>
                           <div className="flex items-center space-x-2">
-                            <span className="text-xs text-slate-500">Popularity Score:</span>
+                            <span className="text-xs text-slate-500">Điểm Phổ Biến:</span>
                             <Badge variant="secondary" className="bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 border-amber-200">
                               ⭐ {station.popularityScore}/10
                             </Badge>
@@ -381,22 +381,22 @@ const Reports = () => {
                     
                     <div className="text-center p-4 bg-gradient-to-br from-emerald-50 to-green-50 rounded-lg border border-emerald-200/60">
                       <div className="text-2xl font-bold text-emerald-700">{station.revenue}</div>
-                      <p className="text-xs text-emerald-600 font-medium">Revenue (VNĐ)</p>
+                      <p className="text-xs text-emerald-600 font-medium">Doanh Thu (VNĐ)</p>
                     </div>
                     
                     <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border border-blue-200/60">
                       <div className="text-2xl font-bold text-blue-700">{station.transactions}</div>
-                      <p className="text-xs text-blue-600 font-medium">Transactions</p>
+                      <p className="text-xs text-blue-600 font-medium">Giao Dịch</p>
                     </div>
                     
                     <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-lg border border-orange-200/60">
                       <div className="text-2xl font-bold text-orange-700">{station.batteries}</div>
-                      <p className="text-xs text-orange-600 font-medium">Batteries Managed</p>
+                      <p className="text-xs text-orange-600 font-medium">Pin Quản Lý</p>
                     </div>
                     
                     <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg border border-purple-200/60">
                       <div className="text-2xl font-bold text-purple-700">{station.efficiency}</div>
-                      <p className="text-xs text-purple-600 font-medium">Efficiency</p>
+                      <p className="text-xs text-purple-600 font-medium">Hiệu Suất</p>
                     </div>
                   </div>
                   
@@ -404,7 +404,7 @@ const Reports = () => {
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-2 text-slate-600">
                         <Clock className="h-4 w-4" />
-                        <span className="text-sm font-medium">Weekly transaction history</span>
+                        <span className="text-sm font-medium">Lịch sử giao dịch hàng tuần</span>
                       </div>
                       <Dialog open={detailsDialogOpen} onOpenChange={setDetailsDialogOpen}>
                         <DialogTrigger asChild>
@@ -415,7 +415,7 @@ const Reports = () => {
                             className="bg-white/80 backdrop-blur-sm hover:bg-white border-slate-200 gap-2 group/btn"
                           >
                             <Eye className="h-4 w-4 group-hover/btn:text-blue-600 transition-colors" />
-                            View Details
+                            Xem Chi Tiết
                             <ChevronRight className="h-3 w-3 group-hover/btn:translate-x-0.5 transition-transform" />
                           </Button>
                         </DialogTrigger>
@@ -425,10 +425,10 @@ const Reports = () => {
                               <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-2 rounded-lg mr-3">
                                 <MapPin className="h-5 w-5 text-white" />
                               </div>
-                              Transaction Details - {selectedStationDetails?.name}
+                              Chi Tiết Giao Dịch - {selectedStationDetails?.name}
                             </DialogTitle>
                             <DialogDescription className="text-slate-600">
-                              Comprehensive transaction history for {selectedStationDetails?.address}
+                              Lịch sử giao dịch toàn diện cho {selectedStationDetails?.address}
                             </DialogDescription>
                           </DialogHeader>
                           
@@ -442,7 +442,7 @@ const Reports = () => {
                                       <CreditCard className="h-6 w-6 text-white" />
                                     </div>
                                     <h3 className="text-lg font-bold text-slate-900">{selectedStationDetails.revenue}</h3>
-                                    <p className="text-xs text-slate-500 font-medium">Revenue (VNĐ)</p>
+                                    <p className="text-xs text-slate-500 font-medium">Doanh Thu (VNĐ)</p>
                                   </CardContent>
                                 </Card>
                                 <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
@@ -451,7 +451,7 @@ const Reports = () => {
                                       <TrendingUp className="h-6 w-6 text-white" />
                                     </div>
                                     <h3 className="text-lg font-bold text-slate-900">{selectedStationDetails.transactions}</h3>
-                                    <p className="text-xs text-slate-500 font-medium">Transactions</p>
+                                    <p className="text-xs text-slate-500 font-medium">Giao Dịch</p>
                                   </CardContent>
                                 </Card>
                                 <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
@@ -459,8 +459,8 @@ const Reports = () => {
                                     <div className="bg-gradient-to-br from-orange-500 to-red-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
                                       <Clock className="h-6 w-6 text-white" />
                                     </div>
-                                    <h3 className="text-lg font-bold text-slate-900">3.5 minutes</h3>
-                                    <p className="text-xs text-slate-500 font-medium">Avg Duration</p>
+                                    <h3 className="text-lg font-bold text-slate-900">3.5 phút</h3>
+                                    <p className="text-xs text-slate-500 font-medium">Thời Gian TB</p>
                                   </CardContent>
                                 </Card>
                                 <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
@@ -469,7 +469,7 @@ const Reports = () => {
                                       <Users className="h-6 w-6 text-white" />
                                     </div>
                                     <h3 className="text-lg font-bold text-slate-900">{selectedStationDetails.efficiency}</h3>
-                                    <p className="text-xs text-slate-500 font-medium">Efficiency</p>
+                                    <p className="text-xs text-slate-500 font-medium">Hiệu Suất</p>
                                   </CardContent>
                                 </Card>
                               </div>
@@ -477,9 +477,9 @@ const Reports = () => {
                               {/* Transaction Table */}
                               <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
                                 <CardHeader>
-                                  <CardTitle className="text-lg">Transaction History</CardTitle>
+                                  <CardTitle className="text-lg">Lịch Sử Giao Dịch</CardTitle>
                                   <CardDescription>
-                                    Detailed breakdown of battery swap transactions this week
+                                    Phân tích chi tiết các giao dịch thay pin trong tuần này
                                   </CardDescription>
                                 </CardHeader>
                                 <CardContent>
@@ -487,14 +487,14 @@ const Reports = () => {
                                     <Table>
                                       <TableHeader>
                                         <TableRow className="bg-slate-50/50">
-                                          <TableHead className="font-semibold">Transaction ID</TableHead>
-                                          <TableHead className="font-semibold">Customer</TableHead>
-                                          <TableHead className="font-semibold">Vehicle & Battery</TableHead>
-                                          <TableHead className="font-semibold">Time</TableHead>
-                                          <TableHead className="font-semibold">Duration</TableHead>
-                                          <TableHead className="font-semibold">Amount</TableHead>
-                                          <TableHead className="font-semibold">Payment</TableHead>
-                                          <TableHead className="font-semibold">Status</TableHead>
+                                          <TableHead className="font-semibold">Mã Giao Dịch</TableHead>
+                                          <TableHead className="font-semibold">Khách Hàng</TableHead>
+                                          <TableHead className="font-semibold">Xe & Pin</TableHead>
+                                          <TableHead className="font-semibold">Thời Gian</TableHead>
+                                          <TableHead className="font-semibold">Thời Lượng</TableHead>
+                                          <TableHead className="font-semibold">Số Tiền</TableHead>
+                                          <TableHead className="font-semibold">Thanh Toán</TableHead>
+                                          <TableHead className="font-semibold">Trạng Thái</TableHead>
                                         </TableRow>
                                       </TableHeader>
                                       <TableBody>
