@@ -226,10 +226,6 @@ const TransactionHistory = () => {
                         <p className="text-sm text-blue-700 font-semibold mb-1">Đổi pin:</p>
                         <p className="font-bold text-blue-800">{transaction.swapTime}</p>
                       </div>
-                      <div className="p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-200">
-                        <p className="text-sm text-purple-700 font-semibold mb-1">Thời lượng:</p>
-                        <p className="font-bold text-purple-800">5 phút</p>
-                      </div>
                     </div>
                   </div>
 
