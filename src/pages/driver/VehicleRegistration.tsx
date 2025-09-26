@@ -4,15 +4,48 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Car, ArrowLeft, Battery, Zap, CheckCircle, Star, Home } from "lucide-react";
+import { Car, ArrowLeft, Battery, Zap, CheckCircle, Star, Home, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const VehicleRegistration = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     vin: "",
     carModel: "",
     batteryType: ""
   });
+
+  const handleRegisterVehicle = () => {
+    if (!formData.vin || !formData.carModel || !formData.batteryType) {
+      toast({
+        title: "Lỗi",
+        description: "Vui lòng điền đầy đủ thông tin xe",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Simulate registration process
+    toast({
+      title: "Đăng ký xe thành công!",
+      description: `Xe ${formData.carModel} đã được đăng ký thành công vào hệ thống.`,
+    });
+
+    // Reset form
+    setFormData({
+      vin: "",
+      carModel: "",
+      batteryType: ""
+    });
+  };
+
+  const handleUnregisterVehicle = () => {
+    toast({
+      title: "Hủy đăng ký xe thành công!",
+      description: "Xe đã được gỡ khỏi hệ thống.",
+    });
+  };
 
   const vinFastModels = [
     "VF e34",
@@ -138,7 +171,10 @@ const VehicleRegistration = () => {
                 </div>
 
                 <div className="flex gap-4 pt-6">
-                  <Button className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+                  <Button 
+                    onClick={handleRegisterVehicle}
+                    className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
+                  >
                     <Zap className="h-5 w-5 mr-2" />
                     Đăng ký xe
                   </Button>
@@ -201,8 +237,14 @@ const VehicleRegistration = () => {
                         <p className="text-sm text-gray-600">Pin: Lithium-ion</p>
                       </div>
                     </div>
-                    <Button variant="destructive" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      Xóa xe
+                    <Button 
+                      variant="destructive" 
+                      size="sm" 
+                      onClick={handleUnregisterVehicle}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    >
+                      <X className="h-4 w-4 mr-1" />
+                      Hủy đăng ký
                     </Button>
                   </div>
                 </div>
