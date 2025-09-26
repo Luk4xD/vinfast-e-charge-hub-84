@@ -32,25 +32,6 @@ const BookingHistory = () => {
 
   const allBookings = [
     {
-      id: "BK004",
-      vehicleType: "VinFast VF8",
-      batteryType: "Lithium-ion",
-      bookingTime: "18/01/2024 10:15",
-      paymentTime: "18/01/2024 10:20",
-      stationLocation: "Trạm Quận 7 - 999 Nguyễn Văn Linh",
-      bookingMethod: "Đặt cọc",
-      status: "Đã cọc",
-      amount: "50,000",
-      canCancel: true,
-      batteryInfo: {
-        code: "BT-4001",
-        soh: 92,
-        chargeCycles: 450,
-        manufactureDate: "10/03/2023",
-        expiryDate: "10/03/2028"
-      }
-    },
-    {
       id: "BK003",
       vehicleType: "VinFast VF6",
       batteryType: "Lithium-ion", 
@@ -77,7 +58,7 @@ const BookingHistory = () => {
       paymentTime: "16/01/2024 09:20",
       stationLocation: "Trạm Bình Thạnh - 789 Xô Viết Nghệ Tĩnh",
       bookingMethod: "Thanh toán đầy đủ",
-      status: "Đã thanh toán",
+      status: "Hoàn thành",
       amount: "120,000",
       canCancel: false,
       batteryInfo: {
@@ -96,7 +77,7 @@ const BookingHistory = () => {
       paymentTime: "15/01/2024 14:35",
       stationLocation: "Trạm Quận 1 - 123 Nguyễn Huệ",
       bookingMethod: "Thanh toán đầy đủ",
-      status: "Hoàn thành",
+      status: "Đã thanh toán",
       amount: "120,000",
       canCancel: false,
       batteryInfo: {
