@@ -475,7 +475,7 @@ const BookingHistory = () => {
                           </>
                         )}
                         
-                        {booking.status === "Hoàn thành" && (
+                        {booking.status === "Đã thanh toán" && (
                           <Dialog>
                             <DialogTrigger asChild>
                               <Button variant="outline" size="sm">
