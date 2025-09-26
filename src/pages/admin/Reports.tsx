@@ -8,7 +8,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { BarChart3, ArrowLeft, Search, CalendarIcon, TrendingUp, DollarSign, Battery, Users, Clock, MapPin, CreditCard, Eye } from "lucide-react";
+import { BarChart3, ArrowLeft, Search, CalendarIcon, TrendingUp, DollarSign, Battery, Users, Clock, MapPin, CreditCard, Eye, Download, Filter, ChevronRight, Zap, Activity, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
@@ -124,199 +124,311 @@ const Reports = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="bg-gradient-to-r from-blue-600 to-blue-500 text-white p-6">
-        <div className="container mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="bg-white/20 p-2 rounded-lg">
-              <BarChart3 className="h-6 w-6" />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20">
+      {/* Modern Header */}
+      <div className="bg-white border-b border-slate-200/60 sticky top-0 z-10 backdrop-blur-lg bg-white/95">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-3 rounded-xl shadow-lg">
+                <BarChart3 className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-slate-900">Analytics Dashboard</h1>
+                <p className="text-slate-500 text-sm">Comprehensive data insights and reports</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-xl font-bold">Báo cáo tổng hợp</h1>
-              <p className="text-blue-100 text-sm">Phân tích dữ liệu và thống kê</p>
+            <div className="flex items-center space-x-3">
+              <Button variant="outline" size="sm" className="gap-2 bg-white/80 backdrop-blur-sm">
+                <Download className="h-4 w-4" />
+                Export
+              </Button>
+              <Link to="/admin">
+                <Button variant="ghost" size="sm" className="gap-2">
+                  <ArrowLeft className="h-4 w-4" />
+                  Back
+                </Button>
+              </Link>
             </div>
           </div>
-          <Link to="/admin">
-            <Button variant="ghost" className="text-white hover:bg-white/20">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Quay lại
-            </Button>
-          </Link>
         </div>
-      </header>
+      </div>
 
-      <div className="container mx-auto p-6">
-        {/* Filters */}
-        <Card className="mb-8 bg-gradient-to-br from-purple-50 to-purple-100 overflow-hidden hover:shadow-lg transition-all duration-300">
-          <div className="h-2 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+      <div className="container mx-auto px-6 py-8">
+        {/* Enhanced Filters Section */}
+        <div className="mb-8">
+          <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-xl">
+            <div className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-t-lg"></div>
+            <CardHeader className="pb-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="bg-gradient-to-br from-slate-600 to-slate-700 p-2.5 rounded-lg">
+                    <Filter className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg text-slate-900">Advanced Filters</CardTitle>
+                    <CardDescription className="text-slate-600">Customize your analytics view</CardDescription>
+                  </div>
+                </div>
+                <Badge variant="secondary" className="bg-blue-100 text-blue-700 border-blue-200">
+                  Real-time
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid lg:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-slate-700">Search Stations</label>
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                    <Input
+                      placeholder="Station name or location..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-10 bg-white/80 backdrop-blur-sm border-slate-200"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-slate-700">Station Filter</label>
+                  <Select onValueChange={setSelectedStation}>
+                    <SelectTrigger className="bg-white/80 backdrop-blur-sm border-slate-200">
+                      <SelectValue placeholder="All stations" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All stations</SelectItem>
+                      {stations.map((station) => (
+                        <SelectItem key={station.id} value={station.id}>
+                          {station.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-slate-700">Date Range</label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="outline" className="w-full justify-start bg-white/80 backdrop-blur-sm border-slate-200">
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        Last 7 days
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar mode="single" />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Enhanced KPI Overview */}
+        <div className="mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="h-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-t-lg"></div>
+              <CardContent className="p-5 text-center">
+                <div className="bg-gradient-to-br from-emerald-500 to-green-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-emerald-500/25 transition-all duration-300">
+                  <DollarSign className="h-6 w-6 text-white" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold text-slate-900">{kpiData.totalRevenue}</h3>
+                  <p className="text-xs text-slate-500 font-medium">Total Revenue (VNĐ)</p>
+                  <div className="flex items-center justify-center text-emerald-600 text-xs">
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    +12.5%
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-t-lg"></div>
+              <CardContent className="p-5 text-center">
+                <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
+                  <Activity className="h-6 w-6 text-white" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold text-slate-900">{kpiData.totalTransactions}</h3>
+                  <p className="text-xs text-slate-500 font-medium">Total Transactions</p>
+                  <div className="flex items-center justify-center text-blue-600 text-xs">
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    +8.3%
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="h-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-t-lg"></div>
+              <CardContent className="p-5 text-center">
+                <div className="bg-gradient-to-br from-orange-500 to-red-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-orange-500/25 transition-all duration-300">
+                  <Target className="h-6 w-6 text-white" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold text-slate-900">{kpiData.avgTransaction}</h3>
+                  <p className="text-xs text-slate-500 font-medium">Avg/Transaction (VNĐ)</p>
+                  <div className="flex items-center justify-center text-orange-600 text-xs">
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    +3.1%
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-t-lg"></div>
+              <CardContent className="p-5 text-center">
+                <div className="bg-gradient-to-br from-purple-500 to-pink-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300">
+                  <Users className="h-6 w-6 text-white" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold text-slate-900">{kpiData.customerSatisfaction}</h3>
+                  <p className="text-xs text-slate-500 font-medium">Customer Satisfaction</p>
+                  <div className="flex items-center justify-center text-purple-600 text-xs">
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    +1.2%
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="h-1 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-t-lg"></div>
+              <CardContent className="p-5 text-center">
+                <div className="bg-gradient-to-br from-teal-500 to-cyan-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-teal-500/25 transition-all duration-300">
+                  <Zap className="h-6 w-6 text-white" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold text-slate-900">{kpiData.systemUptime}</h3>
+                  <p className="text-xs text-slate-500 font-medium">System Uptime</p>
+                  <div className="flex items-center justify-center text-teal-600 text-xs">
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    +0.1%
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-t-lg"></div>
+              <CardContent className="p-5 text-center">
+                <div className="bg-gradient-to-br from-indigo-500 to-purple-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-indigo-500/25 transition-all duration-300">
+                  <Battery className="h-6 w-6 text-white" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold text-slate-900">{kpiData.batteryUtilization}</h3>
+                  <p className="text-xs text-slate-500 font-medium">Battery Utilization</p>
+                  <div className="flex items-center justify-center text-indigo-600 text-xs">
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    +5.7%
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Enhanced Station Details */}
+        <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-xl">
+          <div className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-t-lg"></div>
           <CardHeader>
-            <CardTitle className="flex items-center">
-              <div className="bg-gradient-to-r from-purple-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
-                <Search className="h-5 w-5 text-white" />
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="bg-gradient-to-br from-slate-600 to-slate-700 p-2.5 rounded-lg">
+                  <MapPin className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <CardTitle className="text-xl text-slate-900">Station Performance Overview</CardTitle>
+                  <CardDescription className="text-slate-600">
+                    Detailed insights into revenue, transactions and efficiency metrics
+                  </CardDescription>
+                </div>
               </div>
-              Bộ lọc báo cáo
-            </CardTitle>
-            <CardDescription>Tùy chỉnh thời gian và trạm để xem báo cáo chi tiết</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid lg:grid-cols-2 gap-4">
-              <div>
-                <label className="text-sm font-medium mb-2 block">Tìm kiếm trạm</label>
-                <Input
-                  placeholder="Tên trạm..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-              <div>
-                <label className="text-sm font-medium mb-2 block">Chọn trạm</label>
-                <Select onValueChange={setSelectedStation}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Tất cả trạm" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Tất cả trạm</SelectItem>
-                    {stations.map((station) => (
-                      <SelectItem key={station.id} value={station.id}>
-                        {station.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+              <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                {stations.length} Active Stations
+              </Badge>
             </div>
-          </CardContent>
-        </Card>
-
-        {/* KPI Overview */}
-        <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
-            <div className="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
-            <CardContent className="p-4 text-center">
-              <div className="bg-gradient-to-r from-green-500 to-green-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
-                <DollarSign className="h-5 w-5 text-white" />
-              </div>
-              <h3 className="text-lg font-bold">{kpiData.totalRevenue}</h3>
-              <p className="text-xs text-muted-foreground">Tổng doanh thu (VNĐ)</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
-            <div className="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
-            <CardContent className="p-4 text-center">
-              <div className="bg-gradient-to-r from-blue-500 to-blue-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
-                <TrendingUp className="h-5 w-5 text-white" />
-              </div>
-              <h3 className="text-lg font-bold">{kpiData.totalTransactions}</h3>
-              <p className="text-xs text-muted-foreground">Tổng giao dịch</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
-            <div className="h-2 bg-gradient-to-r from-orange-500 to-orange-600"></div>
-            <CardContent className="p-4 text-center">
-              <div className="bg-gradient-to-r from-orange-500 to-orange-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
-                <DollarSign className="h-5 w-5 text-white" />
-              </div>
-              <h3 className="text-lg font-bold">{kpiData.avgTransaction}</h3>
-              <p className="text-xs text-muted-foreground">TB/giao dịch (VNĐ)</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
-            <div className="h-2 bg-gradient-to-r from-purple-500 to-purple-600"></div>
-            <CardContent className="p-4 text-center">
-              <div className="bg-gradient-to-r from-purple-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
-                <Users className="h-5 w-5 text-white" />
-              </div>
-              <h3 className="text-lg font-bold">{kpiData.customerSatisfaction}</h3>
-              <p className="text-xs text-muted-foreground">Hài lòng KH</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
-            <div className="h-2 bg-gradient-to-r from-emerald-500 to-emerald-600"></div>
-            <CardContent className="p-4 text-center">
-              <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
-                <TrendingUp className="h-5 w-5 text-white" />
-              </div>
-              <h3 className="text-lg font-bold">{kpiData.systemUptime}</h3>
-              <p className="text-xs text-muted-foreground">Uptime hệ thống</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-gradient-to-br from-indigo-50 to-indigo-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
-            <div className="h-2 bg-gradient-to-r from-indigo-500 to-indigo-600"></div>
-            <CardContent className="p-4 text-center">
-              <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-md">
-                <Battery className="h-5 w-5 text-white" />
-              </div>
-              <h3 className="text-lg font-bold">{kpiData.batteryUtilization}</h3>
-              <p className="text-xs text-muted-foreground">Sử dụng pin</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Station Details */}
-        <Card className="animate-scale-in">
-          <CardHeader>
-            <CardTitle>Chi tiết từng trạm</CardTitle>
-            <CardDescription>
-              Thông tin chi tiết về doanh thu, giao dịch và hiệu suất của từng trạm
-            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {stations.map((station) => (
-                <div key={station.id} className="border rounded-lg p-6 hover-glow">
-                  <div className="grid lg:grid-cols-6 gap-4">
-                    <div className="lg:col-span-2">
-                      <h3 className="font-semibold text-lg text-electric-blue">{station.name}</h3>
-                      <p className="text-sm text-muted-foreground">{station.address}</p>
-                      <div className="flex items-center mt-2">
-                        <span className="text-sm text-muted-foreground mr-2">Độ phổ biến:</span>
-                        <Badge variant="secondary">{station.popularityScore}/10</Badge>
+            <div className="space-y-6">
+              {stations.map((station, index) => (
+                <div key={station.id} className="group relative bg-white/50 backdrop-blur-sm border border-slate-200/60 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-t-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  <div className="grid lg:grid-cols-6 gap-6">
+                    <div className="lg:col-span-2 space-y-3">
+                      <div className="flex items-start space-x-3">
+                        <div className="bg-gradient-to-br from-blue-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center shadow-lg">
+                          <span className="text-white font-bold text-sm">{index + 1}</span>
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">
+                            {station.name}
+                          </h3>
+                          <p className="text-sm text-slate-500 mb-2">{station.address}</p>
+                          <div className="flex items-center space-x-2">
+                            <span className="text-xs text-slate-500">Popularity Score:</span>
+                            <Badge variant="secondary" className="bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 border-amber-200">
+                              ⭐ {station.popularityScore}/10
+                            </Badge>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     
-                    <div className="text-center">
-                      <h4 className="text-2xl font-bold text-success">{station.revenue}</h4>
-                      <p className="text-sm text-muted-foreground">Doanh thu (VNĐ)</p>
+                    <div className="text-center p-4 bg-gradient-to-br from-emerald-50 to-green-50 rounded-lg border border-emerald-200/60">
+                      <div className="text-2xl font-bold text-emerald-700">{station.revenue}</div>
+                      <p className="text-xs text-emerald-600 font-medium">Revenue (VNĐ)</p>
                     </div>
                     
-                    <div className="text-center">
-                      <h4 className="text-2xl font-bold text-electric-blue">{station.transactions}</h4>
-                      <p className="text-sm text-muted-foreground">Giao dịch</p>
+                    <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border border-blue-200/60">
+                      <div className="text-2xl font-bold text-blue-700">{station.transactions}</div>
+                      <p className="text-xs text-blue-600 font-medium">Transactions</p>
                     </div>
                     
-                    <div className="text-center">
-                      <h4 className="text-2xl font-bold text-warning">{station.batteries}</h4>
-                      <p className="text-sm text-muted-foreground">Pin quản lý</p>
+                    <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-lg border border-orange-200/60">
+                      <div className="text-2xl font-bold text-orange-700">{station.batteries}</div>
+                      <p className="text-xs text-orange-600 font-medium">Batteries Managed</p>
                     </div>
                     
-                    <div className="text-center">
-                      <h4 className="text-2xl font-bold text-charging">{station.efficiency}</h4>
-                      <p className="text-sm text-muted-foreground">Hiệu suất</p>
+                    <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg border border-purple-200/60">
+                      <div className="text-2xl font-bold text-purple-700">{station.efficiency}</div>
+                      <p className="text-xs text-purple-600 font-medium">Efficiency</p>
                     </div>
                   </div>
                   
-                  <div className="mt-4 pt-4 border-t">
+                  <div className="mt-6 pt-4 border-t border-slate-200/60">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Lịch sử giao dịch tuần này</span>
+                      <div className="flex items-center space-x-2 text-slate-600">
+                        <Clock className="h-4 w-4" />
+                        <span className="text-sm font-medium">Weekly transaction history</span>
+                      </div>
                       <Dialog open={detailsDialogOpen} onOpenChange={setDetailsDialogOpen}>
                         <DialogTrigger asChild>
                           <Button 
                             variant="outline" 
                             size="sm"
                             onClick={() => setSelectedStationDetails(station)}
+                            className="bg-white/80 backdrop-blur-sm hover:bg-white border-slate-200 gap-2 group/btn"
                           >
-                            <Eye className="h-4 w-4 mr-2" />
-                            Xem chi tiết
+                            <Eye className="h-4 w-4 group-hover/btn:text-blue-600 transition-colors" />
+                            View Details
+                            <ChevronRight className="h-3 w-3 group-hover/btn:translate-x-0.5 transition-transform" />
                           </Button>
                         </DialogTrigger>
-                        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+                        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto bg-white/95 backdrop-blur-sm">
                           <DialogHeader>
-                            <DialogTitle className="flex items-center">
-                              <MapPin className="h-5 w-5 mr-2 text-electric-blue" />
-                              Chi tiết giao dịch - {selectedStationDetails?.name}
+                            <DialogTitle className="flex items-center text-xl">
+                              <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-2 rounded-lg mr-3">
+                                <MapPin className="h-5 w-5 text-white" />
+                              </div>
+                              Transaction Details - {selectedStationDetails?.name}
                             </DialogTitle>
-                            <DialogDescription>
-                              Lịch sử giao dịch chi tiết tuần này tại {selectedStationDetails?.address}
+                            <DialogDescription className="text-slate-600">
+                              Comprehensive transaction history for {selectedStationDetails?.address}
                             </DialogDescription>
                           </DialogHeader>
                           
@@ -324,84 +436,97 @@ const Reports = () => {
                             <div className="space-y-6">
                               {/* Summary Stats */}
                               <div className="grid md:grid-cols-4 gap-4">
-                                <Card>
+                                <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
                                   <CardContent className="p-4 text-center">
-                                    <CreditCard className="h-8 w-8 text-success mx-auto mb-2" />
-                                    <h3 className="text-lg font-bold">{selectedStationDetails.revenue}</h3>
-                                    <p className="text-sm text-muted-foreground">Doanh thu (VNĐ)</p>
+                                    <div className="bg-gradient-to-br from-emerald-500 to-green-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+                                      <CreditCard className="h-6 w-6 text-white" />
+                                    </div>
+                                    <h3 className="text-lg font-bold text-slate-900">{selectedStationDetails.revenue}</h3>
+                                    <p className="text-xs text-slate-500 font-medium">Revenue (VNĐ)</p>
                                   </CardContent>
                                 </Card>
-                                <Card>
+                                <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
                                   <CardContent className="p-4 text-center">
-                                    <TrendingUp className="h-8 w-8 text-electric-blue mx-auto mb-2" />
-                                    <h3 className="text-lg font-bold">{selectedStationDetails.transactions}</h3>
-                                    <p className="text-sm text-muted-foreground">Giao dịch</p>
+                                    <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+                                      <TrendingUp className="h-6 w-6 text-white" />
+                                    </div>
+                                    <h3 className="text-lg font-bold text-slate-900">{selectedStationDetails.transactions}</h3>
+                                    <p className="text-xs text-slate-500 font-medium">Transactions</p>
                                   </CardContent>
                                 </Card>
-                                <Card>
+                                <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
                                   <CardContent className="p-4 text-center">
-                                    <Clock className="h-8 w-8 text-warning mx-auto mb-2" />
-                                    <h3 className="text-lg font-bold">3.5 phút</h3>
-                                    <p className="text-sm text-muted-foreground">TB thời gian</p>
+                                    <div className="bg-gradient-to-br from-orange-500 to-red-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+                                      <Clock className="h-6 w-6 text-white" />
+                                    </div>
+                                    <h3 className="text-lg font-bold text-slate-900">3.5 minutes</h3>
+                                    <p className="text-xs text-slate-500 font-medium">Avg Duration</p>
                                   </CardContent>
                                 </Card>
-                                <Card>
+                                <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
                                   <CardContent className="p-4 text-center">
-                                    <Users className="h-8 w-8 text-charging mx-auto mb-2" />
-                                    <h3 className="text-lg font-bold">{selectedStationDetails.efficiency}</h3>
-                                    <p className="text-sm text-muted-foreground">Hiệu suất</p>
+                                    <div className="bg-gradient-to-br from-purple-500 to-pink-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+                                      <Users className="h-6 w-6 text-white" />
+                                    </div>
+                                    <h3 className="text-lg font-bold text-slate-900">{selectedStationDetails.efficiency}</h3>
+                                    <p className="text-xs text-slate-500 font-medium">Efficiency</p>
                                   </CardContent>
                                 </Card>
                               </div>
 
                               {/* Transaction Table */}
-                              <Card>
+                              <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
                                 <CardHeader>
-                                  <CardTitle>Danh sách giao dịch</CardTitle>
+                                  <CardTitle className="text-lg">Transaction History</CardTitle>
                                   <CardDescription>
-                                    Chi tiết từng giao dịch đổi pin trong tuần
+                                    Detailed breakdown of battery swap transactions this week
                                   </CardDescription>
                                 </CardHeader>
                                 <CardContent>
-                                  <Table>
-                                    <TableHeader>
-                                      <TableRow>
-                                        <TableHead>Mã GD</TableHead>
-                                        <TableHead>Khách hàng</TableHead>
-                                        <TableHead>Xe & Pin</TableHead>
-                                        <TableHead>Thời gian</TableHead>
-                                        <TableHead>Thời lượng</TableHead>
-                                        <TableHead>Số tiền</TableHead>
-                                        <TableHead>PT thanh toán</TableHead>
-                                        <TableHead>Trạng thái</TableHead>
-                                      </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                      {getWeeklyTransactions(selectedStationDetails.id).map((transaction) => (
-                                        <TableRow key={transaction.id}>
-                                          <TableCell className="font-medium">{transaction.id}</TableCell>
-                                          <TableCell>{transaction.customerName}</TableCell>
-                                          <TableCell>
-                                            <div>
-                                              <div className="font-medium">{transaction.vehicleType}</div>
-                                              <div className="text-sm text-muted-foreground">{transaction.batteryType}</div>
-                                            </div>
-                                          </TableCell>
-                                          <TableCell>{transaction.swapTime}</TableCell>
-                                          <TableCell>{transaction.duration}</TableCell>
-                                          <TableCell className="font-medium text-success">
-                                            {parseInt(transaction.amount).toLocaleString()} VNĐ
-                                          </TableCell>
-                                          <TableCell>{transaction.paymentMethod}</TableCell>
-                                          <TableCell>
-                                            <Badge variant={transaction.status === "Hoàn thành" ? "default" : "secondary"}>
-                                              {transaction.status}
-                                            </Badge>
-                                          </TableCell>
+                                  <div className="rounded-lg border border-slate-200/60 overflow-hidden">
+                                    <Table>
+                                      <TableHeader>
+                                        <TableRow className="bg-slate-50/50">
+                                          <TableHead className="font-semibold">Transaction ID</TableHead>
+                                          <TableHead className="font-semibold">Customer</TableHead>
+                                          <TableHead className="font-semibold">Vehicle & Battery</TableHead>
+                                          <TableHead className="font-semibold">Time</TableHead>
+                                          <TableHead className="font-semibold">Duration</TableHead>
+                                          <TableHead className="font-semibold">Amount</TableHead>
+                                          <TableHead className="font-semibold">Payment</TableHead>
+                                          <TableHead className="font-semibold">Status</TableHead>
                                         </TableRow>
-                                      ))}
-                                    </TableBody>
-                                  </Table>
+                                      </TableHeader>
+                                      <TableBody>
+                                        {getWeeklyTransactions(selectedStationDetails.id).map((transaction) => (
+                                          <TableRow key={transaction.id} className="hover:bg-slate-50/50 transition-colors">
+                                            <TableCell className="font-medium text-blue-600">{transaction.id}</TableCell>
+                                            <TableCell className="font-medium">{transaction.customerName}</TableCell>
+                                            <TableCell>
+                                              <div>
+                                                <div className="font-medium text-slate-900">{transaction.vehicleType}</div>
+                                                <div className="text-xs text-slate-500">{transaction.batteryType}</div>
+                                              </div>
+                                            </TableCell>
+                                            <TableCell className="text-sm">{transaction.swapTime}</TableCell>
+                                            <TableCell className="text-sm">{transaction.duration}</TableCell>
+                                            <TableCell className="font-bold text-emerald-700">
+                                              {parseInt(transaction.amount).toLocaleString()} VNĐ
+                                            </TableCell>
+                                            <TableCell className="text-sm">{transaction.paymentMethod}</TableCell>
+                                            <TableCell>
+                                              <Badge 
+                                                variant={transaction.status === "Hoàn thành" ? "default" : "secondary"}
+                                                className={transaction.status === "Hoàn thành" ? "bg-emerald-100 text-emerald-700 border-emerald-200" : ""}
+                                              >
+                                                {transaction.status}
+                                              </Badge>
+                                            </TableCell>
+                                          </TableRow>
+                                        ))}
+                                      </TableBody>
+                                    </Table>
+                                  </div>
                                 </CardContent>
                               </Card>
                             </div>
