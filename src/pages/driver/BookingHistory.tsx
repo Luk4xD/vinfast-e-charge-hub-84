@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Calendar, MapPin, Car, Battery, CreditCard, X, Home, AlertTriangle, Filter, Search } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Car, Battery, CreditCard, X, Home, AlertTriangle, Filter, Search, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import batteryIcon from "@/assets/battery-icon.jpg";
@@ -17,9 +17,12 @@ const BookingHistory = () => {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
   const [cancelDepositDialogOpen, setCancelDepositDialogOpen] = useState(false);
+  const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [methodFilter, setMethodFilter] = useState("all");
+  const [rating, setRating] = useState(0);
+  const [reviewText, setReviewText] = useState("");
   const [bankInfo, setBankInfo] = useState({
     accountNumber: "",
     bankName: "",
@@ -158,6 +161,26 @@ const BookingHistory = () => {
 
   const getMethodColor = (method) => {
     return method === "Đặt cọc" ? "destructive" : "default";
+  };
+
+  const handleSubmitReview = () => {
+    if (rating === 0) {
+      toast({
+        title: "Lỗi",
+        description: "Vui lòng chọn số sao đánh giá",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    toast({
+      title: "Đánh giá thành công!",
+      description: "Cảm ơn bạn đã đánh giá trải nghiệm dịch vụ",
+    });
+    
+    setReviewDialogOpen(false);
+    setRating(0);
+    setReviewText("");
   };
 
   return (
@@ -372,6 +395,103 @@ const BookingHistory = () => {
                               </DialogFooter>
                             </DialogContent>
                           </Dialog>
+                        )}
+                        
+                        {(booking.status === "Hoàn thành" || booking.status === "Đã thanh toán") && (
+                          <>
+                            <Dialog open={reviewDialogOpen} onOpenChange={setReviewDialogOpen}>
+                              <DialogTrigger asChild>
+                                <Button 
+                                  variant="default" 
+                                  size="sm"
+                                  onClick={() => setSelectedBooking(booking)}
+                                >
+                                  <Star className="h-4 w-4 mr-1" />
+                                  Đánh giá
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent className="sm:max-w-md">
+                                <DialogHeader>
+                                  <DialogTitle>Đánh giá trải nghiệm</DialogTitle>
+                                  <DialogDescription>
+                                    Hãy chia sẻ trải nghiệm của bạn về dịch vụ đổi pin #{selectedBooking?.id}
+                                  </DialogDescription>
+                                </DialogHeader>
+                                
+                                <div className="space-y-6 p-2">
+                                  {/* Star Rating */}
+                                  <div className="text-center">
+                                    <Label className="text-sm font-medium mb-3 block">Đánh giá chất lượng dịch vụ</Label>
+                                    <div className="flex justify-center space-x-2">
+                                      {[1, 2, 3, 4, 5].map((star) => (
+                                        <button
+                                          key={star}
+                                          type="button"
+                                          onClick={() => setRating(star)}
+                                          className="transition-colors duration-200"
+                                        >
+                                          <Star 
+                                            className={`h-8 w-8 ${
+                                              star <= rating 
+                                                ? "text-yellow-400 fill-yellow-400" 
+                                                : "text-gray-300 hover:text-yellow-200"
+                                            }`}
+                                          />
+                                        </button>
+                                      ))}
+                                    </div>
+                                    {rating > 0 && (
+                                      <p className="text-sm text-muted-foreground mt-2">
+                                        {rating === 1 && "Rất không hài lòng"}
+                                        {rating === 2 && "Không hài lòng"}
+                                        {rating === 3 && "Bình thường"}
+                                        {rating === 4 && "Hài lòng"}
+                                        {rating === 5 && "Rất hài lòng"}
+                                      </p>
+                                    )}
+                                  </div>
+
+                                  {/* Review Text */}
+                                  <div>
+                                    <Label htmlFor="review" className="text-sm font-medium mb-2 block">
+                                      Nhận xét chi tiết (tùy chọn)
+                                    </Label>
+                                    <Textarea
+                                      id="review"
+                                      placeholder="Chia sẻ trải nghiệm của bạn về dịch vụ đổi pin..."
+                                      value={reviewText}
+                                      onChange={(e) => setReviewText(e.target.value)}
+                                      className="min-h-[100px] resize-none"
+                                      maxLength={500}
+                                    />
+                                    <p className="text-xs text-muted-foreground mt-2">
+                                      {reviewText.length}/500 ký tự
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <DialogFooter className="flex space-x-2">
+                                  <Button 
+                                    variant="outline" 
+                                    onClick={() => {
+                                      setReviewDialogOpen(false);
+                                      setRating(0);
+                                      setReviewText("");
+                                    }}
+                                    className="flex-1"
+                                  >
+                                    Hủy
+                                  </Button>
+                                  <Button 
+                                    onClick={handleSubmitReview}
+                                    className="flex-1"
+                                  >
+                                    Gửi đánh giá
+                                  </Button>
+                                </DialogFooter>
+                              </DialogContent>
+                            </Dialog>
+                          </>
                         )}
                         
                         {booking.status === "Hoàn thành" && (
