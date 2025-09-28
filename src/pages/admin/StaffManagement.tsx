@@ -208,6 +208,89 @@ const StaffManagement = () => {
           </Card>
         </div>
 
+        {/* Station Status Overview */}
+        <Card className="bg-gradient-to-br from-teal-50 to-teal-100 overflow-hidden hover:shadow-lg transition-all duration-300 mb-8">
+          <div className="h-2 bg-gradient-to-r from-teal-500 to-teal-600"></div>
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <div className="bg-gradient-to-r from-teal-500 to-teal-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
+                <MapPin className="h-5 w-5 text-white" />
+              </div>
+              Tình trạng trạm làm việc
+            </CardTitle>
+            <CardDescription>Số lượng nhân viên hiện tại tại mỗi trạm</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {stations.map((station) => {
+                const stationStaffCount = staffList.filter(staff => staff.station === station.name).length;
+                const isFullyStaffed = stationStaffCount >= station.maxStaff;
+                const isEmpty = stationStaffCount === 0;
+                
+                return (
+                  <Card key={station.id} className={`border-l-4 transition-all duration-300 hover:scale-105 ${
+                    isEmpty ? 'border-l-red-500 bg-red-50' : 
+                    isFullyStaffed ? 'border-l-green-500 bg-green-50' : 
+                    'border-l-yellow-500 bg-yellow-50'
+                  }`}>
+                    <CardContent className="p-4">
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <h3 className="font-semibold text-gray-800">{station.name}</h3>
+                          <Badge variant={
+                            isEmpty ? "destructive" : 
+                            isFullyStaffed ? "default" : 
+                            "secondary"
+                          }>
+                            {stationStaffCount}/{station.maxStaff}
+                          </Badge>
+                        </div>
+                        <p className="text-sm text-gray-600">{station.address}</p>
+                        <div className="space-y-1">
+                          <div className="flex justify-between text-sm">
+                            <span className="text-gray-500">Nhân viên:</span>
+                            <span className={`font-medium ${
+                              isEmpty ? 'text-red-600' : 
+                              isFullyStaffed ? 'text-green-600' : 
+                              'text-yellow-600'
+                            }`}>
+                              {stationStaffCount}/{station.maxStaff}
+                            </span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div 
+                              className={`h-2 rounded-full transition-all duration-300 ${
+                                isEmpty ? 'bg-red-500' : 
+                                isFullyStaffed ? 'bg-green-500' : 
+                                'bg-yellow-500'
+                              }`}
+                              style={{ width: `${(stationStaffCount / station.maxStaff) * 100}%` }}
+                            ></div>
+                          </div>
+                          <div className="space-y-1">
+                            {staffList
+                              .filter(staff => staff.station === station.name)
+                              .map(staff => (
+                                <div key={staff.id} className="flex items-center text-xs text-gray-600">
+                                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                                  {staff.name}
+                                </div>
+                              ))
+                            }
+                            {stationStaffCount === 0 && (
+                              <div className="text-xs text-gray-500 italic">Chưa có nhân viên</div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Staff Management */}
         <Card className="bg-gradient-to-br from-purple-50 to-purple-100 overflow-hidden hover:shadow-lg transition-all duration-300">
           <div className="h-2 bg-gradient-to-r from-purple-500 to-purple-600"></div>
