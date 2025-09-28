@@ -254,91 +254,109 @@ const BatteryInspection = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Modern Header */}
-      <div className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="container mx-auto px-6 py-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      {/* Enhanced Header */}
+      <header className="relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
+          <div 
+            className="absolute top-10 right-1/4 w-72 h-72 bg-gradient-to-r from-indigo-400 to-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"
+            style={{ animationDelay: '2s' }}
+          ></div>
+        </div>
+
+        <div className="relative z-20 container mx-auto px-6 py-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <Search className="h-6 w-6 text-primary" />
-              <h1 className="text-xl font-semibold text-foreground">Kiểm tra & Giám định pin</h1>
+            <div className="flex items-center space-x-6">
+              <div className="relative p-3 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                <Search className="h-10 w-10 text-white" />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-ping"></div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"></div>
+              </div>
+              <div>
+                <h1 className="text-4xl font-bold text-white mb-2">Kiểm tra & Giám định pin</h1>
+                <p className="text-white/90 text-lg">Thực hiện kiểm tra và đánh giá tình trạng pin</p>
+              </div>
             </div>
             <Link to="/staff">
-              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                <ArrowLeft className="h-4 w-4 mr-2" />
+              <Button variant="ghost" className="text-white hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105">
+                <ArrowLeft className="h-5 w-5 mr-2" />
                 Quay lại
               </Button>
             </Link>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto px-6 py-8">
-        {/* Inspection Stats */}
+      <div className="container mx-auto px-6 py-8 max-w-7xl">
+        {/* Enhanced Inspection Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="border-l-4 border-l-orange-500 bg-card/50 hover:bg-card/80 transition-colors">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Cần kiểm tra</p>
-                  <p className="text-2xl font-bold text-foreground">3</p>
-                </div>
-                <AlertTriangle className="h-8 w-8 text-orange-500 opacity-80" />
+          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 animate-fade-in">
+            <div className="h-2 bg-gradient-to-r from-orange-500 to-yellow-500"></div>
+            <CardContent className="p-6 text-center bg-gradient-to-br from-orange-50 to-yellow-50">
+              <div className="p-3 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl mx-auto mb-4 w-fit">
+                <AlertTriangle className="h-8 w-8 text-white" />
               </div>
+              <h3 className="text-3xl font-bold mb-2 text-gray-800">3</h3>
+              <p className="text-gray-600 font-medium">Cần kiểm tra</p>
             </CardContent>
           </Card>
           
-          <Card className="border-l-4 border-l-red-500 bg-card/50 hover:bg-card/80 transition-colors">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Gửi bảo trì</p>
-                  <p className="text-2xl font-bold text-foreground">2</p>
-                </div>
-                <Wrench className="h-8 w-8 text-red-500 opacity-80" />
+          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            <div className="h-2 bg-gradient-to-r from-red-500 to-red-600"></div>
+            <CardContent className="p-6 text-center bg-gradient-to-br from-red-50 to-red-100">
+              <div className="p-3 bg-gradient-to-r from-red-500 to-red-600 rounded-xl mx-auto mb-4 w-fit">
+                <Wrench className="h-8 w-8 text-white" />
               </div>
+              <h3 className="text-3xl font-bold mb-2 text-gray-800">2</h3>
+              <p className="text-gray-600 font-medium">Gửi bảo trì</p>
             </CardContent>
           </Card>
           
-          <Card className="border-l-4 border-l-green-500 bg-card/50 hover:bg-card/80 transition-colors">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Đạt chuẩn</p>
-                  <p className="text-2xl font-bold text-foreground">8</p>
-                </div>
-                <CheckCircle className="h-8 w-8 text-green-500 opacity-80" />
+          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
+            <CardContent className="p-6 text-center bg-gradient-to-br from-green-50 to-emerald-50">
+              <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl mx-auto mb-4 w-fit">
+                <CheckCircle className="h-8 w-8 text-white" />
               </div>
+              <h3 className="text-3xl font-bold mb-2 text-gray-800">8</h3>
+              <p className="text-gray-600 font-medium">Đạt chuẩn</p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Batteries Requiring Inspection */}
-        <Card className="mb-6 bg-card/50">
+        {/* Enhanced Batteries Requiring Inspection */}
+        <Card className="mb-6 border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-slide-up">
+          <div className="h-2 bg-gradient-to-r from-orange-500 to-yellow-500"></div>
           <CardHeader>
-            <CardTitle className="text-lg font-semibold">Pin cần kiểm tra</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-xl font-bold text-gray-800 flex items-center">
+              <div className="p-3 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl mr-4">
+                <AlertTriangle className="h-6 w-6 text-white" />
+              </div>
+              Pin cần kiểm tra
+            </CardTitle>
+            <CardDescription className="text-gray-600">
               Danh sách pin cần được kiểm tra tình trạng
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {emptyBatteries.map((battery) => (
-                <Card key={battery.id} className="bg-background/50 hover:bg-background/80 transition-colors">
+              {emptyBatteries.map((battery, index) => (
+                <Card key={battery.id} className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                   <CardContent className="p-4">
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
                       <div className="space-y-1">
-                        <h3 className="font-semibold text-foreground">{battery.id}</h3>
-                        <p className="text-sm text-muted-foreground">{battery.type}</p>
+                        <h3 className="font-semibold text-gray-800">{battery.id}</h3>
+                        <p className="text-sm text-gray-600">{battery.type}</p>
                       </div>
                       
                       <div className="space-y-1">
-                        <p className="text-xs text-muted-foreground">Vị trí</p>
-                        <p className="text-sm font-medium">{battery.location}</p>
+                        <p className="text-xs text-gray-500">Vị trí</p>
+                        <p className="text-sm font-medium text-gray-700">{battery.location}</p>
                       </div>
                       
                       <div className="space-y-1">
-                        <p className="text-xs text-muted-foreground">SoH</p>
+                        <p className="text-xs text-gray-500">SoH</p>
                         <p className={`font-semibold ${
                           parseInt(battery.soh) > 90 ? 'text-green-600' : 
                           parseInt(battery.soh) > 80 ? 'text-orange-500' : 'text-red-500'
@@ -348,8 +366,8 @@ const BatteryInspection = () => {
                       </div>
                       
                       <div className="space-y-1">
-                        <p className="text-xs text-muted-foreground">Chu kỳ</p>
-                        <p className="text-sm font-medium">{battery.cycles}</p>
+                        <p className="text-xs text-gray-500">Chu kỳ</p>
+                        <p className="text-sm font-medium text-gray-700">{battery.cycles}</p>
                       </div>
                       
                       <div className="flex justify-end">
@@ -358,7 +376,7 @@ const BatteryInspection = () => {
                             <Button 
                               size="sm"
                               onClick={() => setSelectedBattery(battery)}
-                              className="bg-primary hover:bg-primary/90"
+                              className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:opacity-90 text-white rounded-xl px-4 py-2 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                             >
                               <Search className="h-4 w-4 mr-2" />
                               Kiểm tra
@@ -388,20 +406,26 @@ const BatteryInspection = () => {
           </CardContent>
         </Card>
 
-        {/* Inspection History */}
-        <Card className="mb-6 bg-card/50">
+        {/* Enhanced Inspection History */}
+        <Card className="mb-6 border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-slide-up" style={{ animationDelay: '0.3s' }}>
+          <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-lg font-semibold">Lịch sử kiểm tra pin</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-xl font-bold text-gray-800 flex items-center">
+                  <div className="p-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl mr-4">
+                    <Clock className="h-6 w-6 text-white" />
+                  </div>
+                  Lịch sử kiểm tra pin
+                </CardTitle>
+                <CardDescription className="text-gray-600">
                   {showFullHistory ? "Lịch sử tổng hợp tất cả pin đã kiểm tra" : "Danh sách pin đã được kiểm tra gần đây"}
                 </CardDescription>
               </div>
               <Button 
                 variant="outline" 
                 onClick={() => setShowFullHistory(!showFullHistory)}
-                className="bg-background hover:bg-muted"
+                className="bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border-blue-200 text-blue-700 transition-all duration-300 hover:scale-105"
               >
                 {showFullHistory ? "Thu gọn" : "Xem tổng hợp"}
               </Button>
@@ -409,34 +433,34 @@ const BatteryInspection = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {displayedHistory.map((record) => (
-                <Card key={record.id} className="bg-background/50">
+              {displayedHistory.map((record, index) => (
+                <Card key={record.id} className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                   <CardContent className="p-4">
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-start">
                       <div className="space-y-1">
-                        <h3 className="font-semibold text-foreground">{record.id}</h3>
-                        <p className="text-sm text-muted-foreground">{record.type}</p>
+                        <h3 className="font-semibold text-gray-800">{record.id}</h3>
+                        <p className="text-sm text-gray-600">{record.type}</p>
                       </div>
                       
                       <div className="space-y-1">
-                        <div className="flex items-center text-xs text-muted-foreground">
+                        <div className="flex items-center text-xs text-gray-500">
                           <Clock className="h-3 w-3 mr-1" />
                           {record.inspectionDate}
                         </div>
-                        <div className="flex items-center text-xs">
+                        <div className="flex items-center text-xs text-gray-700">
                           <User className="h-3 w-3 mr-1" />
                           {record.inspector}
                         </div>
                       </div>
                       
                       <div className="space-y-1">
-                        <p className="text-xs font-medium text-muted-foreground">Tình trạng</p>
-                        <p className="text-sm">{record.physicalCondition}</p>
+                        <p className="text-xs font-medium text-gray-500">Tình trạng</p>
+                        <p className="text-sm text-gray-700">{record.physicalCondition}</p>
                       </div>
                       
                       <div className="space-y-1">
-                        <p className="text-xs font-medium text-muted-foreground">Ghi chú</p>
-                        <p className="text-sm">{record.notes}</p>
+                        <p className="text-xs font-medium text-gray-500">Ghi chú</p>
+                        <p className="text-sm text-gray-700">{record.notes}</p>
                       </div>
                       
                       <div className="flex justify-end">
