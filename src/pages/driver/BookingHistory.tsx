@@ -165,88 +165,124 @@ const BookingHistory = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="container mx-auto px-6 py-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      {/* Enhanced Header */}
+      <header className="relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
+          <div 
+            className="absolute top-10 right-1/4 w-72 h-72 bg-gradient-to-r from-indigo-400 to-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"
+            style={{ animationDelay: '2s' }}
+          ></div>
+        </div>
+
+        <div className="relative z-20 container mx-auto px-6 py-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <Calendar className="h-6 w-6 text-primary" />
-              <h1 className="text-xl font-semibold text-foreground">Lịch sử đặt chỗ</h1>
+            <div className="flex items-center space-x-6">
+              <div className="relative p-3 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                <Calendar className="h-10 w-10 text-white" />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-ping"></div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full"></div>
+              </div>
+              <div>
+                <h1 className="text-4xl font-bold text-white mb-2">Lịch sử đặt chỗ</h1>
+                <p className="text-white/90 text-lg">Theo dõi và quản lý các đặt chỗ đổi pin của bạn</p>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-3">
               <Link to="/driver">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
+                <Button variant="ghost" className="text-white hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105">
+                  <ArrowLeft className="h-5 w-5 mr-2" />
                   Dashboard
                 </Button>
               </Link>
               <Link to="/">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                  <Home className="h-4 w-4" />
+                <Button variant="ghost" className="text-white hover:bg-white/20 backdrop-blur-sm border border-white/20 p-3 rounded-xl transition-all duration-300 hover:scale-105">
+                  <Home className="h-5 w-5" />
                 </Button>
               </Link>
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-6 py-8 max-w-6xl">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="border-l-4 border-l-primary bg-card/50">
+          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in">
+            <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Tổng đặt chỗ</p>
-                  <p className="text-2xl font-bold text-foreground">{bookings.length}</p>
+                  <p className="text-sm font-medium text-gray-600 mb-1">Tổng đặt chỗ</p>
+                  <p className="text-3xl font-bold text-gray-800">{bookings.length}</p>
                 </div>
-                <Calendar className="h-8 w-8 text-primary opacity-80" />
+                <div className="p-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl">
+                  <Calendar className="h-8 w-8 text-white" />
+                </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card className="border-l-4 border-l-green-500 bg-card/50">
+          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Đã hoàn thành</p>
-                  <p className="text-2xl font-bold text-foreground">{bookings.filter(b => b.status === "Hoàn thành").length}</p>
+                  <p className="text-sm font-medium text-gray-600 mb-1">Đã hoàn thành</p>
+                  <p className="text-3xl font-bold text-gray-800">{bookings.filter(b => b.status === "Hoàn thành").length}</p>
                 </div>
-                <CreditCard className="h-8 w-8 text-green-500 opacity-80" />
+                <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl">
+                  <CreditCard className="h-8 w-8 text-white" />
+                </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card className="border-l-4 border-l-orange-500 bg-card/50">
+          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="h-2 bg-gradient-to-r from-orange-500 to-red-500"></div>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Đang chờ</p>
-                  <p className="text-2xl font-bold text-foreground">{bookings.filter(b => b.canCancel).length}</p>
+                  <p className="text-sm font-medium text-gray-600 mb-1">Đang chờ</p>
+                  <p className="text-3xl font-bold text-gray-800">{bookings.filter(b => b.canCancel).length}</p>
                 </div>
-                <Battery className="h-8 w-8 text-orange-500 opacity-80" />
+                <div className="p-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl">
+                  <Battery className="h-8 w-8 text-white" />
+                </div>
               </div>
             </CardContent>
           </Card>
         </div>
 
         {/* Search and Filter */}
-        <Card className="mb-6 bg-card/50">
-          <CardContent className="p-6">
+        <Card className="mb-8 border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-slide-up">
+          <div className="h-2 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+          <CardHeader>
+            <CardTitle className="flex items-center text-xl font-bold text-gray-800">
+              <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl mr-4">
+                <Filter className="h-6 w-6 text-white" />
+              </div>
+              Tìm kiếm & Lọc
+            </CardTitle>
+            <CardDescription className="text-gray-600">
+              Tìm kiếm đặt chỗ theo mã, trạm hoặc phương thức thanh toán
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
                   placeholder="Tìm kiếm mã đặt chỗ, trạm..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 bg-background"
+                  className="pl-10 border-gray-200 focus:border-purple-500 focus:ring-purple-500/20"
                 />
               </div>
               
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="bg-background">
+                <SelectTrigger className="border-gray-200 focus:border-purple-500 focus:ring-purple-500/20">
                   <SelectValue placeholder="Trạng thái" />
                 </SelectTrigger>
                 <SelectContent>
@@ -258,7 +294,7 @@ const BookingHistory = () => {
               </Select>
               
               <Select value={methodFilter} onValueChange={setMethodFilter}>
-                <SelectTrigger className="bg-background">
+                <SelectTrigger className="border-gray-200 focus:border-purple-500 focus:ring-purple-500/20">
                   <SelectValue placeholder="Phương thức" />
                 </SelectTrigger>
                 <SelectContent>
@@ -275,7 +311,7 @@ const BookingHistory = () => {
                   setStatusFilter("all");
                   setMethodFilter("all");
                 }}
-                className="bg-background hover:bg-muted"
+                className="bg-gradient-to-r from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200 border-gray-200 text-gray-700 transition-all duration-300 hover:scale-105"
               >
                 <X className="h-4 w-4 mr-2" />
                 Xóa bộ lọc
@@ -285,25 +321,28 @@ const BookingHistory = () => {
         </Card>
 
         {/* Bookings List */}
-        <div className="space-y-4">
+        <div className="space-y-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold text-foreground">
+            <h2 className="text-2xl font-bold text-gray-800">
               Danh sách đặt chỗ 
-              <span className="text-sm font-normal text-muted-foreground ml-2">({bookings.length} kết quả)</span>
+              <span className="text-lg font-normal text-gray-500 ml-2">({bookings.length} kết quả)</span>
             </h2>
           </div>
 
           {bookings.length === 0 ? (
-            <Card className="bg-card/50">
+            <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm">
               <CardContent className="p-12 text-center">
-                <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground">Không tìm thấy đặt chỗ nào</p>
+                <div className="p-4 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                  <Calendar className="h-12 w-12 text-gray-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Chưa có đặt chỗ nào</h3>
+                <p className="text-gray-500">Không tìm thấy đặt chỗ nào phù hợp với bộ lọc</p>
               </CardContent>
             </Card>
           ) : (
-            <div className="space-y-4">
-              {bookings.map((booking) => (
-                <Card key={booking.id} className="bg-card/50 hover:bg-card/80 transition-colors duration-200">
+            <div className="space-y-6">
+              {bookings.map((booking, index) => (
+                <Card key={booking.id} className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="space-y-2">
