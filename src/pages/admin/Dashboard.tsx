@@ -32,26 +32,28 @@ const AdminDashboard = () => {
               <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
               <span className="text-sm">Hiệu suất cao</span>
             </div>
-            <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
-              <DialogTrigger asChild>
-                <Button variant="ghost" className="text-white hover:bg-white/20">
-                  <Settings className="h-4 w-4 mr-2" />
-                  Cài đặt
+            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
+              <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="ghost" className="w-full sm:w-auto text-white hover:bg-white/20">
+                    <Settings className="h-4 w-4 mr-2" />
+                    Cài đặt
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle>Cài đặt tài khoản</DialogTitle>
+                  </DialogHeader>
+                  <AccountSettings userRole="admin" />
+                </DialogContent>
+              </Dialog>
+              <Link to="/">
+                <Button variant="ghost" className="w-full sm:w-auto text-white hover:bg-white/20">
+                  <Home className="h-4 w-4 mr-2" />
+                  Trang chủ
                 </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-                <DialogHeader>
-                  <DialogTitle>Cài đặt tài khoản</DialogTitle>
-                </DialogHeader>
-                <AccountSettings userRole="admin" />
-              </DialogContent>
-            </Dialog>
-            <Link to="/">
-              <Button variant="ghost" className="text-white hover:bg-white/20">
-                <Home className="h-4 w-4 mr-2" />
-                Trang chủ
-              </Button>
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
       </header>
