@@ -4,12 +4,57 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { ArrowLeft, CreditCard, QrCode, Wallet, Home, Zap, Shield, CheckCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("full");
   const [selectedMethod, setSelectedMethod] = useState("card");
+  const [showCardForm, setShowCardForm] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [cardDetails, setCardDetails] = useState({
+    cardNumber: "",
+    expiry: "",
+    cvv: "",
+    holderName: ""
+  });
+  
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handlePayment = () => {
+    if (selectedMethod === "card") {
+      setShowCardForm(true);
+    } else {
+      // Handle other payment methods
+      processPayment();
+    }
+  };
+
+  const processPayment = async () => {
+    setIsProcessing(true);
+    
+    // Simulate payment processing
+    setTimeout(() => {
+      setIsProcessing(false);
+      toast({
+        title: "Thanh toán thành công!",
+        description: "QR code đã được tạo. Bạn sẽ được chuyển về dashboard.",
+      });
+      
+      // Redirect to dashboard after 2 seconds
+      setTimeout(() => {
+        navigate("/driver");
+      }, 2000);
+    }, 2000);
+  };
+
+  const handleCardPayment = (e: React.FormEvent) => {
+    e.preventDefault();
+    processPayment();
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -167,9 +212,13 @@ const Payment = () => {
                 </div>
 
                 <div className="space-y-4 pt-6">
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+                  <Button 
+                    onClick={handlePayment}
+                    disabled={isProcessing}
+                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg disabled:opacity-50"
+                  >
                     <Zap className="h-5 w-5 mr-2" />
-                    Thanh toán & Nhận QR
+                    {isProcessing ? "Đang xử lý..." : "Thanh toán & Nhận QR"}
                   </Button>
                   
                   <Link to="/driver" className="block">
@@ -189,6 +238,94 @@ const Payment = () => {
             </Card>
           </div>
         </div>
+
+        {/* Credit Card Form Modal */}
+        {showCardForm && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <Card className="w-full max-w-md bg-white shadow-2xl animate-scale-in">
+              <CardHeader>
+                <CardTitle className="flex items-center text-xl font-bold text-gray-800">
+                  <CreditCard className="h-6 w-6 mr-2 text-blue-600" />
+                  Thông tin thẻ tín dụng
+                </CardTitle>
+                <CardDescription>
+                  Nhập thông tin thẻ để hoàn tất thanh toán
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleCardPayment} className="space-y-4">
+                  <div>
+                    <Label htmlFor="cardNumber">Số thẻ</Label>
+                    <Input
+                      id="cardNumber"
+                      placeholder="1234 5678 9012 3456"
+                      value={cardDetails.cardNumber}
+                      onChange={(e) => setCardDetails({...cardDetails, cardNumber: e.target.value})}
+                      required
+                      className="mt-1"
+                    />
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="holderName">Tên chủ thẻ</Label>
+                    <Input
+                      id="holderName"
+                      placeholder="NGUYEN VAN A"
+                      value={cardDetails.holderName}
+                      onChange={(e) => setCardDetails({...cardDetails, holderName: e.target.value})}
+                      required
+                      className="mt-1"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="expiry">Ngày hết hạn</Label>
+                      <Input
+                        id="expiry"
+                        placeholder="MM/YY"
+                        value={cardDetails.expiry}
+                        onChange={(e) => setCardDetails({...cardDetails, expiry: e.target.value})}
+                        required
+                        className="mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="cvv">CVV</Label>
+                      <Input
+                        id="cvv"
+                        placeholder="123"
+                        type="password"
+                        value={cardDetails.cvv}
+                        onChange={(e) => setCardDetails({...cardDetails, cvv: e.target.value})}
+                        required
+                        className="mt-1"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 pt-4">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setShowCardForm(false)}
+                      className="flex-1"
+                    >
+                      Hủy
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={isProcessing}
+                      className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                    >
+                      {isProcessing ? "Đang xử lý..." : "Tiến hành thanh toán"}
+                    </Button>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   );
