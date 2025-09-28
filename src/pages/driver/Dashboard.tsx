@@ -52,10 +52,10 @@ const DriverDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
               <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
                 <DialogTrigger asChild>
-                  <Button variant="ghost" className="text-white hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105">
+                  <Button variant="ghost" className="w-full sm:w-auto text-white hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105">
                     <Settings className="h-5 w-5 mr-2" />
                     Cài đặt
                   </Button>
@@ -68,7 +68,7 @@ const DriverDashboard = () => {
                 </DialogContent>
               </Dialog>
               <Link to="/">
-                <Button variant="ghost" className="text-white hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105">
+                <Button variant="ghost" className="w-full sm:w-auto text-white hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105">
                   <Home className="h-5 w-5 mr-2" />
                   Trang chủ
                 </Button>
