@@ -41,7 +41,7 @@ const Payment = () => {
       setIsProcessing(false);
       toast({
         title: "Thanh toán thành công!",
-        description: "QR code đã được tạo. Bạn sẽ được chuyển về dashboard.",
+        description: "Bạn có thể xem QR đổi pin tại phần lịch sử đặt chỗ",
       });
       
       // Redirect to dashboard after 2 seconds
@@ -228,11 +228,6 @@ const Payment = () => {
                     </Button>
                   </Link>
                   
-                  <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border border-blue-200">
-                    <QrCode className="h-20 w-20 mx-auto mb-4 text-blue-600" />
-                    <p className="text-lg font-semibold text-blue-800 mb-2">QR Code sẽ được tạo sau khi thanh toán</p>
-                    <p className="text-sm text-blue-600">Xuất trình QR này tại trạm để đổi pin</p>
-                  </div>
                 </div>
               </CardContent>
             </Card>
