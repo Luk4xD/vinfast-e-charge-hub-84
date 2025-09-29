@@ -261,22 +261,6 @@ const Reports = () => {
               </CardContent>
             </Card>
 
-            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="h-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-t-lg"></div>
-              <CardContent className="p-5 text-center">
-                <div className="bg-gradient-to-br from-orange-500 to-red-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-orange-500/25 transition-all duration-300">
-                  <Target className="h-6 w-6 text-white" />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="text-xl font-bold text-slate-900">{kpiData.avgTransaction}</h3>
-                  <p className="text-xs text-slate-500 font-medium">TB/Giao Dịch (VNĐ)</p>
-                  <div className="flex items-center justify-center text-orange-600 text-xs">
-                    <TrendingUp className="h-3 w-3 mr-1" />
-                    +3.1%
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
 
             <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-t-lg"></div>
