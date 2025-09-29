@@ -12,108 +12,97 @@ import { BarChart3, ArrowLeft, Search, CalendarIcon, TrendingUp, DollarSign, Bat
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
-
 const Reports = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStation, setSelectedStation] = useState("");
-  const [dateRange, setDateRange] = useState({ from: new Date(), to: new Date() });
+  const [dateRange, setDateRange] = useState({
+    from: new Date(),
+    to: new Date()
+  });
   const [selectedStationDetails, setSelectedStationDetails] = useState(null);
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
-
-  const stations = [
-    {
-      id: "1",
-      name: "Trạm Quận 1",
-      address: "123 Nguyễn Huệ, Quận 1",
-      revenue: "850,000",
-      transactions: 89,
-      batteries: 45,
-      efficiency: "96%",
-      popularityScore: 9.2
-    },
-    {
-      id: "2", 
-      name: "Trạm Bình Thạnh",
-      address: "789 Xô Viết Nghệ Tĩnh, Bình Thạnh",
-      revenue: "720,000",
-      transactions: 76,
-      batteries: 38,
-      efficiency: "94%",
-      popularityScore: 8.8
-    },
-    {
-      id: "3",
-      name: "Trạm Quận 3",
-      address: "456 Lê Văn Sỹ, Quận 3",
-      revenue: "680,000",
-      transactions: 64,
-      batteries: 42,
-      efficiency: "92%",
-      popularityScore: 8.1
-    }
-  ];
-
-  const getWeeklyTransactions = (stationId) => {
-    const transactions = [
-      {
-        id: "TXN001",
-        customerName: "Nguyễn Văn A",
-        vehicleType: "VinFast VF8",
-        batteryType: "Lithium-ion",
-        swapTime: "15/01/2024 14:30",
-        duration: "3 phút 45 giây",
-        amount: "120,000",
-        status: "Hoàn thành",
-        paymentMethod: "Thẻ tín dụng"
-      },
-      {
-        id: "TXN002",
-        customerName: "Trần Thị B",
-        vehicleType: "VinFast VF9",
-        batteryType: "LFP",
-        swapTime: "15/01/2024 16:15",
-        duration: "4 phút 12 giây",
-        amount: "110,000",
-        status: "Hoàn thành",
-        paymentMethod: "Ví điện tử"
-      },
-      {
-        id: "TXN003",
-        customerName: "Lê Văn C",
-        vehicleType: "VinFast VF6",
-        batteryType: "Lithium-ion",
-        swapTime: "16/01/2024 09:20",
-        duration: "3 phút 28 giây",
-        amount: "115,000",
-        status: "Hoàn thành",
-        paymentMethod: "Chuyển khoản"
-      },
-      {
-        id: "TXN004",
-        customerName: "Phạm Thị D",
-        vehicleType: "VinFast VF8",
-        batteryType: "Lithium-ion",
-        swapTime: "16/01/2024 11:45",
-        duration: "2 phút 56 giây",
-        amount: "120,000",
-        status: "Hoàn thành",
-        paymentMethod: "Thẻ tín dụng"
-      },
-      {
-        id: "TXN005",
-        customerName: "Hoàng Văn E",
-        vehicleType: "VinFast VF9",
-        batteryType: "LFP",
-        swapTime: "17/01/2024 08:30",
-        duration: "4 phút 05 giây",
-        amount: "110,000",
-        status: "Đang xử lý",
-        paymentMethod: "Ví điện tử"
-      }
-    ];
+  const stations = [{
+    id: "1",
+    name: "Trạm Quận 1",
+    address: "123 Nguyễn Huệ, Quận 1",
+    revenue: "850,000",
+    transactions: 89,
+    batteries: 45,
+    efficiency: "96%",
+    popularityScore: 9.2
+  }, {
+    id: "2",
+    name: "Trạm Bình Thạnh",
+    address: "789 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+    revenue: "720,000",
+    transactions: 76,
+    batteries: 38,
+    efficiency: "94%",
+    popularityScore: 8.8
+  }, {
+    id: "3",
+    name: "Trạm Quận 3",
+    address: "456 Lê Văn Sỹ, Quận 3",
+    revenue: "680,000",
+    transactions: 64,
+    batteries: 42,
+    efficiency: "92%",
+    popularityScore: 8.1
+  }];
+  const getWeeklyTransactions = stationId => {
+    const transactions = [{
+      id: "TXN001",
+      customerName: "Nguyễn Văn A",
+      vehicleType: "VinFast VF8",
+      batteryType: "Lithium-ion",
+      swapTime: "15/01/2024 14:30",
+      duration: "3 phút 45 giây",
+      amount: "120,000",
+      status: "Hoàn thành",
+      paymentMethod: "Thẻ tín dụng"
+    }, {
+      id: "TXN002",
+      customerName: "Trần Thị B",
+      vehicleType: "VinFast VF9",
+      batteryType: "LFP",
+      swapTime: "15/01/2024 16:15",
+      duration: "4 phút 12 giây",
+      amount: "110,000",
+      status: "Hoàn thành",
+      paymentMethod: "Ví điện tử"
+    }, {
+      id: "TXN003",
+      customerName: "Lê Văn C",
+      vehicleType: "VinFast VF6",
+      batteryType: "Lithium-ion",
+      swapTime: "16/01/2024 09:20",
+      duration: "3 phút 28 giây",
+      amount: "115,000",
+      status: "Hoàn thành",
+      paymentMethod: "Chuyển khoản"
+    }, {
+      id: "TXN004",
+      customerName: "Phạm Thị D",
+      vehicleType: "VinFast VF8",
+      batteryType: "Lithium-ion",
+      swapTime: "16/01/2024 11:45",
+      duration: "2 phút 56 giây",
+      amount: "120,000",
+      status: "Hoàn thành",
+      paymentMethod: "Thẻ tín dụng"
+    }, {
+      id: "TXN005",
+      customerName: "Hoàng Văn E",
+      vehicleType: "VinFast VF9",
+      batteryType: "LFP",
+      swapTime: "17/01/2024 08:30",
+      duration: "4 phút 05 giây",
+      amount: "110,000",
+      status: "Đang xử lý",
+      paymentMethod: "Ví điện tử"
+    }];
     return transactions;
   };
-
   const kpiData = {
     totalRevenue: "2,850,000",
     totalTransactions: 245,
@@ -122,9 +111,7 @@ const Reports = () => {
     systemUptime: "99.2%",
     batteryUtilization: "87%"
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20">
+  return <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20">
       {/* Modern Header */}
       <div className="bg-white border-b border-slate-200/60 sticky top-0 z-10 backdrop-blur-lg bg-white/95">
         <div className="container mx-auto px-6 py-4">
@@ -181,12 +168,7 @@ const Reports = () => {
                   <label className="text-sm font-medium text-slate-700">Tìm Kiếm Trạm</label>
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
-                    <Input
-                      placeholder="Tên trạm hoặc địa điểm..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 bg-white/80 backdrop-blur-sm border-slate-200"
-                    />
+                    <Input placeholder="Tên trạm hoặc địa điểm..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-white/80 backdrop-blur-sm border-slate-200" />
                   </div>
                 </div>
                 <div className="space-y-2">
@@ -197,11 +179,9 @@ const Reports = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">Tất cả trạm</SelectItem>
-                      {stations.map((station) => (
-                        <SelectItem key={station.id} value={station.id}>
+                      {stations.map(station => <SelectItem key={station.id} value={station.id}>
                           {station.name}
-                        </SelectItem>
-                      ))}
+                        </SelectItem>)}
                     </SelectContent>
                   </Select>
                 </div>
@@ -226,7 +206,7 @@ const Reports = () => {
 
         {/* Enhanced KPI Overview */}
         <div className="mb-8">
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-20">
             <div className="w-48 flex-shrink-0">
               <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
                 <div className="h-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-t-lg"></div>
@@ -347,8 +327,7 @@ const Reports = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-              {stations.map((station, index) => (
-                <div key={station.id} className="group relative bg-white/50 backdrop-blur-sm border border-slate-200/60 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
+              {stations.map((station, index) => <div key={station.id} className="group relative bg-white/50 backdrop-blur-sm border border-slate-200/60 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-t-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   <div className="grid lg:grid-cols-6 gap-6">
@@ -401,12 +380,7 @@ const Reports = () => {
                       </div>
                       <Dialog open={detailsDialogOpen} onOpenChange={setDetailsDialogOpen}>
                         <DialogTrigger asChild>
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => setSelectedStationDetails(station)}
-                            className="bg-white/80 backdrop-blur-sm hover:bg-white border-slate-200 gap-2 group/btn"
-                          >
+                          <Button variant="outline" size="sm" onClick={() => setSelectedStationDetails(station)} className="bg-white/80 backdrop-blur-sm hover:bg-white border-slate-200 gap-2 group/btn">
                             <Eye className="h-4 w-4 group-hover/btn:text-blue-600 transition-colors" />
                             Xem Chi Tiết
                             <ChevronRight className="h-3 w-3 group-hover/btn:translate-x-0.5 transition-transform" />
@@ -425,8 +399,7 @@ const Reports = () => {
                             </DialogDescription>
                           </DialogHeader>
                           
-                          {selectedStationDetails && (
-                            <div className="space-y-6">
+                          {selectedStationDetails && <div className="space-y-6">
                               {/* Summary Stats */}
                               <div className="grid md:grid-cols-4 gap-4">
                                 <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg">
@@ -491,8 +464,7 @@ const Reports = () => {
                                         </TableRow>
                                       </TableHeader>
                                       <TableBody>
-                                        {getWeeklyTransactions(selectedStationDetails.id).map((transaction) => (
-                                          <TableRow key={transaction.id} className="hover:bg-slate-50/50 transition-colors">
+                                        {getWeeklyTransactions(selectedStationDetails.id).map(transaction => <TableRow key={transaction.id} className="hover:bg-slate-50/50 transition-colors">
                                             <TableCell className="font-medium text-blue-600">{transaction.id}</TableCell>
                                             <TableCell className="font-medium">{transaction.customerName}</TableCell>
                                             <TableCell>
@@ -508,34 +480,26 @@ const Reports = () => {
                                             </TableCell>
                                             <TableCell className="text-sm">{transaction.paymentMethod}</TableCell>
                                             <TableCell>
-                                              <Badge 
-                                                variant={transaction.status === "Hoàn thành" ? "default" : "secondary"}
-                                                className={transaction.status === "Hoàn thành" ? "bg-emerald-100 text-emerald-700 border-emerald-200" : ""}
-                                              >
+                                              <Badge variant={transaction.status === "Hoàn thành" ? "default" : "secondary"} className={transaction.status === "Hoàn thành" ? "bg-emerald-100 text-emerald-700 border-emerald-200" : ""}>
                                                 {transaction.status}
                                               </Badge>
                                             </TableCell>
-                                          </TableRow>
-                                        ))}
+                                          </TableRow>)}
                                       </TableBody>
                                     </Table>
                                   </div>
                                 </CardContent>
                               </Card>
-                            </div>
-                          )}
+                            </div>}
                         </DialogContent>
                       </Dialog>
                     </div>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Reports;
