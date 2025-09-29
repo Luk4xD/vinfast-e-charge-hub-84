@@ -111,7 +111,7 @@ const Subscriptions = () => {
           <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
           <CardHeader>
             <CardTitle className="flex items-center text-2xl font-bold text-gray-800">
-              <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl mr-4">
+              <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 mr-4">
                 <Star className="h-6 w-6 text-white" />
               </div>
               Gói hiện tại của bạn
@@ -119,19 +119,19 @@ const Subscriptions = () => {
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center p-6 bg-white/60 rounded-2xl">
+              <div className="text-center p-6 bg-white/60">
                 <h3 className="text-3xl font-bold text-green-600 mb-2">Premium</h3>
                 <p className="text-gray-600">Đang hoạt động</p>
                 <Badge className="mt-2 bg-green-100 text-green-800">Gói phổ biến</Badge>
               </div>
-              <div className="text-center p-6 bg-white/60 rounded-2xl">
+              <div className="text-center p-6 bg-white/60">
                 <h3 className="text-3xl font-bold text-blue-600 mb-2">{currentSubscription.remainingSwaps}</h3>
                 <p className="text-gray-600">Lần đổi còn lại</p>
-                <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
-                  <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full" style={{ width: '75%' }}></div>
+                <div className="w-full bg-gray-200 h-2 mt-3">
+                  <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-2" style={{ width: '75%' }}></div>
                 </div>
               </div>
-              <div className="text-center p-6 bg-white/60 rounded-2xl">
+              <div className="text-center p-6 bg-white/60">
                 <h3 className="text-3xl font-bold text-purple-600 mb-2">{currentSubscription.expiryDate}</h3>
                 <p className="text-gray-600">Ngày hết hạn</p>
                 <Button variant="outline" className="mt-2 text-sm">Gia hạn</Button>
@@ -230,7 +230,7 @@ const Subscriptions = () => {
           <div className="h-2 bg-gradient-to-r from-blue-500 to-purple-500"></div>
           <CardHeader>
             <CardTitle className="flex items-center text-2xl font-bold text-gray-800">
-              <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl mr-4">
+              <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 mr-4">
                 <Battery className="h-6 w-6 text-white" />
               </div>
               Lịch sử sử dụng gần đây
@@ -244,9 +244,9 @@ const Subscriptions = () => {
                 { station: "Trạm Quận 3", date: "10/12/2024 - 09:15", status: "Đã sử dụng", color: "green" },
                 { station: "Trạm Bình Thạnh", date: "08/12/2024 - 16:45", status: "Đã sử dụng", color: "green" }
               ].map((usage, index) => (
-                <div key={index} className="flex justify-between items-center p-6 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-colors group">
+                <div key={index} className="flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 transition-colors group">
                   <div className="flex items-center space-x-4">
-                    <div className="p-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                    <div className="p-3 bg-gradient-to-r from-blue-500 to-indigo-500 group-hover:scale-110 transition-transform duration-300">
                       <Zap className="h-5 w-5 text-white" />
                     </div>
                     <div>
