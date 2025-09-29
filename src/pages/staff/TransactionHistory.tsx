@@ -93,9 +93,8 @@ const TransactionHistory = () => {
 
       <div className="container mx-auto px-6 py-8 max-w-7xl">
         {/* Search and Filter */}
-        <Card className="mb-8 border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in">
-          <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
-          <CardHeader>
+        <Card className="mb-8 border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in rounded-3xl overflow-hidden">
+          <CardHeader className="border-b border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50">
             <CardTitle className="flex items-center text-2xl font-bold text-gray-800">
               <div className="p-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl mr-4">
                 <Search className="h-6 w-6 text-white" />
@@ -139,10 +138,9 @@ const TransactionHistory = () => {
           {transactions.map((transaction, index) => (
             <Card 
               key={transaction.id} 
-              className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 bg-white/90 backdrop-blur-sm group overflow-hidden"
+              className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 bg-white/90 backdrop-blur-sm group rounded-3xl overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
               <CardContent className="p-8">
                 <div className="grid lg:grid-cols-4 gap-8">
                   {/* Customer Info */}
@@ -255,7 +253,7 @@ const TransactionHistory = () => {
         </div>
 
         {/* Summary Stats */}
-        <Card className="mt-8 border-0 shadow-lg bg-white animate-scale-in">
+        <Card className="mt-8 border-0 shadow-lg bg-white animate-scale-in rounded-3xl overflow-hidden">
           <CardHeader>
             <CardTitle className="flex items-center text-2xl font-bold text-gray-800">
               <div className="p-3 bg-gradient-to-r from-gray-600 to-gray-800 rounded-xl mr-4">
