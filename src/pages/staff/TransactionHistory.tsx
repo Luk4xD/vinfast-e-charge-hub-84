@@ -94,7 +94,7 @@ const TransactionHistory = () => {
       <div className="container mx-auto px-6 py-8 max-w-7xl">
         {/* Search and Filter */}
         <Card className="mb-8 border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in rounded-3xl overflow-hidden">
-          <CardHeader className="border-b border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50">
+          <CardHeader className="border-b border-gray-100">
             <CardTitle className="flex items-center text-2xl font-bold text-gray-800">
               <div className="p-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl mr-4">
                 <Search className="h-6 w-6 text-white" />
