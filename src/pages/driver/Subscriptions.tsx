@@ -107,8 +107,8 @@ const Subscriptions = () => {
 
       <div className="container mx-auto px-6 py-8 max-w-7xl">
         {/* Current Subscription */}
-        <Card className="mb-8 border-0 shadow-xl bg-gradient-to-br from-green-50 to-emerald-50 animate-fade-in rounded-3xl">
-          <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-t-3xl"></div>
+        <Card className="mb-8 border-0 shadow-xl bg-gradient-to-br from-green-50 to-emerald-50 animate-fade-in rounded-3xl overflow-hidden">
+          <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
           <CardHeader>
             <CardTitle className="flex items-center text-2xl font-bold text-gray-800">
               <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl mr-4">
@@ -226,8 +226,8 @@ const Subscriptions = () => {
         </div>
 
         {/* Usage History */}
-        <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-scale-in rounded-3xl">
-          <div className="h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-t-3xl"></div>
+        <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-scale-in rounded-3xl overflow-hidden">
+          <div className="h-2 bg-gradient-to-r from-blue-500 to-purple-500"></div>
           <CardHeader>
             <CardTitle className="flex items-center text-2xl font-bold text-gray-800">
               <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl mr-4">
