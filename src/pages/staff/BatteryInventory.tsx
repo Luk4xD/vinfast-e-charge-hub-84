@@ -166,9 +166,8 @@ const BatteryInventory = () => {
       <div className="container mx-auto px-6 py-8 max-w-7xl">
         {/* Enhanced Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 animate-fade-in">
-            <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
-            <CardContent className="p-6 text-center bg-gradient-to-br from-green-50 to-emerald-50">
+          <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 animate-fade-in">
+            <CardContent className="p-6 text-center">
               <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl mx-auto mb-4 w-fit">
                 <Battery className="h-8 w-8 text-white" />
               </div>
@@ -177,9 +176,8 @@ const BatteryInventory = () => {
             </CardContent>
           </Card>
           
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
-            <CardContent className="p-6 text-center bg-gradient-to-br from-blue-50 to-indigo-50">
+          <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            <CardContent className="p-6 text-center">
               <div className="p-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl mx-auto mb-4 w-fit">
                 <Battery className="h-8 w-8 text-white" />
               </div>
@@ -188,9 +186,8 @@ const BatteryInventory = () => {
             </CardContent>
           </Card>
           
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="h-2 bg-gradient-to-r from-orange-500 to-yellow-500"></div>
-            <CardContent className="p-6 text-center bg-gradient-to-br from-orange-50 to-yellow-50">
+          <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <CardContent className="p-6 text-center">
               <div className="p-3 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl mx-auto mb-4 w-fit">
                 <Battery className="h-8 w-8 text-white" />
               </div>
@@ -199,9 +196,8 @@ const BatteryInventory = () => {
             </CardContent>
           </Card>
           
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <div className="h-2 bg-gradient-to-r from-purple-500 to-pink-500"></div>
-            <CardContent className="p-6 text-center bg-gradient-to-br from-purple-50 to-pink-50">
+          <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            <CardContent className="p-6 text-center">
               <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl mx-auto mb-4 w-fit">
                 <Battery className="h-8 w-8 text-white" />
               </div>
@@ -212,8 +208,7 @@ const BatteryInventory = () => {
         </div>
 
         {/* Enhanced Search and Actions */}
-        <Card className="mb-6 border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-slide-up">
-          <div className="h-2 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+        <Card className="mb-6 border-0 shadow-lg bg-white animate-slide-up">
           <CardContent className="p-6">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1 relative">
@@ -336,7 +331,7 @@ const BatteryInventory = () => {
 
           <div className="grid gap-6">
             {batteries.map((battery, index) => (
-              <Card key={battery.id} className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+              <Card key={battery.id} className="border-0 shadow-md bg-white hover:shadow-lg transition-all duration-300 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                 <CardContent className="p-6">
                   <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-center">
                     <div className="space-y-1">
