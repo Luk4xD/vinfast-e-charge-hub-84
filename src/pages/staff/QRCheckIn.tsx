@@ -72,7 +72,7 @@ const QRCheckIn = () => {
         <div className="grid lg:grid-cols-2 gap-8">
           {/* QR Scanner */}
           <div>
-            <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in">
+            <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in rounded-3xl overflow-hidden">
               <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
               <CardHeader>
                 <CardTitle className="text-center text-2xl font-bold text-gray-800">
