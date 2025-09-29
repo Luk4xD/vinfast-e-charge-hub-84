@@ -226,92 +226,101 @@ const Reports = () => {
 
         {/* Enhanced KPI Overview */}
         <div className="mb-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 justify-items-center">
-            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="h-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-t-lg"></div>
-              <CardContent className="p-5 text-center">
-                <div className="bg-gradient-to-br from-emerald-500 to-green-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-emerald-500/25 transition-all duration-300">
-                  <DollarSign className="h-6 w-6 text-white" />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="text-xl font-bold text-slate-900">{kpiData.totalRevenue}</h3>
-                  <p className="text-xs text-slate-500 font-medium">Tổng Doanh Thu (VNĐ)</p>
-                  <div className="flex items-center justify-center text-emerald-600 text-xs">
-                    <TrendingUp className="h-3 w-3 mr-1" />
-                    +12.5%
+          <div className="flex flex-wrap justify-center gap-4">
+            <div className="w-48 flex-shrink-0">
+              <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
+                <div className="h-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-t-lg"></div>
+                <CardContent className="p-5 text-center">
+                  <div className="bg-gradient-to-br from-emerald-500 to-green-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-emerald-500/25 transition-all duration-300">
+                    <DollarSign className="h-6 w-6 text-white" />
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-t-lg"></div>
-              <CardContent className="p-5 text-center">
-                <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
-                  <Activity className="h-6 w-6 text-white" />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="text-xl font-bold text-slate-900">{kpiData.totalTransactions}</h3>
-                  <p className="text-xs text-slate-500 font-medium">Tổng Giao Dịch</p>
-                  <div className="flex items-center justify-center text-blue-600 text-xs">
-                    <TrendingUp className="h-3 w-3 mr-1" />
-                    +8.3%
+                  <div className="space-y-1">
+                    <h3 className="text-xl font-bold text-slate-900">{kpiData.totalRevenue}</h3>
+                    <p className="text-xs text-slate-500 font-medium">Tổng Doanh Thu (VNĐ)</p>
+                    <div className="flex items-center justify-center text-emerald-600 text-xs">
+                      <TrendingUp className="h-3 w-3 mr-1" />
+                      +12.5%
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
 
-
-            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-t-lg"></div>
-              <CardContent className="p-5 text-center">
-                <div className="bg-gradient-to-br from-purple-500 to-pink-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300">
-                  <Users className="h-6 w-6 text-white" />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="text-xl font-bold text-slate-900">{kpiData.customerSatisfaction}</h3>
-                  <p className="text-xs text-slate-500 font-medium">Hài Lòng Khách Hàng</p>
-                  <div className="flex items-center justify-center text-purple-600 text-xs">
-                    <TrendingUp className="h-3 w-3 mr-1" />
-                    +1.2%
+            <div className="w-48 flex-shrink-0">
+              <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
+                <div className="h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-t-lg"></div>
+                <CardContent className="p-5 text-center">
+                  <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
+                    <Activity className="h-6 w-6 text-white" />
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="h-1 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-t-lg"></div>
-              <CardContent className="p-5 text-center">
-                <div className="bg-gradient-to-br from-teal-500 to-cyan-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-teal-500/25 transition-all duration-300">
-                  <Zap className="h-6 w-6 text-white" />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="text-xl font-bold text-slate-900">{kpiData.systemUptime}</h3>
-                  <p className="text-xs text-slate-500 font-medium">Thời Gian Hoạt Động</p>
-                  <div className="flex items-center justify-center text-teal-600 text-xs">
-                    <TrendingUp className="h-3 w-3 mr-1" />
-                    +0.1%
+                  <div className="space-y-1">
+                    <h3 className="text-xl font-bold text-slate-900">{kpiData.totalTransactions}</h3>
+                    <p className="text-xs text-slate-500 font-medium">Tổng Giao Dịch</p>
+                    <div className="flex items-center justify-center text-blue-600 text-xs">
+                      <TrendingUp className="h-3 w-3 mr-1" />
+                      +8.3%
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
 
-            <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-t-lg"></div>
-              <CardContent className="p-5 text-center">
-                <div className="bg-gradient-to-br from-indigo-500 to-purple-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-indigo-500/25 transition-all duration-300">
-                  <Battery className="h-6 w-6 text-white" />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="text-xl font-bold text-slate-900">{kpiData.batteryUtilization}</h3>
-                  <p className="text-xs text-slate-500 font-medium">Sử Dụng Pin</p>
-                  <div className="flex items-center justify-center text-indigo-600 text-xs">
-                    <TrendingUp className="h-3 w-3 mr-1" />
-                    +5.7%
+            <div className="w-48 flex-shrink-0">
+              <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
+                <div className="h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-t-lg"></div>
+                <CardContent className="p-5 text-center">
+                  <div className="bg-gradient-to-br from-purple-500 to-pink-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300">
+                    <Users className="h-6 w-6 text-white" />
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="space-y-1">
+                    <h3 className="text-xl font-bold text-slate-900">{kpiData.customerSatisfaction}</h3>
+                    <p className="text-xs text-slate-500 font-medium">Hài Lòng Khách Hàng</p>
+                    <div className="flex items-center justify-center text-purple-600 text-xs">
+                      <TrendingUp className="h-3 w-3 mr-1" />
+                      +1.2%
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="w-48 flex-shrink-0">
+              <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
+                <div className="h-1 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-t-lg"></div>
+                <CardContent className="p-5 text-center">
+                  <div className="bg-gradient-to-br from-teal-500 to-cyan-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-teal-500/25 transition-all duration-300">
+                    <Zap className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="text-xl font-bold text-slate-900">{kpiData.systemUptime}</h3>
+                    <p className="text-xs text-slate-500 font-medium">Thời Gian Hoạt Động</p>
+                    <div className="flex items-center justify-center text-teal-600 text-xs">
+                      <TrendingUp className="h-3 w-3 mr-1" />
+                      +0.1%
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="w-48 flex-shrink-0">
+              <Card className="group bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
+                <div className="h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-t-lg"></div>
+                <CardContent className="p-5 text-center">
+                  <div className="bg-gradient-to-br from-indigo-500 to-purple-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-indigo-500/25 transition-all duration-300">
+                    <Battery className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="text-xl font-bold text-slate-900">{kpiData.batteryUtilization}</h3>
+                    <p className="text-xs text-slate-500 font-medium">Sử Dụng Pin</p>
+                    <div className="flex items-center justify-center text-indigo-600 text-xs">
+                      <TrendingUp className="h-3 w-3 mr-1" />
+                      +5.7%
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
 
