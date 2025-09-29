@@ -291,9 +291,8 @@ const BatteryInspection = () => {
       <div className="container mx-auto px-6 py-8 max-w-7xl">
         {/* Enhanced Inspection Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 animate-fade-in">
-            <div className="h-2 bg-gradient-to-r from-orange-500 to-yellow-500"></div>
-            <CardContent className="p-6 text-center bg-gradient-to-br from-orange-50 to-yellow-50">
+          <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 animate-fade-in">
+            <CardContent className="p-6 text-center">
               <div className="p-3 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl mx-auto mb-4 w-fit">
                 <AlertTriangle className="h-8 w-8 text-white" />
               </div>
@@ -312,9 +311,8 @@ const BatteryInspection = () => {
             </CardContent>
           </Card>
           
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
-            <CardContent className="p-6 text-center bg-gradient-to-br from-green-50 to-emerald-50">
+          <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <CardContent className="p-6 text-center">
               <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl mx-auto mb-4 w-fit">
                 <CheckCircle className="h-8 w-8 text-white" />
               </div>
@@ -325,8 +323,7 @@ const BatteryInspection = () => {
         </div>
 
         {/* Enhanced Batteries Requiring Inspection */}
-        <Card className="mb-6 border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-slide-up">
-          <div className="h-2 bg-gradient-to-r from-orange-500 to-yellow-500"></div>
+        <Card className="mb-6 border-0 shadow-lg bg-white animate-slide-up">
           <CardHeader>
             <CardTitle className="text-xl font-bold text-gray-800 flex items-center">
               <div className="p-3 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl mr-4">
@@ -341,7 +338,7 @@ const BatteryInspection = () => {
           <CardContent>
             <div className="space-y-4">
               {emptyBatteries.map((battery, index) => (
-                <Card key={battery.id} className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <Card key={battery.id} className="border-0 shadow-md bg-white hover:shadow-lg transition-all duration-300 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                   <CardContent className="p-4">
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
                       <div className="space-y-1">
@@ -406,8 +403,7 @@ const BatteryInspection = () => {
         </Card>
 
         {/* Enhanced Inspection History */}
-        <Card className="mb-6 border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-slide-up" style={{ animationDelay: '0.3s' }}>
-          <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+        <Card className="mb-6 border-0 shadow-lg bg-white animate-slide-up" style={{ animationDelay: '0.3s' }}>
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
@@ -433,7 +429,7 @@ const BatteryInspection = () => {
           <CardContent>
             <div className="space-y-4">
               {displayedHistory.map((record, index) => (
-                <Card key={record.id} className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <Card key={record.id} className="border-0 shadow-md bg-white hover:shadow-lg transition-all duration-300 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                   <CardContent className="p-4">
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-start">
                       <div className="space-y-1">
