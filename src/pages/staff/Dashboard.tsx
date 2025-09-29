@@ -88,10 +88,9 @@ const StaffDashboard = () => {
           </div>
           
           {/* Station Info Card */}
-          <Card className="w-96 border-0 shadow-xl bg-gradient-to-br from-blue-50 to-indigo-50 animate-slide-up">
-            <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+          <Card className="w-96 border-0 shadow-lg bg-white animate-slide-up">
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center text-blue-800">
+              <CardTitle className="text-lg flex items-center text-gray-800">
                 <div className="p-2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg mr-3">
                   <Battery className="h-5 w-5 text-white" />
                 </div>
@@ -130,18 +129,17 @@ const StaffDashboard = () => {
         {/* Enhanced Quick Stats */}
         <div className="grid md:grid-cols-4 gap-6 mb-8">
           {[
-            { icon: QrCode, count: "23", label: "QR đã quét hôm nay", color: "from-blue-500 to-indigo-500", bgColor: "from-blue-50 to-indigo-50" },
-            { icon: CreditCard, count: "8", label: "Thanh toán chờ xử lý", color: "from-green-500 to-emerald-500", bgColor: "from-green-50 to-emerald-50" },
-            { icon: Battery, count: "45", label: "Pin trong kho", color: "from-orange-500 to-yellow-500", bgColor: "from-orange-50 to-yellow-50" },
-            { icon: Search, count: "3", label: "Pin cần kiểm tra", color: "from-purple-500 to-pink-500", bgColor: "from-purple-50 to-pink-50" }
+            { icon: QrCode, count: "23", label: "QR đã quét hôm nay", color: "from-blue-500 to-indigo-500" },
+            { icon: CreditCard, count: "8", label: "Thanh toán chờ xử lý", color: "from-green-500 to-emerald-500" },
+            { icon: Battery, count: "45", label: "Pin trong kho", color: "from-orange-500 to-yellow-500" },
+            { icon: Search, count: "3", label: "Pin cần kiểm tra", color: "from-purple-500 to-pink-500" }
           ].map((stat, index) => (
             <Card 
               key={index} 
-              className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 group overflow-hidden"
+              className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 group overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className={`h-2 bg-gradient-to-r ${stat.color}`}></div>
-              <CardContent className={`p-6 text-center bg-gradient-to-br ${stat.bgColor} group-hover:scale-105 transition-transform duration-300`}>
+              <CardContent className="p-6 text-center group-hover:scale-105 transition-transform duration-300">
                 <div className={`p-3 bg-gradient-to-r ${stat.color} rounded-xl mx-auto mb-4 w-fit group-hover:rotate-6 transition-transform duration-300`}>
                   <stat.icon className="h-8 w-8 text-white" />
                 </div>
@@ -161,10 +159,9 @@ const StaffDashboard = () => {
           ].map((metric, index) => (
             <Card 
               key={index} 
-              className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 group overflow-hidden"
+              className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 group overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className={`h-2 bg-gradient-to-r ${metric.color}`}></div>
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className={`p-3 bg-gradient-to-r ${metric.color} rounded-xl group-hover:scale-110 transition-transform duration-300`}>
@@ -219,10 +216,9 @@ const StaffDashboard = () => {
           ].map((feature, index) => (
             <Card 
               key={index} 
-              className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden"
+              className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className={`h-2 bg-gradient-to-r ${feature.color}`}></div>
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center space-x-4">
@@ -257,8 +253,7 @@ const StaffDashboard = () => {
         </div>
 
         {/* Today's Summary */}
-        <Card className="mt-8 border-0 shadow-xl bg-gradient-to-br from-gray-50 to-gray-100 animate-fade-in">
-          <div className="h-2 bg-gradient-to-r from-gray-600 to-gray-800"></div>
+        <Card className="mt-8 border-0 shadow-lg bg-white animate-fade-in">
           <CardHeader>
             <CardTitle className="flex items-center text-2xl font-bold text-gray-800">
               <div className="p-3 bg-gradient-to-r from-gray-600 to-gray-800 rounded-xl mr-4">

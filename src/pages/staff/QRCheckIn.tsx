@@ -222,7 +222,7 @@ const QRCheckIn = () => {
                 </CardContent>
               </Card>
             ) : (
-              <Card className="border-0 shadow-xl bg-gradient-to-br from-gray-50 to-gray-100">
+              <Card className="border-0 shadow-lg bg-white">
                 <CardContent className="p-12 text-center">
                   <QrCode className="h-24 w-24 text-gray-300 mx-auto mb-6" />
                   <h3 className="text-xl font-semibold text-gray-600 mb-3">Chờ quét QR Code</h3>

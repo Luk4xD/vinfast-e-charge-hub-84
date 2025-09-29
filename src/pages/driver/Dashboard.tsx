@@ -88,18 +88,17 @@ const DriverDashboard = () => {
         {/* Enhanced Quick Stats */}
         <div className="grid md:grid-cols-4 gap-6 mb-8">
           {[
-            { icon: Car, count: "1", label: "Xe đã đăng ký", color: "from-blue-500 to-indigo-500", bgColor: "from-blue-50 to-indigo-50" },
-            { icon: MapPin, count: "12", label: "Trạm gần đây", color: "from-green-500 to-emerald-500", bgColor: "from-green-50 to-emerald-50" },
-            { icon: Calendar, count: "3", label: "Lịch hẹn", color: "from-orange-500 to-yellow-500", bgColor: "from-orange-50 to-yellow-50" },
-            { icon: CreditCard, count: "5", label: "Gói thuê bao", color: "from-purple-500 to-pink-500", bgColor: "from-purple-50 to-pink-50" }
+            { icon: Car, count: "1", label: "Xe đã đăng ký", color: "from-blue-500 to-indigo-500" },
+            { icon: MapPin, count: "12", label: "Trạm gần đây", color: "from-green-500 to-emerald-500" },
+            { icon: Calendar, count: "3", label: "Lịch hẹn", color: "from-orange-500 to-yellow-500" },
+            { icon: CreditCard, count: "5", label: "Gói thuê bao", color: "from-purple-500 to-pink-500" }
           ].map((stat, index) => (
             <Card 
               key={index} 
-              className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 group overflow-hidden"
+              className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 group overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className={`h-2 bg-gradient-to-r ${stat.color}`}></div>
-              <CardContent className={`p-6 text-center bg-gradient-to-br ${stat.bgColor} group-hover:scale-105 transition-transform duration-300`}>
+              <CardContent className="p-6 text-center group-hover:scale-105 transition-transform duration-300">
                 <div className={`p-3 bg-gradient-to-r ${stat.color} rounded-xl mx-auto mb-4 w-fit`}>
                   <stat.icon className="h-8 w-8 text-white" />
                 </div>
@@ -147,10 +146,9 @@ const DriverDashboard = () => {
           ].map((feature, index) => (
             <Card 
               key={index} 
-              className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden"
+              className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className={`h-2 bg-gradient-to-r ${feature.color}`}></div>
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
                   <div className={`p-3 bg-gradient-to-r ${feature.color} rounded-xl mr-4`}>

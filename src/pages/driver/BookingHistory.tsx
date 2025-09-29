@@ -209,8 +209,7 @@ const BookingHistory = () => {
       <div className="container mx-auto px-6 py-8 max-w-7xl">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in">
-            <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+          <Card className="border-0 shadow-lg bg-white animate-fade-in">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -224,8 +223,7 @@ const BookingHistory = () => {
             </CardContent>
           </Card>
           
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
+          <Card className="border-0 shadow-lg bg-white animate-fade-in" style={{ animationDelay: '0.1s' }}>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -239,8 +237,7 @@ const BookingHistory = () => {
             </CardContent>
           </Card>
           
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="h-2 bg-gradient-to-r from-orange-500 to-red-500"></div>
+          <Card className="border-0 shadow-lg bg-white animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -259,8 +256,7 @@ const BookingHistory = () => {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Search and Filter Sidebar */}
           <div className="lg:w-80 shrink-0">
-            <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-slide-up sticky top-6">
-              <div className="h-2 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+            <Card className="border-0 shadow-lg bg-white animate-slide-up sticky top-6">
               <CardHeader>
                 <CardTitle className="flex items-center text-xl font-bold text-gray-800">
                   <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl mr-4">
@@ -344,7 +340,7 @@ const BookingHistory = () => {
               </div>
 
               {bookings.length === 0 ? (
-                <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm">
+                <Card className="border-0 shadow-lg bg-white">
                   <CardContent className="p-12 text-center">
                     <div className="p-4 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
                       <Calendar className="h-12 w-12 text-gray-400" />
@@ -356,7 +352,7 @@ const BookingHistory = () => {
               ) : (
                 <div className="space-y-6">
                   {bookings.map((booking, index) => (
-                    <Card key={booking.id} className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                    <Card key={booking.id} className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                       <CardContent className="p-6">
                         <div className="flex items-start justify-between mb-4">
                           <div className="space-y-2">

@@ -176,8 +176,7 @@ const StaffManagement = () => {
       <div className="container mx-auto p-6">
         {/* Statistics */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
-            <div className="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+          <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
             <CardContent className="p-6 text-center">
               <div className="bg-gradient-to-r from-blue-500 to-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
                 <Users className="h-6 w-6 text-white" />
@@ -186,8 +185,7 @@ const StaffManagement = () => {
               <p className="text-muted-foreground">Tổng nhân viên</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
-            <div className="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
+          <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
             <CardContent className="p-6 text-center">
               <div className="bg-gradient-to-r from-green-500 to-green-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
                 <UserPlus className="h-6 w-6 text-white" />
@@ -196,8 +194,7 @@ const StaffManagement = () => {
               <p className="text-muted-foreground">Đã phân công</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
-            <div className="h-2 bg-gradient-to-r from-orange-500 to-orange-600"></div>
+          <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
             <CardContent className="p-6 text-center">
               <div className="bg-gradient-to-r from-orange-500 to-orange-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
                 <Users className="h-6 w-6 text-white" />
@@ -209,8 +206,7 @@ const StaffManagement = () => {
         </div>
 
         {/* Station Status Overview */}
-        <Card className="bg-gradient-to-br from-teal-50 to-teal-100 overflow-hidden hover:shadow-lg transition-all duration-300 mb-8">
-          <div className="h-2 bg-gradient-to-r from-teal-500 to-teal-600"></div>
+        <Card className="border-0 shadow-lg bg-white overflow-hidden hover:shadow-xl transition-all duration-300 mb-8">
           <CardHeader>
             <CardTitle className="flex items-center">
               <div className="bg-gradient-to-r from-teal-500 to-teal-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
@@ -292,8 +288,7 @@ const StaffManagement = () => {
         </Card>
 
         {/* Staff Management */}
-        <Card className="bg-gradient-to-br from-purple-50 to-purple-100 overflow-hidden hover:shadow-lg transition-all duration-300">
-          <div className="h-2 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+        <Card className="border-0 shadow-lg bg-white overflow-hidden hover:shadow-xl transition-all duration-300">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>

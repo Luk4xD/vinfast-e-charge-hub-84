@@ -70,8 +70,7 @@ const AdminDashboard = () => {
 
             {/* Stats Cards */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              <Card className="relative overflow-hidden bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 to-green-600"></div>
+              <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <CardContent className="p-6 text-center">
                   <div className="bg-gradient-to-r from-green-500 to-green-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <TrendingUp className="h-6 w-6 text-white" />
@@ -81,8 +80,7 @@ const AdminDashboard = () => {
                 </CardContent>
               </Card>
 
-              <Card className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+              <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <CardContent className="p-6 text-center">
                   <div className="bg-gradient-to-r from-blue-500 to-blue-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <Users className="h-6 w-6 text-white" />
@@ -92,8 +90,7 @@ const AdminDashboard = () => {
                 </CardContent>
               </Card>
 
-              <Card className="relative overflow-hidden bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-orange-600"></div>
+              <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <CardContent className="p-6 text-center">
                   <div className="bg-gradient-to-r from-orange-500 to-orange-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <Battery className="h-6 w-6 text-white" />
@@ -103,8 +100,7 @@ const AdminDashboard = () => {
                 </CardContent>
               </Card>
 
-              <Card className="relative overflow-hidden bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+              <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <CardContent className="p-6 text-center">
                   <div className="bg-gradient-to-r from-purple-500 to-purple-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <MapPin className="h-6 w-6 text-white" />
@@ -117,8 +113,7 @@ const AdminDashboard = () => {
 
             {/* Quick Actions */}
             <div className="grid md:grid-cols-3 gap-6">
-            <Card className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
-              <div className="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+            <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
                 <CardHeader>
                   <CardTitle className="flex items-center text-gray-800">
                     <div className="bg-gradient-to-r from-blue-500 to-blue-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
@@ -139,8 +134,7 @@ const AdminDashboard = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
-                <div className="h-2 bg-gradient-to-r from-orange-500 to-orange-600"></div>
+              <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
                 <CardHeader>
                   <CardTitle className="flex items-center text-gray-800">
                     <div className="bg-gradient-to-r from-orange-500 to-orange-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">
@@ -161,8 +155,7 @@ const AdminDashboard = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-green-50 to-green-100 hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
-                <div className="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
+              <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
                 <CardHeader>
                   <CardTitle className="flex items-center text-gray-800">
                     <div className="bg-gradient-to-r from-green-500 to-green-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md">

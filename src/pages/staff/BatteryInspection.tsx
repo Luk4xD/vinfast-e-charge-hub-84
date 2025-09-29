@@ -302,9 +302,8 @@ const BatteryInspection = () => {
             </CardContent>
           </Card>
           
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            <div className="h-2 bg-gradient-to-r from-red-500 to-red-600"></div>
-            <CardContent className="p-6 text-center bg-gradient-to-br from-red-50 to-red-100">
+          <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            <CardContent className="p-6 text-center">
               <div className="p-3 bg-gradient-to-r from-red-500 to-red-600 rounded-xl mx-auto mb-4 w-fit">
                 <Wrench className="h-8 w-8 text-white" />
               </div>

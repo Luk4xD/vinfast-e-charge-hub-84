@@ -142,7 +142,7 @@ const Payment = () => {
             </Card>
 
             {/* Security Info */}
-            <Card className="border-0 shadow-xl bg-gradient-to-br from-green-50 to-emerald-50 animate-slide-up">
+            <Card className="border-0 shadow-lg bg-white animate-slide-up">
               <CardHeader>
                 <CardTitle className="flex items-center text-green-800">
                   <Shield className="h-6 w-6 mr-2" />

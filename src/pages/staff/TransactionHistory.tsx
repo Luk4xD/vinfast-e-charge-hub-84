@@ -255,8 +255,7 @@ const TransactionHistory = () => {
         </div>
 
         {/* Summary Stats */}
-        <Card className="mt-8 border-0 shadow-xl bg-gradient-to-br from-gray-50 to-gray-100 animate-scale-in">
-          <div className="h-2 bg-gradient-to-r from-gray-600 to-gray-800"></div>
+        <Card className="mt-8 border-0 shadow-lg bg-white animate-scale-in">
           <CardHeader>
             <CardTitle className="flex items-center text-2xl font-bold text-gray-800">
               <div className="p-3 bg-gradient-to-r from-gray-600 to-gray-800 rounded-xl mr-4">
