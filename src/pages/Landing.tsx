@@ -1,10 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Battery, Zap, Users, BarChart3, LogIn, UserPlus, Star, ArrowRight, CheckCircle, Globe, Phone, Clock, MapPin, Shield, Sparkles } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Battery, Zap, Users, BarChart3, LogIn, UserPlus, Star, ArrowRight, CheckCircle, Globe, Phone, Clock, MapPin, Shield, Sparkles, Smartphone, Network, HeadphonesIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/electric-scooter-hero.jpg";
+import Autoplay from "embla-carousel-autoplay";
+import React from "react";
 const Landing = () => {
   console.log("Landing component rendering...");
+  const plugin = React.useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: true })
+  );
+  
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -225,6 +232,128 @@ const Landing = () => {
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
+
+      {/* Carousel Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-0 w-full h-full" style={{ 
+            backgroundImage: 'radial-gradient(circle at 50% 50%, hsl(var(--electric-blue)) 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16 animate-fade-in">
+            <div className="text-primary text-lg font-medium mb-4 italic">Tính năng nổi bật</div>
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              Trải nghiệm dịch vụ của chúng tôi
+            </h2>
+          </div>
+
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            plugins={[plugin.current]}
+            className="w-full max-w-5xl mx-auto"
+          >
+            <CarouselContent>
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                <div className="p-4">
+                  <Card className="group hover:scale-105 transition-all duration-500 border-0 shadow-xl overflow-hidden h-full">
+                    <div className="bg-gradient-to-br from-electric-blue to-electric-blue-dark p-8 aspect-square flex flex-col items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></div>
+                      <Zap className="h-20 w-20 text-white mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 relative z-10" />
+                      <h3 className="text-2xl font-bold text-white text-center relative z-10">Quy trình nhanh</h3>
+                    </div>
+                    <CardContent className="p-6">
+                      <p className="text-gray-600 text-center">Đổi pin tự động chỉ trong 5 phút với công nghệ tiên tiến</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                <div className="p-4">
+                  <Card className="group hover:scale-105 transition-all duration-500 border-0 shadow-xl overflow-hidden h-full">
+                    <div className="bg-gradient-to-br from-primary to-electric-blue-dark p-8 aspect-square flex flex-col items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></div>
+                      <Smartphone className="h-20 w-20 text-white mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 relative z-10" />
+                      <h3 className="text-2xl font-bold text-white text-center relative z-10">Ứng dụng di động</h3>
+                    </div>
+                    <CardContent className="p-6">
+                      <p className="text-gray-600 text-center">Đặt lịch và thanh toán dễ dàng qua ứng dụng thông minh</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                <div className="p-4">
+                  <Card className="group hover:scale-105 transition-all duration-500 border-0 shadow-xl overflow-hidden h-full">
+                    <div className="bg-gradient-to-br from-electric-blue-light to-primary p-8 aspect-square flex flex-col items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></div>
+                      <Network className="h-20 w-20 text-white mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 relative z-10" />
+                      <h3 className="text-2xl font-bold text-white text-center relative z-10">Mạng lưới rộng</h3>
+                    </div>
+                    <CardContent className="p-6">
+                      <p className="text-gray-600 text-center">Hơn 100 trạm đổi pin trên toàn quốc</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                <div className="p-4">
+                  <Card className="group hover:scale-105 transition-all duration-500 border-0 shadow-xl overflow-hidden h-full">
+                    <div className="bg-gradient-to-br from-primary to-electric-blue p-8 aspect-square flex flex-col items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></div>
+                      <HeadphonesIcon className="h-20 w-20 text-white mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 relative z-10" />
+                      <h3 className="text-2xl font-bold text-white text-center relative z-10">Hỗ trợ 24/7</h3>
+                    </div>
+                    <CardContent className="p-6">
+                      <p className="text-gray-600 text-center">Đội ngũ hỗ trợ sẵn sàng phục vụ mọi lúc mọi nơi</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                <div className="p-4">
+                  <Card className="group hover:scale-105 transition-all duration-500 border-0 shadow-xl overflow-hidden h-full">
+                    <div className="bg-gradient-to-br from-electric-blue-dark to-primary p-8 aspect-square flex flex-col items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></div>
+                      <Shield className="h-20 w-20 text-white mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 relative z-10" />
+                      <h3 className="text-2xl font-bold text-white text-center relative z-10">An toàn tuyệt đối</h3>
+                    </div>
+                    <CardContent className="p-6">
+                      <p className="text-gray-600 text-center">Kiểm tra chất lượng pin nghiêm ngặt và bảo hành toàn diện</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                <div className="p-4">
+                  <Card className="group hover:scale-105 transition-all duration-500 border-0 shadow-xl overflow-hidden h-full">
+                    <div className="bg-gradient-to-br from-primary to-electric-blue-light p-8 aspect-square flex flex-col items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></div>
+                      <Battery className="h-20 w-20 text-white mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 relative z-10" />
+                      <h3 className="text-2xl font-bold text-white text-center relative z-10">Pin chất lượng cao</h3>
+                    </div>
+                    <CardContent className="p-6">
+                      <p className="text-gray-600 text-center">Pin VINFAST chính hãng với hiệu suất vượt trội</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex" />
+            <CarouselNext className="hidden md:flex" />
+          </Carousel>
         </div>
       </section>
 
