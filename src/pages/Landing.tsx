@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Battery, Zap, Users, BarChart3, LogIn, UserPlus, Star, ArrowRight, CheckCircle, Globe, Phone, Clock, MapPin, Shield } from "lucide-react";
+import { Battery, Zap, Users, BarChart3, LogIn, UserPlus, Star, ArrowRight, CheckCircle, Globe, Phone, Clock, MapPin, Shield, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/electric-scooter-hero.jpg";
 const Landing = () => {
@@ -21,9 +21,27 @@ const Landing = () => {
           <div className="absolute bottom-1/4 right-1/3 w-2 h-2 bg-white/30 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
           <div className="absolute top-1/2 left-1/3 w-4 h-4 bg-electric-blue-light/30 rounded-full animate-float" style={{ animationDelay: '0.8s' }}></div>
           
+          {/* Floating Icons - Animated continuously */}
+          <div className="absolute top-32 left-1/4 animate-float opacity-20">
+            <Battery className="h-8 w-8 text-white animate-pulse" />
+          </div>
+          <div className="absolute top-1/3 right-1/3 animate-float opacity-20" style={{ animationDelay: '1.2s' }}>
+            <Zap className="h-10 w-10 text-electric-blue-light animate-pulse" />
+          </div>
+          <div className="absolute bottom-1/3 left-1/3 animate-float opacity-20" style={{ animationDelay: '2.5s' }}>
+            <Sparkles className="h-7 w-7 text-white animate-pulse" />
+          </div>
+          <div className="absolute top-1/2 right-1/4 animate-float opacity-20" style={{ animationDelay: '1.8s' }}>
+            <Battery className="h-6 w-6 text-electric-blue-light animate-pulse" />
+          </div>
+          
           {/* Thêm gradient circles lớn */}
           <div className="absolute -top-20 -right-20 w-96 h-96 bg-electric-blue/20 rounded-full blur-3xl animate-pulse-glow"></div>
           <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1.5s' }}></div>
+          
+          {/* Animated lines moving across */}
+          <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent animate-slide-in-right"></div>
+          <div className="absolute top-2/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-electric-blue-light/30 to-transparent animate-slide-in-right" style={{ animationDelay: '2s' }}></div>
         </div>
 
         {/* Navigation */}
@@ -110,8 +128,12 @@ const Landing = () => {
             <div className="relative animate-fade-in">
               <div className="absolute -top-4 -left-4 w-24 h-24 bg-electric-blue/10 rounded-full animate-float"></div>
               <div className="absolute top-8 left-8 w-16 h-16 bg-electric-blue/20 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
-              <div className="relative bg-electric-blue-light/30 rounded-3xl p-8 text-center hover-lift transition-all duration-300">
-                <div className="bg-electric-blue rounded-2xl p-6 w-fit mx-auto mb-6 hover-scale">
+            <div className="relative bg-electric-blue-light/30 rounded-3xl p-8 text-center hover-lift transition-all duration-300">
+                {/* Rotating ring around icon */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-electric-blue/30 rounded-full animate-spin" style={{ animationDuration: '8s' }}></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 border-2 border-electric-blue/20 rounded-full animate-spin" style={{ animationDuration: '10s', animationDirection: 'reverse' }}></div>
+                
+                <div className="bg-electric-blue rounded-2xl p-6 w-fit mx-auto mb-6 hover-scale relative z-10">
                   <Users className="h-16 w-16 text-white animate-pulse" />
                 </div>
                 <h3 className="text-2xl font-bold text-electric-blue mb-2">Chào mừng bạn đến!</h3>
@@ -149,6 +171,17 @@ const Landing = () => {
         {/* Animated background elements */}
         <div className="absolute top-10 right-10 w-32 h-32 bg-electric-blue/5 rounded-full animate-float"></div>
         <div className="absolute bottom-20 left-10 w-24 h-24 bg-primary/5 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+        
+        {/* Continuous moving icons */}
+        <div className="absolute top-1/4 left-10 animate-float opacity-10">
+          <Zap className="h-12 w-12 text-electric-blue" />
+        </div>
+        <div className="absolute bottom-1/3 right-20 animate-float opacity-10" style={{ animationDelay: '1.5s' }}>
+          <Battery className="h-14 w-14 text-primary" />
+        </div>
+        <div className="absolute top-2/3 left-1/4 animate-float opacity-10" style={{ animationDelay: '2.5s' }}>
+          <Sparkles className="h-10 w-10 text-electric-blue" />
+        </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 animate-fade-in">
@@ -232,6 +265,16 @@ const Landing = () => {
         {/* Animated decorations */}
         <div className="absolute top-20 right-20 w-40 h-40 bg-electric-blue/5 rounded-full animate-float"></div>
         <div className="absolute bottom-40 left-20 w-32 h-32 bg-primary/5 rounded-full animate-float" style={{ animationDelay: '1.5s' }}></div>
+        
+        {/* Floating particles continuously */}
+        <div className="absolute top-1/3 left-1/4 w-2 h-2 bg-electric-blue/30 rounded-full animate-float"></div>
+        <div className="absolute top-1/2 right-1/3 w-3 h-3 bg-primary/30 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-1/3 left-1/3 w-2 h-2 bg-electric-blue/20 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-2/3 right-1/4 w-3 h-3 bg-primary/20 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
+        
+        {/* Rotating elements in background */}
+        <div className="absolute top-1/4 right-10 w-24 h-24 border-2 border-electric-blue/10 rounded-full animate-spin" style={{ animationDuration: '15s' }}></div>
+        <div className="absolute bottom-1/4 left-10 w-32 h-32 border-2 border-primary/10 rounded-full animate-spin" style={{ animationDuration: '20s', animationDirection: 'reverse' }}></div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 animate-fade-in">
