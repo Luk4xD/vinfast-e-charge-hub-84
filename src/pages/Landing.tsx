@@ -11,16 +11,23 @@ const Landing = () => {
       <div className="relative min-h-screen overflow-hidden">
         {/* Hero Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-electric-blue-dark/90 z-10"></div>
-          <img src={heroImage} alt="EV Charging Station" className="w-full h-full object-cover" />
-          {/* Animated background elements */}
-          <div className="absolute top-20 left-10 w-2 h-2 bg-white/30 rounded-full animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-3 h-3 bg-white/20 rounded-full animate-pulse delay-1000"></div>
-          <div className="absolute bottom-32 left-1/4 w-1 h-1 bg-white/40 rounded-full animate-pulse delay-500"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-electric-blue/80 to-electric-blue-dark/90 z-10 animate-pulse-glow"></div>
+          <img src={heroImage} alt="EV Charging Station" className="w-full h-full object-cover animate-scale-in" />
+          {/* Animated background elements - nhiều hơn và đẹp hơn */}
+          <div className="absolute top-20 left-10 w-3 h-3 bg-white/40 rounded-full animate-float"></div>
+          <div className="absolute top-40 right-20 w-4 h-4 bg-electric-blue-light/50 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-32 left-1/4 w-2 h-2 bg-white/50 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
+          <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-electric-blue/40 rounded-full animate-float" style={{ animationDelay: '1.5s' }}></div>
+          <div className="absolute bottom-1/4 right-1/3 w-2 h-2 bg-white/30 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/2 left-1/3 w-4 h-4 bg-electric-blue-light/30 rounded-full animate-float" style={{ animationDelay: '0.8s' }}></div>
+          
+          {/* Thêm gradient circles lớn */}
+          <div className="absolute -top-20 -right-20 w-96 h-96 bg-electric-blue/20 rounded-full blur-3xl animate-pulse-glow"></div>
+          <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1.5s' }}></div>
         </div>
 
         {/* Navigation */}
-        <nav className="relative z-20 bg-white/10 backdrop-blur-md">
+        <nav className="relative z-20 bg-white/10 backdrop-blur-md animate-slide-in-right">
           <div className="container mx-auto px-4 py-4">
             <div className="flex justify-between items-center">
               <div className="flex items-center">
@@ -62,25 +69,26 @@ const Landing = () => {
         {/* Hero Content */}
         <div className="relative z-20 container mx-auto px-4 pt-20 pb-32">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-8">
-              <Star className="h-4 w-4 mr-2" />
+            <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-8 animate-fade-in hover-scale">
+              <Star className="h-4 w-4 mr-2 animate-pulse" />
               EV Battery Swap
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight animate-slide-up">
               Hãy để chúng tôi làm sạch 
-              <span className="block text-electric-blue-light">những tấm pin giúp bạn nào.</span>
+              <span className="block text-electric-blue-light animate-pulse-glow">những tấm pin giúp bạn nào.</span>
             </h1>
             
-            <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.3s' }}>
               Dịch vụ đổi pin xe điện chuyên nghiệp, nhanh chóng và hiệu quả. 
               Kết nối tài xế, nhân viên và quản trị viên trong một hệ thống thống nhất.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.5s' }}>
               <Link to="/signup">
-                <Button size="lg" className="bg-primary text-white hover:bg-primary/90 text-lg px-8 py-4 rounded-full shadow-xl">
+                <Button size="lg" className="bg-primary text-white hover:bg-primary/90 hover-scale hover-glow text-lg px-8 py-4 rounded-full shadow-xl group">
                   ĐẶT DỊCH VỤ
+                  <ArrowRight className="inline-block ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </div>
@@ -99,18 +107,18 @@ const Landing = () => {
       <section className="py-20 bg-white" id="about">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="relative">
-              <div className="absolute -top-4 -left-4 w-24 h-24 bg-electric-blue/10 rounded-full"></div>
-              <div className="absolute top-8 left-8 w-16 h-16 bg-electric-blue/20 rounded-full"></div>
-              <div className="relative bg-electric-blue-light/30 rounded-3xl p-8 text-center">
-                <div className="bg-electric-blue rounded-2xl p-6 w-fit mx-auto mb-6">
-                  <Users className="h-16 w-16 text-white" />
+            <div className="relative animate-fade-in">
+              <div className="absolute -top-4 -left-4 w-24 h-24 bg-electric-blue/10 rounded-full animate-float"></div>
+              <div className="absolute top-8 left-8 w-16 h-16 bg-electric-blue/20 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
+              <div className="relative bg-electric-blue-light/30 rounded-3xl p-8 text-center hover-lift transition-all duration-300">
+                <div className="bg-electric-blue rounded-2xl p-6 w-fit mx-auto mb-6 hover-scale">
+                  <Users className="h-16 w-16 text-white animate-pulse" />
                 </div>
                 <h3 className="text-2xl font-bold text-electric-blue mb-2">Chào mừng bạn đến!</h3>
               </div>
             </div>
             
-            <div>
+            <div className="animate-slide-up">
               <div className="text-primary text-lg font-medium mb-4 italic">Chào mừng bạn đến!</div>
               <h2 className="text-4xl font-bold text-gray-800 mb-6">
                 Dịch vụ đổi pin xe điện chuyên nghiệp của chúng tôi
@@ -122,11 +130,13 @@ const Landing = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-electric-blue text-white hover:bg-electric-blue-dark px-8 py-3 rounded-full">
+                <Button className="bg-electric-blue text-white hover:bg-electric-blue-dark px-8 py-3 rounded-full hover-scale hover-glow group">
                   KHU THƯƠNG MẠI
+                  <ArrowRight className="inline-block ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-full">
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-full hover-scale group">
                   KHU DÂN CƯ
+                  <ArrowRight className="inline-block ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </div>
             </div>
@@ -135,9 +145,13 @@ const Landing = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-gray-50" id="services">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+      <section className="py-20 bg-gray-50 relative overflow-hidden" id="services">
+        {/* Animated background elements */}
+        <div className="absolute top-10 right-10 w-32 h-32 bg-electric-blue/5 rounded-full animate-float"></div>
+        <div className="absolute bottom-20 left-10 w-24 h-24 bg-primary/5 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16 animate-fade-in">
             <div className="text-primary text-lg font-medium mb-4 italic">Những dịch vụ của chúng tôi</div>
             <h2 className="text-4xl font-bold text-gray-800 mb-6">
               Hãy đưa chúng tôi pin của bạn.
@@ -145,32 +159,35 @@ const Landing = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <Card className="group hover:scale-105 transition-all duration-300 border-0 shadow-lg overflow-hidden">
-              <div className="aspect-square bg-gradient-to-br from-electric-blue to-electric-blue-dark p-8 flex items-center justify-center">
-                <Battery className="h-16 w-16 text-white" />
+            <Card className="group hover:scale-105 hover-lift transition-all duration-500 border-0 shadow-lg overflow-hidden animate-fade-in card-hover">
+              <div className="aspect-square bg-gradient-to-br from-electric-blue to-electric-blue-dark p-8 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></div>
+                <Battery className="h-16 w-16 text-white group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
               </div>
               <CardContent className="p-6 text-center">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Kiểm tra Pin</h3>
+                <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-electric-blue transition-colors">Kiểm tra Pin</h3>
                 <p className="text-gray-600">Kiểm tra tình trạng pin chi tiết với công nghệ AI</p>
               </CardContent>
             </Card>
 
-            <Card className="group hover:scale-105 transition-all duration-300 border-0 shadow-lg overflow-hidden">
-              <div className="aspect-square bg-gradient-to-br from-primary to-electric-blue-dark p-8 flex items-center justify-center">
-                <Zap className="h-16 w-16 text-white" />
+            <Card className="group hover:scale-105 hover-lift transition-all duration-500 border-0 shadow-lg overflow-hidden animate-fade-in card-hover" style={{ animationDelay: '0.1s' }}>
+              <div className="aspect-square bg-gradient-to-br from-primary to-electric-blue-dark p-8 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></div>
+                <Zap className="h-16 w-16 text-white group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
               </div>
               <CardContent className="p-6 text-center">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Đổi Pin Nhanh</h3>
+                <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-primary transition-colors">Đổi Pin Nhanh</h3>
                 <p className="text-gray-600">Quy trình đổi pin tự động chỉ trong 5 phút</p>
               </CardContent>
             </Card>
 
-            <Card className="group hover:scale-105 transition-all duration-300 border-0 shadow-lg overflow-hidden">
-              <div className="aspect-square bg-gradient-to-br from-primary to-electric-blue-dark p-8 flex items-center justify-center">
-                <Shield className="h-16 w-16 text-white" />
+            <Card className="group hover:scale-105 hover-lift transition-all duration-500 border-0 shadow-lg overflow-hidden animate-fade-in card-hover" style={{ animationDelay: '0.2s' }}>
+              <div className="aspect-square bg-gradient-to-br from-primary to-electric-blue-dark p-8 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300"></div>
+                <Shield className="h-16 w-16 text-white group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
               </div>
               <CardContent className="p-6 text-center">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Bảo vệ</h3>
+                <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-primary transition-colors">Bảo vệ</h3>
                 <p className="text-gray-600">Bảo vệ pin khỏi hư hỏng và kéo dài tuổi thọ</p>
               </CardContent>
             </Card>
@@ -179,43 +196,55 @@ const Landing = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-electric-blue">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gradient-to-r from-electric-blue via-primary to-electric-blue-dark relative overflow-hidden">
+        {/* Animated background patterns */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-full h-full" style={{ 
+            backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px)',
+            backgroundSize: '50px 50px'
+          }}></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-4 gap-8 text-center text-white">
-            <div>
-              <div className="text-4xl font-bold mb-2">5 phút</div>
-              <div className="text-white/80">Thời gian đổi pin</div>
+            <div className="group hover-scale animate-fade-in">
+              <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform animate-pulse-glow">5 phút</div>
+              <div className="text-white/80 group-hover:text-white transition-colors">Thời gian đổi pin</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">24/7</div>
-              <div className="text-white/80">Hoạt động liên tục</div>
+            <div className="group hover-scale animate-fade-in" style={{ animationDelay: '0.1s' }}>
+              <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform animate-pulse-glow">24/7</div>
+              <div className="text-white/80 group-hover:text-white transition-colors">Hoạt động liên tục</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">100+</div>
-              <div className="text-white/80">Trạm đổi pin</div>
+            <div className="group hover-scale animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform animate-pulse-glow">100+</div>
+              <div className="text-white/80 group-hover:text-white transition-colors">Trạm đổi pin</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">99.9%</div>
-              <div className="text-white/80">Độ tin cậy</div>
+            <div className="group hover-scale animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform animate-pulse-glow">99.9%</div>
+              <div className="text-white/80 group-hover:text-white transition-colors">Độ tin cậy</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Role Cards */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+      <section className="py-20 bg-white relative overflow-hidden">
+        {/* Animated decorations */}
+        <div className="absolute top-20 right-20 w-40 h-40 bg-electric-blue/5 rounded-full animate-float"></div>
+        <div className="absolute bottom-40 left-20 w-32 h-32 bg-primary/5 rounded-full animate-float" style={{ animationDelay: '1.5s' }}></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl font-bold text-gray-800 mb-6">Dành cho mọi đối tượng</h2>
             <p className="text-xl text-gray-600">Hệ thống phân quyền thông minh</p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <Card className="group hover:scale-105 transition-all duration-500 border-0 shadow-xl relative overflow-hidden">
+            <Card className="group hover:scale-105 hover-lift transition-all duration-500 border-0 shadow-xl relative overflow-hidden card-hover animate-fade-in">
               <div className="absolute inset-0 bg-gradient-to-br from-electric-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <CardHeader className="text-center pb-6 relative z-10">
-                <div className="mx-auto mb-6 p-4 bg-gradient-to-br from-electric-blue to-electric-blue-dark rounded-2xl w-fit shadow-lg">
-                  <Zap className="h-10 w-10 text-white" />
+                <div className="mx-auto mb-6 p-4 bg-gradient-to-br from-electric-blue to-electric-blue-dark rounded-2xl w-fit shadow-lg hover-scale glow-primary">
+                  <Zap className="h-10 w-10 text-white group-hover:rotate-12 transition-transform duration-300" />
                 </div>
                 <CardTitle className="text-2xl font-bold text-electric-blue">Tài xế</CardTitle>
                 <CardDescription className="text-lg text-muted-foreground">
@@ -244,11 +273,11 @@ const Landing = () => {
               </CardContent>
             </Card>
 
-            <Card className="group hover:scale-105 transition-all duration-500 border-0 shadow-xl relative overflow-hidden">
+            <Card className="group hover:scale-105 hover-lift transition-all duration-500 border-0 shadow-xl relative overflow-hidden card-hover animate-fade-in" style={{ animationDelay: '0.1s' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-electric-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <CardHeader className="text-center pb-6 relative z-10">
-                <div className="mx-auto mb-6 p-4 bg-gradient-to-br from-electric-blue to-electric-blue-dark rounded-2xl w-fit shadow-lg">
-                  <Users className="h-10 w-10 text-white" />
+                <div className="mx-auto mb-6 p-4 bg-gradient-to-br from-electric-blue to-electric-blue-dark rounded-2xl w-fit shadow-lg hover-scale glow-primary">
+                  <Users className="h-10 w-10 text-white group-hover:rotate-12 transition-transform duration-300" />
                 </div>
                 <CardTitle className="text-2xl font-bold text-electric-blue">Nhân viên</CardTitle>
                 <CardDescription className="text-lg text-muted-foreground">
@@ -277,11 +306,11 @@ const Landing = () => {
               </CardContent>
             </Card>
 
-            <Card className="group hover:scale-105 transition-all duration-500 border-0 shadow-xl relative overflow-hidden">
+            <Card className="group hover:scale-105 hover-lift transition-all duration-500 border-0 shadow-xl relative overflow-hidden card-hover animate-fade-in" style={{ animationDelay: '0.2s' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-electric-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <CardHeader className="text-center pb-6 relative z-10">
-                <div className="mx-auto mb-6 p-4 bg-gradient-to-br from-electric-blue to-electric-blue-dark rounded-2xl w-fit shadow-lg">
-                  <BarChart3 className="h-10 w-10 text-white" />
+                <div className="mx-auto mb-6 p-4 bg-gradient-to-br from-electric-blue to-electric-blue-dark rounded-2xl w-fit shadow-lg hover-scale glow-primary">
+                  <BarChart3 className="h-10 w-10 text-white group-hover:rotate-12 transition-transform duration-300" />
                 </div>
                 <CardTitle className="text-2xl font-bold text-electric-blue">Quản trị</CardTitle>
                 <CardDescription className="text-lg text-muted-foreground">
@@ -314,27 +343,31 @@ const Landing = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gray-50" id="contact">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-electric-blue/5 relative overflow-hidden" id="contact">
+        {/* Animated background */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-electric-blue/10 rounded-full blur-3xl animate-pulse-glow"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1s' }}></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center animate-fade-in">
             <div className="flex items-center justify-center mb-6">
-              <div className="p-3 bg-electric-blue rounded-full mr-4">
-                <Star className="h-8 w-8 text-white" />
+              <div className="p-3 bg-electric-blue rounded-full mr-4 hover-scale animate-pulse-glow">
+                <Star className="h-8 w-8 text-white animate-pulse" />
               </div>
-              <h3 className="text-4xl font-bold text-gray-800">
+              <h3 className="text-4xl font-bold text-gray-800 animate-slide-up">
                 Sẵn sàng bắt đầu?
               </h3>
             </div>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-xl text-gray-600 mb-8 leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
               Tham gia ngay hôm nay và trải nghiệm hệ thống đổi pin xe điện 
-              <span className="font-bold text-electric-blue"> hiện đại nhất Việt Nam</span>
+              <span className="font-bold text-electric-blue animate-pulse-glow"> hiện đại nhất Việt Nam</span>
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
               <Link to="/signup">
-                <Button size="lg" className="bg-primary text-white hover:bg-primary/90 text-lg px-12 py-4 rounded-full shadow-xl">
-                  <Star className="h-5 w-5 mr-2" />
+                <Button size="lg" className="bg-primary text-white hover:bg-primary/90 text-lg px-12 py-4 rounded-full shadow-xl hover-scale hover-glow group">
+                  <Star className="h-5 w-5 mr-2 group-hover:rotate-180 transition-transform duration-500" />
                   Đăng ký miễn phí
-                  <ArrowRight className="h-5 w-5 ml-2" />
+                  <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <div className="text-gray-500 text-sm">
