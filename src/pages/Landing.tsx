@@ -11,7 +11,7 @@ import React from "react";
 const Landing = () => {
   console.log("Landing component rendering...");
   const plugin = React.useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: true })
+    Autoplay({ delay: 2000, stopOnInteraction: true })
   );
   
   return (
