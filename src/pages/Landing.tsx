@@ -31,20 +31,20 @@ const Landing = () => {
             <CarouselContent className="h-screen">
               <CarouselItem className="h-screen">
                 <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-electric-blue/80 to-electric-blue-dark/90 z-10"></div>
                   <img src={heroImage} alt="Electric Scooter" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-electric-blue/80 to-electric-blue-dark/90"></div>
                 </div>
               </CarouselItem>
               <CarouselItem className="h-screen">
                 <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-electric-blue/90 via-primary/80 to-electric-blue-light/90 z-10"></div>
                   <img src={evStationImage} alt="EV Station" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-electric-blue/90 via-primary/80 to-electric-blue-light/90"></div>
                 </div>
               </CarouselItem>
               <CarouselItem className="h-screen">
                 <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-electric-blue-dark/90 via-electric-blue/80 to-primary/90 z-10"></div>
                   <img src={dashboardBgImage} alt="Battery Swap Service" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-electric-blue-dark/90 via-electric-blue/80 to-primary/90"></div>
                 </div>
               </CarouselItem>
             </CarouselContent>
