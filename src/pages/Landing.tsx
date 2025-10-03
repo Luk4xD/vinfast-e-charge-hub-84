@@ -16,39 +16,66 @@ const Landing = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <div className="relative min-h-screen overflow-hidden">
-        {/* Hero Background */}
+        {/* Hero Background Carousel */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-electric-blue/80 to-electric-blue-dark/90 z-10 animate-pulse-glow"></div>
-          <img src={heroImage} alt="EV Charging Station" className="w-full h-full object-cover animate-scale-in" />
-          {/* Animated background elements - nhiều hơn và đẹp hơn */}
-          <div className="absolute top-20 left-10 w-3 h-3 bg-white/40 rounded-full animate-float"></div>
-          <div className="absolute top-40 right-20 w-4 h-4 bg-electric-blue-light/50 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute bottom-32 left-1/4 w-2 h-2 bg-white/50 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
-          <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-electric-blue/40 rounded-full animate-float" style={{ animationDelay: '1.5s' }}></div>
-          <div className="absolute bottom-1/4 right-1/3 w-2 h-2 bg-white/30 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute top-1/2 left-1/3 w-4 h-4 bg-electric-blue-light/30 rounded-full animate-float" style={{ animationDelay: '0.8s' }}></div>
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            plugins={[plugin.current]}
+            className="w-full h-full"
+          >
+            <CarouselContent className="h-screen">
+              <CarouselItem className="h-screen">
+                <div className="absolute inset-0">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-electric-blue/80 to-electric-blue-dark/90 z-10"></div>
+                  <img src={heroImage} alt="EV Charging Station" className="w-full h-full object-cover" />
+                </div>
+              </CarouselItem>
+              <CarouselItem className="h-screen">
+                <div className="absolute inset-0">
+                  <div className="absolute inset-0 bg-gradient-to-br from-electric-blue/90 via-primary/80 to-electric-blue-light/90 z-10"></div>
+                  <img src={heroImage} alt="Electric Scooter" className="w-full h-full object-cover" />
+                </div>
+              </CarouselItem>
+              <CarouselItem className="h-screen">
+                <div className="absolute inset-0">
+                  <div className="absolute inset-0 bg-gradient-to-br from-electric-blue-dark/90 via-electric-blue/80 to-primary/90 z-10"></div>
+                  <img src={heroImage} alt="Battery Swap Service" className="w-full h-full object-cover" />
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+          </Carousel>
           
-          {/* Floating Icons - Animated continuously */}
-          <div className="absolute top-32 left-1/4 animate-float opacity-20">
-            <Battery className="h-8 w-8 text-white animate-pulse" />
+          {/* Animated overlay elements */}
+          <div className="absolute inset-0 z-20 pointer-events-none">
+            <div className="absolute top-20 left-10 w-3 h-3 bg-white/40 rounded-full animate-float"></div>
+            <div className="absolute top-40 right-20 w-4 h-4 bg-electric-blue-light/50 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute bottom-32 left-1/4 w-2 h-2 bg-white/50 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
+            <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-electric-blue/40 rounded-full animate-float" style={{ animationDelay: '1.5s' }}></div>
+            <div className="absolute bottom-1/4 right-1/3 w-2 h-2 bg-white/30 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+            <div className="absolute top-1/2 left-1/3 w-4 h-4 bg-electric-blue-light/30 rounded-full animate-float" style={{ animationDelay: '0.8s' }}></div>
+            
+            {/* Floating Icons */}
+            <div className="absolute top-32 left-1/4 animate-float opacity-20">
+              <Battery className="h-8 w-8 text-white animate-pulse" />
+            </div>
+            <div className="absolute top-1/3 right-1/3 animate-float opacity-20" style={{ animationDelay: '1.2s' }}>
+              <Zap className="h-10 w-10 text-electric-blue-light animate-pulse" />
+            </div>
+            <div className="absolute bottom-1/3 left-1/3 animate-float opacity-20" style={{ animationDelay: '2.5s' }}>
+              <Sparkles className="h-7 w-7 text-white animate-pulse" />
+            </div>
+            
+            {/* Gradient circles */}
+            <div className="absolute -top-20 -right-20 w-96 h-96 bg-electric-blue/20 rounded-full blur-3xl animate-pulse-glow"></div>
+            <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1.5s' }}></div>
+            
+            {/* Animated lines */}
+            <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent animate-slide-in-right"></div>
+            <div className="absolute top-2/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-electric-blue-light/30 to-transparent animate-slide-in-right" style={{ animationDelay: '2s' }}></div>
           </div>
-          <div className="absolute top-1/3 right-1/3 animate-float opacity-20" style={{ animationDelay: '1.2s' }}>
-            <Zap className="h-10 w-10 text-electric-blue-light animate-pulse" />
-          </div>
-          <div className="absolute bottom-1/3 left-1/3 animate-float opacity-20" style={{ animationDelay: '2.5s' }}>
-            <Sparkles className="h-7 w-7 text-white animate-pulse" />
-          </div>
-          <div className="absolute top-1/2 right-1/4 animate-float opacity-20" style={{ animationDelay: '1.8s' }}>
-            <Battery className="h-6 w-6 text-electric-blue-light animate-pulse" />
-          </div>
-          
-          {/* Thêm gradient circles lớn */}
-          <div className="absolute -top-20 -right-20 w-96 h-96 bg-electric-blue/20 rounded-full blur-3xl animate-pulse-glow"></div>
-          <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1.5s' }}></div>
-          
-          {/* Animated lines moving across */}
-          <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent animate-slide-in-right"></div>
-          <div className="absolute top-2/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-electric-blue-light/30 to-transparent animate-slide-in-right" style={{ animationDelay: '2s' }}></div>
         </div>
 
         {/* Navigation */}
