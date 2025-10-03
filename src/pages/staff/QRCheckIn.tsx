@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { QrCode, ArrowLeft, CheckCircle, User, Zap, Star, Smartphone, Box } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -12,6 +12,7 @@ const QRCheckIn = () => {
   const [scannedCustomer, setScannedCustomer] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
   const [batterySlotNumber, setBatterySlotNumber] = useState<number | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const mockCustomer = {
     name: "Nguyễn Văn A",
@@ -215,21 +216,12 @@ const QRCheckIn = () => {
                     </div>
                   </div>
 
-                  {batterySlotNumber && (
-                    <Alert className="bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200">
-                      <Box className="h-5 w-5 text-amber-600" />
-                      <AlertTitle className="text-amber-900 font-semibold">Ô pin đang mở</AlertTitle>
-                      <AlertDescription className="text-amber-800 text-base">
-                        Pin đang được mở ở ô số <span className="font-bold text-xl">{batterySlotNumber}</span>
-                      </AlertDescription>
-                    </Alert>
-                  )}
-
                   <div className="pt-6 border-t border-gray-200">
                     <Button 
                       onClick={() => {
                         const randomSlot = Math.floor(Math.random() * 20) + 1;
                         setBatterySlotNumber(randomSlot);
+                        setIsDialogOpen(true);
                         toast({
                           title: "Dịch vụ đã bắt đầu",
                           description: `Pin đang được mở ở ô số ${randomSlot}`,
@@ -255,6 +247,36 @@ const QRCheckIn = () => {
           </div>
         </div>
       </div>
+
+      {/* Battery Slot Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <div className="flex justify-center mb-4">
+              <div className="p-4 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full animate-pulse">
+                <Box className="h-12 w-12 text-white" />
+              </div>
+            </div>
+            <DialogTitle className="text-center text-2xl">Ô pin đang mở</DialogTitle>
+            <DialogDescription className="text-center text-lg pt-4">
+              Pin đang được mở ở ô số
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-center py-6">
+            <div className="w-32 h-32 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-2xl animate-bounce">
+              <span className="text-6xl font-bold text-white">{batterySlotNumber}</span>
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <Button 
+              onClick={() => setIsDialogOpen(false)}
+              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-8"
+            >
+              Đã hiểu
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
