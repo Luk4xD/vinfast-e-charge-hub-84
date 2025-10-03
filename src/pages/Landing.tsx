@@ -10,8 +10,12 @@ import Autoplay from "embla-carousel-autoplay";
 import React from "react";
 const Landing = () => {
   console.log("Landing component rendering...");
-  const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
+  const heroPlugin = React.useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: false })
+  );
+  
+  const featuresPlugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
   );
   
   return (
@@ -25,7 +29,7 @@ const Landing = () => {
               align: "center",
               loop: true,
             }}
-            plugins={[plugin.current]}
+            plugins={[heroPlugin.current]}
             className="w-full h-full"
           >
             <CarouselContent className="h-screen">
@@ -286,7 +290,7 @@ const Landing = () => {
               align: "start",
               loop: true,
             }}
-            plugins={[plugin.current]}
+            plugins={[featuresPlugin.current]}
             className="w-full max-w-5xl mx-auto"
           >
             <CarouselContent>
