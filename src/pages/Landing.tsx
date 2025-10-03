@@ -4,6 +4,8 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Battery, Zap, Users, BarChart3, LogIn, UserPlus, Star, ArrowRight, CheckCircle, Globe, Phone, Clock, MapPin, Shield, Sparkles, Smartphone, Network, HeadphonesIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/electric-scooter-hero.jpg";
+import evStationImage from "@/assets/ev-station-hero.jpg";
+import dashboardBgImage from "@/assets/dashboard-bg.jpg";
 import Autoplay from "embla-carousel-autoplay";
 import React from "react";
 const Landing = () => {
@@ -30,19 +32,19 @@ const Landing = () => {
               <CarouselItem className="h-screen">
                 <div className="absolute inset-0">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-electric-blue/80 to-electric-blue-dark/90 z-10"></div>
-                  <img src={heroImage} alt="EV Charging Station" className="w-full h-full object-cover" />
-                </div>
-              </CarouselItem>
-              <CarouselItem className="h-screen">
-                <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-electric-blue/90 via-primary/80 to-electric-blue-light/90 z-10"></div>
                   <img src={heroImage} alt="Electric Scooter" className="w-full h-full object-cover" />
                 </div>
               </CarouselItem>
               <CarouselItem className="h-screen">
                 <div className="absolute inset-0">
+                  <div className="absolute inset-0 bg-gradient-to-br from-electric-blue/90 via-primary/80 to-electric-blue-light/90 z-10"></div>
+                  <img src={evStationImage} alt="EV Station" className="w-full h-full object-cover" />
+                </div>
+              </CarouselItem>
+              <CarouselItem className="h-screen">
+                <div className="absolute inset-0">
                   <div className="absolute inset-0 bg-gradient-to-br from-electric-blue-dark/90 via-electric-blue/80 to-primary/90 z-10"></div>
-                  <img src={heroImage} alt="Battery Swap Service" className="w-full h-full object-cover" />
+                  <img src={dashboardBgImage} alt="Battery Swap Service" className="w-full h-full object-cover" />
                 </div>
               </CarouselItem>
             </CarouselContent>
