@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { QrCode, ArrowLeft, CheckCircle, User, Zap, Star, Smartphone } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { QrCode, ArrowLeft, CheckCircle, User, Zap, Star, Smartphone, Box } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
@@ -10,6 +11,7 @@ const QRCheckIn = () => {
   const { toast } = useToast();
   const [scannedCustomer, setScannedCustomer] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
+  const [batterySlotNumber, setBatterySlotNumber] = useState<number | null>(null);
 
   const mockCustomer = {
     name: "Nguyễn Văn A",
@@ -213,8 +215,28 @@ const QRCheckIn = () => {
                     </div>
                   </div>
 
+                  {batterySlotNumber && (
+                    <Alert className="bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200">
+                      <Box className="h-5 w-5 text-amber-600" />
+                      <AlertTitle className="text-amber-900 font-semibold">Ô pin đang mở</AlertTitle>
+                      <AlertDescription className="text-amber-800 text-base">
+                        Pin đang được mở ở ô số <span className="font-bold text-xl">{batterySlotNumber}</span>
+                      </AlertDescription>
+                    </Alert>
+                  )}
+
                   <div className="pt-6 border-t border-gray-200">
-                    <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white rounded-xl py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+                    <Button 
+                      onClick={() => {
+                        const randomSlot = Math.floor(Math.random() * 20) + 1;
+                        setBatterySlotNumber(randomSlot);
+                        toast({
+                          title: "Dịch vụ đã bắt đầu",
+                          description: `Pin đang được mở ở ô số ${randomSlot}`,
+                        });
+                      }}
+                      className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white rounded-xl py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
+                    >
                       <Star className="h-5 w-5 mr-2" />
                       Bắt đầu dịch vụ đổi pin
                     </Button>
