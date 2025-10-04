@@ -4,14 +4,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { MapPin, ArrowLeft, Battery, Filter, Map, Navigation, Zap, Clock, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import LocationMap from "@/components/LocationMap";
 
 const StationFinder = () => {
   const [filters, setFilters] = useState({
     distance: "",
     batteryCount: ""
   });
+  const [isMapOpen, setIsMapOpen] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState("123 Lê Lợi, Quận 1, TP.HCM");
+
+  const handleLocationSelect = (address: string, coordinates: [number, number]) => {
+    setSelectedLocation(address);
+    setIsMapOpen(false);
+  };
 
   const mockStations = [
     {
@@ -140,13 +149,17 @@ const StationFinder = () => {
                   <Input 
                     placeholder="Nhập địa chỉ hoặc chọn trên bản đồ..." 
                     className="pl-12 pr-4 py-3 bg-gray-50 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-xl text-sm"
-                    defaultValue="123 Lê Lợi, Quận 1, TP.HCM"
+                    value={selectedLocation}
+                    onChange={(e) => setSelectedLocation(e.target.value)}
                   />
                   <div className="absolute left-4 top-1/2 -translate-y-1/2">
                     <MapPin className="h-4 w-4 text-gray-400" />
                   </div>
                 </div>
-                <Button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white rounded-xl py-3 transition-all duration-300 hover:scale-105 shadow-lg">
+                <Button 
+                  onClick={() => setIsMapOpen(true)}
+                  className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white rounded-xl py-3 transition-all duration-300 hover:scale-105 shadow-lg"
+                >
                   <Map className="h-4 w-4 mr-2" />
                   Chọn trên bản đồ
                 </Button>
@@ -389,6 +402,19 @@ const StationFinder = () => {
           </div>
         </div>
       </div>
+
+      {/* Map Dialog */}
+      <Dialog open={isMapOpen} onOpenChange={setIsMapOpen}>
+        <DialogContent className="max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>Chọn vị trí trên bản đồ</DialogTitle>
+          </DialogHeader>
+          <LocationMap 
+            onLocationSelect={handleLocationSelect}
+            initialCenter={[106.6297, 10.8231]}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
