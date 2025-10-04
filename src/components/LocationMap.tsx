@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import { Input } from '@/components/ui/input';
+import React, { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
+import { MapPin, Navigation, ZoomIn, ZoomOut } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface LocationMapProps {
@@ -12,150 +10,184 @@ interface LocationMapProps {
 
 const LocationMap: React.FC<LocationMapProps> = ({ 
   onLocationSelect,
-  initialCenter = [106.6297, 10.8231] // Mặc định: TP.HCM
+  initialCenter = [106.6297, 10.8231]
 }) => {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const marker = useRef<mapboxgl.Marker | null>(null);
-  const [mapboxToken, setMapboxToken] = useState('');
-  const [selectedCoordinates, setSelectedCoordinates] = useState<[number, number]>(initialCenter);
+  const [markerPosition, setMarkerPosition] = useState({ x: 50, y: 50 }); // Phần trăm
+  const [selectedAddress, setSelectedAddress] = useState('');
+  const mapRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!mapContainer.current || !mapboxToken) return;
-
-    mapboxgl.accessToken = mapboxToken;
+  // Mock địa chỉ dựa trên vị trí click
+  const getMockAddress = (x: number, y: number) => {
+    const districts = [
+      'Quận 1', 'Quận 3', 'Quận 5', 'Quận 7', 'Quận 10',
+      'Bình Thạnh', 'Phú Nhuận', 'Tân Bình', 'Gò Vấp'
+    ];
+    const streets = [
+      'Nguyễn Huệ', 'Lê Lợi', 'Võ Văn Tần', 'Trần Hưng Đạo',
+      'Lê Văn Sỹ', 'Phan Xích Long', 'Cách Mạng Tháng 8'
+    ];
     
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v12',
-      center: initialCenter,
-      zoom: 13,
-    });
-
-    // Add navigation controls
-    map.current.addControl(
-      new mapboxgl.NavigationControl(),
-      'top-right'
-    );
-
-    // Add initial marker
-    marker.current = new mapboxgl.Marker({
-      draggable: true,
-      color: '#3b82f6'
-    })
-      .setLngLat(initialCenter)
-      .addTo(map.current);
-
-    // Handle marker drag
-    marker.current.on('dragend', () => {
-      const lngLat = marker.current!.getLngLat();
-      setSelectedCoordinates([lngLat.lng, lngLat.lat]);
-      reverseGeocode(lngLat.lng, lngLat.lat);
-    });
-
-    // Handle map click
-    map.current.on('click', (e) => {
-      const { lng, lat } = e.lngLat;
-      marker.current?.setLngLat([lng, lat]);
-      setSelectedCoordinates([lng, lat]);
-      reverseGeocode(lng, lat);
-    });
-
-    return () => {
-      map.current?.remove();
-    };
-  }, [mapboxToken, initialCenter]);
-
-  const reverseGeocode = async (lng: number, lat: number) => {
-    if (!mapboxToken) return;
+    const districtIndex = Math.floor((x / 100) * districts.length);
+    const streetIndex = Math.floor((y / 100) * streets.length);
+    const number = Math.floor(Math.random() * 500) + 1;
     
-    try {
-      const response = await fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapboxToken}`
-      );
-      const data = await response.json();
-      if (data.features && data.features.length > 0) {
-        const address = data.features[0].place_name;
-        toast.success('Đã chọn vị trí: ' + address);
-      }
-    } catch (error) {
-      console.error('Lỗi reverse geocode:', error);
-    }
+    return `${number} ${streets[streetIndex]}, ${districts[districtIndex]}, TP.HCM`;
   };
 
-  const handleConfirm = async () => {
-    if (!mapboxToken) {
-      toast.error('Vui lòng nhập Mapbox token');
+  const handleMapClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!mapRef.current) return;
+    
+    const rect = mapRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    setMarkerPosition({ x, y });
+    const address = getMockAddress(x, y);
+    setSelectedAddress(address);
+    toast.success('Đã chọn vị trí: ' + address);
+  };
+
+  const handleConfirm = () => {
+    if (!selectedAddress) {
+      toast.error('Vui lòng chọn vị trí trên bản đồ');
       return;
     }
-
-    try {
-      const response = await fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${selectedCoordinates[0]},${selectedCoordinates[1]}.json?access_token=${mapboxToken}`
-      );
-      const data = await response.json();
-      const address = data.features?.[0]?.place_name || 'Địa chỉ không xác định';
-      
-      onLocationSelect(address, selectedCoordinates);
-      toast.success('Đã xác nhận vị trí!');
-    } catch (error) {
-      toast.error('Không thể lấy thông tin địa chỉ');
-    }
+    
+    const coordinates: [number, number] = [
+      initialCenter[0] + (markerPosition.x - 50) * 0.01,
+      initialCenter[1] + (50 - markerPosition.y) * 0.01
+    ];
+    
+    onLocationSelect(selectedAddress, coordinates);
   };
 
   return (
     <div className="space-y-4">
-      {!mapboxToken ? (
-        <div className="space-y-4 p-6 bg-blue-50 rounded-lg border border-blue-200">
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-2">Cần Mapbox Token</h3>
-            <p className="text-sm text-gray-600 mb-4">
-              Để sử dụng bản đồ, vui lòng nhập Mapbox public token của bạn. 
-              Bạn có thể lấy token miễn phí tại{' '}
-              <a 
-                href="https://mapbox.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline font-medium"
-              >
-                mapbox.com
-              </a>
-            </p>
-          </div>
-          <div className="flex gap-2">
-            <Input 
-              type="text"
-              placeholder="Nhập Mapbox public token..."
-              value={mapboxToken}
-              onChange={(e) => setMapboxToken(e.target.value)}
-              className="flex-1"
-            />
-            <Button onClick={() => mapboxToken && toast.success('Token đã được lưu!')}>
-              Xác nhận
-            </Button>
+      {/* Map Container */}
+      <div 
+        ref={mapRef}
+        onClick={handleMapClick}
+        className="relative w-full h-[500px] rounded-lg overflow-hidden cursor-crosshair border-2 border-gray-200 shadow-lg bg-gradient-to-br from-blue-50 via-green-50 to-yellow-50"
+      >
+        {/* Mock Map Background */}
+        <div className="absolute inset-0 opacity-30">
+          <svg className="w-full h-full">
+            {/* Grid lines */}
+            {Array.from({ length: 20 }).map((_, i) => (
+              <React.Fragment key={i}>
+                <line
+                  x1={`${i * 5}%`}
+                  y1="0"
+                  x2={`${i * 5}%`}
+                  y2="100%"
+                  stroke="#94a3b8"
+                  strokeWidth="1"
+                />
+                <line
+                  x1="0"
+                  y1={`${i * 5}%`}
+                  x2="100%"
+                  y2={`${i * 5}%`}
+                  stroke="#94a3b8"
+                  strokeWidth="1"
+                />
+              </React.Fragment>
+            ))}
+          </svg>
+        </div>
+
+        {/* Mock Roads */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-0 right-0 h-2 bg-gray-400 opacity-40"></div>
+          <div className="absolute top-1/2 left-0 right-0 h-3 bg-gray-500 opacity-50"></div>
+          <div className="absolute top-3/4 left-0 right-0 h-2 bg-gray-400 opacity-40"></div>
+          <div className="absolute left-1/4 top-0 bottom-0 w-2 bg-gray-400 opacity-40"></div>
+          <div className="absolute left-1/2 top-0 bottom-0 w-3 bg-gray-500 opacity-50"></div>
+          <div className="absolute left-3/4 top-0 bottom-0 w-2 bg-gray-400 opacity-40"></div>
+        </div>
+
+        {/* Mock Buildings */}
+        {[...Array(15)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute bg-gray-300 opacity-20 rounded-sm"
+            style={{
+              left: `${Math.random() * 90 + 5}%`,
+              top: `${Math.random() * 90 + 5}%`,
+              width: `${Math.random() * 40 + 20}px`,
+              height: `${Math.random() * 40 + 20}px`,
+            }}
+          ></div>
+        ))}
+
+        {/* Location Marker */}
+        <div
+          className="absolute transform -translate-x-1/2 -translate-y-full transition-all duration-200"
+          style={{
+            left: `${markerPosition.x}%`,
+            top: `${markerPosition.y}%`,
+          }}
+        >
+          <MapPin className="h-10 w-10 text-red-500 drop-shadow-lg animate-bounce" fill="currentColor" />
+        </div>
+
+        {/* Controls */}
+        <div className="absolute top-4 right-4 flex flex-col gap-2">
+          <Button
+            size="icon"
+            variant="secondary"
+            className="bg-white shadow-lg hover:bg-gray-100"
+          >
+            <ZoomIn className="h-4 w-4" />
+          </Button>
+          <Button
+            size="icon"
+            variant="secondary"
+            className="bg-white shadow-lg hover:bg-gray-100"
+          >
+            <ZoomOut className="h-4 w-4" />
+          </Button>
+          <Button
+            size="icon"
+            variant="secondary"
+            className="bg-white shadow-lg hover:bg-gray-100"
+          >
+            <Navigation className="h-4 w-4" />
+          </Button>
+        </div>
+
+        {/* Instructions */}
+        <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg">
+          <p className="text-sm font-medium text-gray-700">
+            Click vào bản đồ để chọn vị trí
+          </p>
+        </div>
+      </div>
+
+      {/* Selected Location Info */}
+      {selectedAddress && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="flex items-start gap-3">
+            <MapPin className="h-5 w-5 text-blue-600 mt-0.5" />
+            <div className="flex-1">
+              <p className="text-sm font-medium text-gray-900 mb-1">Vị trí đã chọn:</p>
+              <p className="text-sm text-gray-700">{selectedAddress}</p>
+            </div>
           </div>
         </div>
-      ) : (
-        <>
-          <div 
-            ref={mapContainer} 
-            className="w-full h-[500px] rounded-lg shadow-lg border border-gray-200"
-          />
-          <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
-            <div className="text-sm text-gray-600">
-              <p className="font-medium text-gray-900 mb-1">Hướng dẫn:</p>
-              <p>• Click vào bản đồ hoặc kéo marker để chọn vị trí</p>
-              <p>• Tọa độ hiện tại: {selectedCoordinates[1].toFixed(4)}, {selectedCoordinates[0].toFixed(4)}</p>
-            </div>
-            <Button 
-              onClick={handleConfirm}
-              className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600"
-            >
-              Xác nhận vị trí
-            </Button>
-          </div>
-        </>
       )}
+
+      {/* Confirm Button */}
+      <div className="flex justify-end">
+        <Button 
+          onClick={handleConfirm}
+          disabled={!selectedAddress}
+          className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 px-8"
+        >
+          <MapPin className="h-4 w-4 mr-2" />
+          Xác nhận vị trí
+        </Button>
+      </div>
     </div>
   );
 };
