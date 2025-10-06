@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Battery, Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { MouseSparkles } from "@/components/MouseSparkles";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -52,6 +53,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
+      <MouseSparkles />
       <Card className="w-full max-w-md bg-white/95 backdrop-blur border-0">
         <CardHeader className="text-center">
           <div className="flex items-center justify-center mb-4">

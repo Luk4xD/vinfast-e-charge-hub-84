@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Battery, Eye, EyeOff, User, Mail, Phone, MapPin } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { MouseSparkles } from "@/components/MouseSparkles";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -85,6 +86,7 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
+      <MouseSparkles />
       <Card className="w-full max-w-lg bg-white/95 backdrop-blur border-0">
         <CardHeader className="text-center">
           <div className="flex items-center justify-center mb-4">
