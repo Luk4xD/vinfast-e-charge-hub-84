@@ -120,7 +120,7 @@ const Landing = () => {
         </nav>
 
         {/* Hero Content */}
-        <div className="relative z-20 container mx-auto px-4 pt-20 pb-32">
+        <div className="relative z-20 container mx-auto px-4 pt-20 pb-40">
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-8 animate-fade-in hover-scale">
               <Star className="h-4 w-4 mr-2 animate-pulse" />
@@ -149,15 +149,15 @@ const Landing = () => {
         </div>
 
         {/* Curved Bottom */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
-          <svg className="relative block w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <div className="absolute bottom-[-1px] left-0 w-full overflow-hidden">
+          <svg className="relative block w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ display: 'block' }}>
             <path d="M0,0V50Q600,120,1200,50V0Z" className="fill-white"></path>
           </svg>
         </div>
       </div>
 
       {/* Welcome Section */}
-      <section className="py-20 bg-white" id="about">
+      <section className="py-20 bg-white -mt-1" id="about">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative animate-fade-in">
