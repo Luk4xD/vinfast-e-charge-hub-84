@@ -19,7 +19,7 @@ const Landing = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="relative min-h-screen overflow-hidden">
+      <div className="relative min-h-screen overflow-hidden bg-primary">
         {/* Hero Background Carousel */}
         <div className="absolute inset-0">
           <Carousel
@@ -149,7 +149,7 @@ const Landing = () => {
         </div>
 
         {/* Curved Bottom */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
           <svg className="relative block w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M0,0V50Q600,120,1200,50V0Z" className="fill-white"></path>
           </svg>
