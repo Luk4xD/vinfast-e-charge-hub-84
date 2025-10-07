@@ -320,8 +320,8 @@ const StationFinder = () => {
                         </div>
                       </div>
 
-                      {/* Battery Types Grid */}
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {/* Battery Types List */}
+                      <div className="space-y-4">
                         {Object.entries(station.batteryTypes)
                           .filter(([_, counts]) => counts.full > 0 || counts.charging > 0)
                           .map(([type, counts]) => (
