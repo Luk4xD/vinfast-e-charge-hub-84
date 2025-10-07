@@ -321,58 +321,40 @@ const StationFinder = () => {
                       </div>
 
                       {/* Battery Types List */}
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         {Object.entries(station.batteryTypes)
                           .filter(([_, counts]) => counts.full > 0 || counts.charging > 0)
                           .map(([type, counts]) => (
                             <div 
                               key={type} 
-                              className="relative bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 p-6 rounded-2xl border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
+                              className="flex items-center justify-between p-5 bg-gradient-to-r from-white via-blue-50/30 to-purple-50/30 rounded-xl border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 hover:shadow-lg group"
                             >
-                              {/* Type Header */}
-                              <div className="flex items-center gap-3 mb-5">
-                                <div className={`p-3 rounded-xl ${
+                              {/* Battery Type Name */}
+                              <div className="flex items-center gap-3 flex-1">
+                                <div className={`p-2.5 rounded-lg ${
                                   type === "Lithium-ion" ? "bg-gradient-to-r from-blue-400 to-blue-600" : 
                                   type === "Pin LFP" ? "bg-gradient-to-r from-purple-400 to-purple-600" : 
                                   "bg-gradient-to-r from-orange-400 to-orange-600"
                                 }`}>
                                   <Battery className="h-5 w-5 text-white" />
                                 </div>
-                                <h5 className="font-bold text-gray-800 text-base">{type}</h5>
+                                <span className="font-bold text-gray-800 text-base">{type}</span>
                               </div>
 
-                              {/* Battery Status Details */}
-                              <div className="space-y-4">
+                              {/* Battery Counts */}
+                              <div className="flex items-center gap-4">
                                 {/* Full Batteries */}
-                                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200">
-                                  <div className="flex items-center gap-2">
-                                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                                    <span className="text-sm font-medium text-gray-700">Pin đầy</span>
-                                  </div>
-                                  <span className="text-xl font-bold text-green-600">{counts.full}</span>
+                                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
+                                  <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
+                                  <span className="text-sm font-medium text-gray-700">Đầy:</span>
+                                  <span className="text-lg font-bold text-green-600">{counts.full}</span>
                                 </div>
 
                                 {/* Charging Batteries */}
-                                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
-                                  <div className="flex items-center gap-2">
-                                    <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-                                    <span className="text-sm font-medium text-gray-700">Đang sạc</span>
-                                  </div>
-                                  <span className="text-xl font-bold text-blue-600">{counts.charging}</span>
-                                </div>
-                              </div>
-
-                              {/* Progress Indicator */}
-                              <div className="mt-4 pt-4 border-t border-gray-200">
-                                <div className="flex items-center justify-between text-xs text-gray-600 mb-2">
-                                  <span>Sẵn sàng</span>
-                                  <span className="font-semibold">{Math.round((counts.full / (counts.full + counts.charging + counts.empty)) * 100)}%</span>
-                                </div>
-                                <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                                  <div 
-                                    className="h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-full transition-all duration-500"
-                                    style={{ width: `${(counts.full / (counts.full + counts.charging + counts.empty)) * 100}%` }}
-                                  ></div>
+                                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+                                  <div className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse"></div>
+                                  <span className="text-sm font-medium text-gray-700">Sạc:</span>
+                                  <span className="text-lg font-bold text-blue-600">{counts.charging}</span>
                                 </div>
                               </div>
                             </div>
