@@ -300,61 +300,59 @@ const StationFinder = () => {
                     </div>
 
                     {/* Battery Information Section - Combined */}
-                    <div className="mb-8">
+                    <div className="mb-6">
                       {/* Header with Total Batteries */}
-                      <div className="flex items-center justify-between mb-6 pb-4 border-b-2 border-gradient-to-r from-blue-200 via-purple-200 to-pink-200">
-                        <h4 className="text-xl font-bold text-gray-800 flex items-center gap-3">
-                          <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl">
-                            <Battery className="h-6 w-6 text-white" />
+                      <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
+                        <h4 className="text-base font-semibold text-gray-800 flex items-center gap-2">
+                          <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg">
+                            <Battery className="h-4 w-4 text-white" />
                           </div>
                           Thông tin pin
                         </h4>
-                        <div className="flex items-center gap-3">
-                          <Badge 
-                            variant="secondary" 
-                            className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-lg px-6 py-3 rounded-full font-bold shadow-lg animate-pulse"
-                          >
-                            <Battery className="h-5 w-5 mr-2 inline" />
-                            {station.batteries.full + station.batteries.charging} pin có sẵn
-                          </Badge>
-                        </div>
+                        <Badge 
+                          variant="secondary" 
+                          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm px-4 py-1.5 rounded-full font-semibold"
+                        >
+                          <Battery className="h-3.5 w-3.5 mr-1.5 inline" />
+                          {station.batteries.full + station.batteries.charging} pin
+                        </Badge>
                       </div>
 
                       {/* Battery Types List */}
-                      <div className="space-y-3">
+                      <div className="space-y-2.5">
                         {Object.entries(station.batteryTypes)
                           .filter(([_, counts]) => counts.full > 0 || counts.charging > 0)
                           .map(([type, counts]) => (
                             <div 
                               key={type} 
-                              className="flex items-center justify-between p-5 bg-gradient-to-r from-white via-blue-50/30 to-purple-50/30 rounded-xl border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 hover:shadow-lg group"
+                              className="flex items-center justify-between p-3 bg-gradient-to-r from-white to-blue-50/50 rounded-lg border border-blue-100 hover:border-blue-300 transition-all duration-200 hover:shadow-md group"
                             >
                               {/* Battery Type Name */}
-                              <div className="flex items-center gap-3 flex-1">
-                                <div className={`p-2.5 rounded-lg ${
+                              <div className="flex items-center gap-2 flex-1">
+                                <div className={`p-1.5 rounded-md ${
                                   type === "Lithium-ion" ? "bg-gradient-to-r from-blue-400 to-blue-600" : 
                                   type === "Pin LFP" ? "bg-gradient-to-r from-purple-400 to-purple-600" : 
                                   "bg-gradient-to-r from-orange-400 to-orange-600"
                                 }`}>
-                                  <Battery className="h-5 w-5 text-white" />
+                                  <Battery className="h-3.5 w-3.5 text-white" />
                                 </div>
-                                <span className="font-bold text-gray-800 text-base">{type}</span>
+                                <span className="font-semibold text-gray-800 text-sm">{type}</span>
                               </div>
 
                               {/* Battery Counts */}
-                              <div className="flex items-center gap-4">
+                              <div className="flex items-center gap-3">
                                 {/* Full Batteries */}
-                                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
-                                  <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
-                                  <span className="text-sm font-medium text-gray-700">Đầy:</span>
-                                  <span className="text-lg font-bold text-green-600">{counts.full}</span>
+                                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-green-50 to-emerald-50 rounded-md border border-green-200">
+                                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                  <span className="text-xs font-medium text-gray-600">Đầy:</span>
+                                  <span className="text-sm font-bold text-green-600">{counts.full}</span>
                                 </div>
 
                                 {/* Charging Batteries */}
-                                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
-                                  <div className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse"></div>
-                                  <span className="text-sm font-medium text-gray-700">Sạc:</span>
-                                  <span className="text-lg font-bold text-blue-600">{counts.charging}</span>
+                                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-md border border-blue-200">
+                                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                                  <span className="text-xs font-medium text-gray-600">Sạc:</span>
+                                  <span className="text-sm font-bold text-blue-600">{counts.charging}</span>
                                 </div>
                               </div>
                             </div>
