@@ -408,7 +408,7 @@ const StationFinder = () => {
 
                                 {/* +/- Buttons - show when selected */}
                                 {isSelected && (
-                                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 animate-scale-in">
+                                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 animate-fade-in">
                                     <button
                                       onClick={(e) => {
                                         e.stopPropagation();
