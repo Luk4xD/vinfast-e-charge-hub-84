@@ -17,10 +17,40 @@ const StationFinder = () => {
   });
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("123 Lê Lợi, Quận 1, TP.HCM");
+  const [selectedBatteries, setSelectedBatteries] = useState<Record<number, Record<string, number>>>({});
 
   const handleLocationSelect = (address: string, coordinates: [number, number]) => {
     setSelectedLocation(address);
     setIsMapOpen(false);
+  };
+
+  const handleBatteryClick = (stationId: number, batteryType: string) => {
+    setSelectedBatteries(prev => {
+      const stationBatteries = prev[stationId] || {};
+      if (stationBatteries[batteryType]) {
+        // Already selected, remove it
+        const { [batteryType]: _, ...rest } = stationBatteries;
+        return { ...prev, [stationId]: rest };
+      } else {
+        // Not selected, add it with quantity 1
+        return { ...prev, [stationId]: { ...stationBatteries, [batteryType]: 1 } };
+      }
+    });
+  };
+
+  const updateBatteryQuantity = (stationId: number, batteryType: string, delta: number) => {
+    setSelectedBatteries(prev => {
+      const stationBatteries = prev[stationId] || {};
+      const currentQuantity = stationBatteries[batteryType] || 0;
+      const newQuantity = Math.max(0, currentQuantity + delta);
+      
+      if (newQuantity === 0) {
+        const { [batteryType]: _, ...rest } = stationBatteries;
+        return { ...prev, [stationId]: rest };
+      }
+      
+      return { ...prev, [stationId]: { ...stationBatteries, [batteryType]: newQuantity } };
+    });
   };
 
   const mockStations = [
@@ -323,41 +353,85 @@ const StationFinder = () => {
                       <div className="space-y-2.5">
                         {Object.entries(station.batteryTypes)
                           .filter(([_, counts]) => counts.full > 0 || counts.charging > 0)
-                          .map(([type, counts]) => (
-                            <div 
-                              key={type} 
-                              className="flex items-center justify-between p-3 bg-gradient-to-r from-white to-blue-50/50 rounded-lg border border-blue-100 hover:border-blue-300 transition-all duration-200 hover:shadow-md group"
-                            >
-                              {/* Battery Type Name */}
-                              <div className="flex items-center gap-2 flex-1">
-                                <div className={`p-1.5 rounded-md ${
-                                  type === "Lithium-ion" ? "bg-gradient-to-r from-blue-400 to-blue-600" : 
-                                  type === "Pin LFP" ? "bg-gradient-to-r from-purple-400 to-purple-600" : 
-                                  "bg-gradient-to-r from-orange-400 to-orange-600"
-                                }`}>
-                                  <Battery className="h-3.5 w-3.5 text-white" />
-                                </div>
-                                <span className="font-semibold text-gray-800 text-sm">{type}</span>
-                              </div>
+                          .map(([type, counts]) => {
+                            const isSelected = selectedBatteries[station.id]?.[type] > 0;
+                            const selectedQuantity = selectedBatteries[station.id]?.[type] || 0;
+                            
+                            return (
+                              <div 
+                                key={type} 
+                                className="relative"
+                              >
+                                <div 
+                                  onClick={() => handleBatteryClick(station.id, type)}
+                                  className={`flex items-center justify-between p-3 rounded-lg border transition-all duration-300 cursor-pointer ${
+                                    isSelected 
+                                      ? 'bg-gradient-to-r from-blue-100 to-purple-100 border-blue-400 shadow-lg' 
+                                      : 'bg-gradient-to-r from-white to-blue-50/50 border-blue-100 hover:border-blue-300 hover:shadow-md'
+                                  }`}
+                                >
+                                  {/* Battery Type Name or Selected Quantity */}
+                                  <div className="flex items-center gap-2 flex-1">
+                                    <div className={`p-1.5 rounded-md transition-all duration-300 ${
+                                      type === "Lithium-ion" ? "bg-gradient-to-r from-blue-400 to-blue-600" : 
+                                      type === "Pin LFP" ? "bg-gradient-to-r from-purple-400 to-purple-600" : 
+                                      "bg-gradient-to-r from-orange-400 to-orange-600"
+                                    }`}>
+                                      <Battery className="h-3.5 w-3.5 text-white" />
+                                    </div>
+                                    <span className={`font-semibold text-sm transition-all duration-300 ${
+                                      isSelected ? 'text-blue-700' : 'text-gray-800'
+                                    }`}>
+                                      {isSelected ? `Số lượng đặt pin: ${selectedQuantity}` : type}
+                                    </span>
+                                  </div>
 
-                              {/* Battery Counts */}
-                              <div className="flex items-center gap-3">
-                                {/* Full Batteries */}
-                                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-green-50 to-emerald-50 rounded-md border border-green-200">
-                                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                                  <span className="text-xs font-medium text-gray-600">Đầy:</span>
-                                  <span className="text-sm font-bold text-green-600">{counts.full}</span>
+                                  {/* Battery Counts - only show when not selected */}
+                                  {!isSelected && (
+                                    <div className="flex items-center gap-3">
+                                      {/* Full Batteries */}
+                                      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-green-50 to-emerald-50 rounded-md border border-green-200">
+                                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                        <span className="text-xs font-medium text-gray-600">Đầy:</span>
+                                        <span className="text-sm font-bold text-green-600">{counts.full}</span>
+                                      </div>
+
+                                      {/* Charging Batteries */}
+                                      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-md border border-blue-200">
+                                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                                        <span className="text-xs font-medium text-gray-600">Sạc:</span>
+                                        <span className="text-sm font-bold text-blue-600">{counts.charging}</span>
+                                      </div>
+                                    </div>
+                                  )}
                                 </div>
 
-                                {/* Charging Batteries */}
-                                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-md border border-blue-200">
-                                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                                  <span className="text-xs font-medium text-gray-600">Sạc:</span>
-                                  <span className="text-sm font-bold text-blue-600">{counts.charging}</span>
-                                </div>
+                                {/* +/- Buttons - show when selected */}
+                                {isSelected && (
+                                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 animate-scale-in">
+                                    <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        updateBatteryQuantity(station.id, type, -1);
+                                      }}
+                                      className="w-8 h-8 rounded-full bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold text-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-md hover:shadow-lg"
+                                    >
+                                      −
+                                    </button>
+                                    <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        updateBatteryQuantity(station.id, type, 1);
+                                      }}
+                                      className="w-8 h-8 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold text-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-md hover:shadow-lg"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+                                )}
                               </div>
-                            </div>
-                          ))}
+                            );
+                          })}
                       </div>
                     </div>
 
