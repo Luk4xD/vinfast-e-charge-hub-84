@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Progress } from "@/components/ui/progress";
 import { MapPin, ArrowLeft, Battery, Filter, Map, Navigation, Zap, Clock, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import LocationMap from "@/components/LocationMap";
@@ -358,6 +359,28 @@ const StationFinder = () => {
                             </div>
                           ))}
                       </div>
+                    </div>
+
+                    {/* Total Battery Progress Bar */}
+                    <div className="mb-6">
+                      {(() => {
+                        const totalFull = Object.values(station.batteryTypes).reduce((sum, counts) => sum + counts.full, 0);
+                        const totalBatteries = Object.values(station.batteryTypes).reduce((sum, counts) => sum + counts.full + counts.charging + counts.empty, 0);
+                        const percentage = totalBatteries > 0 ? (totalFull / totalBatteries) * 100 : 0;
+                        
+                        return (
+                          <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-sm font-semibold text-gray-700">Tình trạng pin sẵn sàng</span>
+                              <span className="text-sm font-bold text-green-700">{totalFull}/{totalBatteries} pin đầy</span>
+                            </div>
+                            <Progress 
+                              value={percentage} 
+                              className="h-3 bg-green-100"
+                            />
+                          </div>
+                        );
+                      })()}
                     </div>
 
                     {/* Amenities */}
