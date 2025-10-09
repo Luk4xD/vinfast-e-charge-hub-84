@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { DriverLayout } from "@/components/DriverLayout";
 import Index from "./pages/Index";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
@@ -45,14 +46,20 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           
-          {/* Driver routes */}
-          <Route path="/driver" element={<DriverDashboard />} />
-          <Route path="/driver/register-vehicle" element={<VehicleRegistration />} />
-          <Route path="/driver/find-stations" element={<StationFinder />} />
-          <Route path="/driver/reservation" element={<Reservation />} />
-          <Route path="/driver/payment" element={<Payment />} />
-          <Route path="/driver/subscriptions" element={<Subscriptions />} />
-          <Route path="/driver/booking-history" element={<BookingHistory />} />
+          {/* Driver routes - Wrapped in DriverLayout */}
+          <Route path="/driver/*" element={
+            <DriverLayout>
+              <Routes>
+                <Route index element={<DriverDashboard />} />
+                <Route path="register-vehicle" element={<VehicleRegistration />} />
+                <Route path="find-stations" element={<StationFinder />} />
+                <Route path="reservation" element={<Reservation />} />
+                <Route path="payment" element={<Payment />} />
+                <Route path="subscriptions" element={<Subscriptions />} />
+                <Route path="booking-history" element={<BookingHistory />} />
+              </Routes>
+            </DriverLayout>
+          } />
           
           {/* Staff routes */}
           <Route path="/staff" element={<StaffDashboard />} />

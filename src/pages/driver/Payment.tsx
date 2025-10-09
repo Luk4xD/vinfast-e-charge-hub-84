@@ -58,39 +58,6 @@ const Payment = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Enhanced Header */}
-      <header className="relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
-          <div 
-            className="absolute top-10 right-1/4 w-72 h-72 bg-gradient-to-r from-indigo-400 to-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"
-            style={{ animationDelay: '2s' }}
-          ></div>
-        </div>
-
-        <div className="relative z-20 container mx-auto px-6 py-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
-              <div className="relative p-3 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
-                <CreditCard className="h-10 w-10 text-white" />
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-ping"></div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full"></div>
-              </div>
-              <div>
-                <h1 className="text-4xl font-bold text-white mb-2">Thanh toán an toàn</h1>
-                <p className="text-white/90 text-lg">Hoàn tất đặt chỗ với phương thức thanh toán ưa thích</p>
-              </div>
-            </div>
-            <Link to="/driver/reservation">
-              <Button variant="ghost" className="text-white hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105">
-                <ArrowLeft className="h-5 w-5 mr-2" />
-                Quay lại
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
-
       <div className="container mx-auto px-6 py-8 max-w-6xl">
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Payment Methods */}
