@@ -1,4 +1,4 @@
-import { Home, Car, MapPin, Calendar, History, Battery, CreditCard, Settings, LogOut } from "lucide-react";
+import { Home, Car, MapPin, Calendar, History, Battery, CreditCard, Settings, LogOut, PanelLeftClose, PanelLeft } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
@@ -11,6 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarFooter,
+  SidebarHeader,
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -28,7 +29,7 @@ const mainItems = [
 ];
 
 export function DriverSidebar() {
-  const { open } = useSidebar();
+  const { open, toggleSidebar } = useSidebar();
   const navigate = useNavigate();
   const [settingsOpen, setSettingsOpen] = useState(false);
 
@@ -39,13 +40,24 @@ export function DriverSidebar() {
   return (
     <>
       <Sidebar
-        className={`border-r border-white/10 transition-all duration-300 ${
-          open ? "w-60" : "w-14"
+        className={`transition-all duration-300 ${
+          open ? "w-60" : "w-16"
         }`}
         collapsible="icon"
       >
-        <div className="h-full bg-gradient-to-b from-blue-600 via-indigo-600 to-purple-600">
-          <SidebarContent className="pt-6">
+        <div className="h-full bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 m-2 rounded-2xl border border-white/10 shadow-2xl">
+          <SidebarHeader className="border-b border-white/10 p-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleSidebar}
+              className="text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200"
+            >
+              {open ? <PanelLeftClose className="h-5 w-5" /> : <PanelLeft className="h-5 w-5" />}
+            </Button>
+          </SidebarHeader>
+          
+          <SidebarContent className="pt-4">
             <SidebarGroup>
               <SidebarGroupLabel className={`text-white/70 text-xs uppercase tracking-wider px-3 mb-2 ${!open && "opacity-0"}`}>
                 Menu chính

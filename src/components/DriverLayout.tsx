@@ -1,6 +1,5 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { DriverSidebar } from "@/components/DriverSidebar";
-import { Menu } from "lucide-react";
 
 interface DriverLayoutProps {
   children: React.ReactNode;
@@ -9,18 +8,11 @@ interface DriverLayoutProps {
 export function DriverLayout({ children }: DriverLayoutProps) {
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="min-h-screen flex w-full">
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
         <DriverSidebar />
-        <div className="flex-1 flex flex-col w-full">
-          <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
-            <SidebarTrigger className="text-foreground hover:bg-accent transition-colors">
-              <Menu className="h-5 w-5" />
-            </SidebarTrigger>
-          </header>
-          <main className="flex-1">
-            {children}
-          </main>
-        </div>
+        <main className="flex-1 p-4">
+          {children}
+        </main>
       </div>
     </SidebarProvider>
   );
