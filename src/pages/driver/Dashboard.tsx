@@ -10,9 +10,16 @@ const DriverDashboard = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen">
+      {/* Page Header */}
+      <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 mb-6">
+        <div className="px-6 py-4">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Dashboard</h1>
+        </div>
+      </header>
+
       {/* Main Content */}
-      <div className="container mx-auto px-6 py-8 max-w-7xl">
+      <div className="container mx-auto px-6 max-w-7xl">
         <div className="mb-8 animate-fade-in">
           <h2 className="text-3xl font-bold text-gray-800 mb-2">Chào mừng bạn!</h2>
           <p className="text-gray-600">Quản lý xe điện và dịch vụ đổi pin của bạn</p>

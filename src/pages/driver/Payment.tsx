@@ -57,8 +57,15 @@ const Payment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <div className="container mx-auto px-6 py-8 max-w-6xl">
+    <div className="min-h-screen">
+      {/* Page Header */}
+      <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 mb-6">
+        <div className="px-6 py-4">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Thanh toán</h1>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-6 max-w-6xl">
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Payment Methods */}
           <div className="space-y-6">

@@ -61,8 +61,15 @@ const Reservation = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <div className="container mx-auto px-6 py-8 max-w-7xl">
+    <div className="min-h-screen">
+      {/* Page Header */}
+      <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 mb-6">
+        <div className="px-6 py-4">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Đặt lịch</h1>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-6 max-w-7xl">
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Booking Form */}
           <div className="lg:col-span-2 space-y-6">

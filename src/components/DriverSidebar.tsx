@@ -41,17 +41,17 @@ export function DriverSidebar() {
     <>
       <Sidebar
         className={`transition-all duration-300 ${
-          open ? "w-60" : "w-16"
+          open ? "w-64" : "w-20"
         }`}
         collapsible="icon"
       >
-        <div className="h-full bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 m-2 rounded-2xl border border-white/10 shadow-2xl">
-          <SidebarHeader className="border-b border-white/10 p-3">
+        <div className="h-full bg-white dark:bg-slate-900 m-3 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg">
+          <SidebarHeader className="border-b border-slate-200 dark:border-slate-700 p-4">
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleSidebar}
-              className="text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200"
+              className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200"
             >
               {open ? <PanelLeftClose className="h-5 w-5" /> : <PanelLeft className="h-5 w-5" />}
             </Button>
@@ -59,7 +59,7 @@ export function DriverSidebar() {
           
           <SidebarContent className="pt-4">
             <SidebarGroup>
-              <SidebarGroupLabel className={`text-white/70 text-xs uppercase tracking-wider px-3 mb-2 ${!open && "opacity-0"}`}>
+              <SidebarGroupLabel className={`text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider px-3 mb-2 ${!open && "opacity-0"}`}>
                 Menu chính
               </SidebarGroupLabel>
               <SidebarGroupContent>
@@ -69,10 +69,10 @@ export function DriverSidebar() {
                       <SidebarMenuButton
                         asChild
                         tooltip={item.title}
-                        className="text-white/90 hover:text-white hover:bg-white/10 data-[active=true]:bg-blue-700 data-[active=true]:text-white transition-all duration-200"
+                        className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/50 data-[active=true]:bg-blue-100 dark:data-[active=true]:bg-blue-900/50 data-[active=true]:text-blue-600 dark:data-[active=true]:text-blue-400 transition-all duration-200"
                       >
                         <NavLink to={item.url} end={item.url === "/driver"}>
-                          <item.icon className="h-5 w-5" />
+                          <item.icon className="h-5 w-5 shrink-0" />
                           {open && <span className="animate-fade-in">{item.title}</span>}
                         </NavLink>
                       </SidebarMenuButton>
@@ -83,15 +83,15 @@ export function DriverSidebar() {
             </SidebarGroup>
           </SidebarContent>
 
-          <SidebarFooter className="border-t border-white/10 p-2">
+          <SidebarFooter className="border-t border-slate-200 dark:border-slate-700 p-2 mt-auto">
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
                   onClick={() => setSettingsOpen(true)}
                   tooltip="Cài đặt"
-                  className="text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200 cursor-pointer"
+                  className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/50 transition-all duration-200 cursor-pointer"
                 >
-                  <Settings className="h-5 w-5" />
+                  <Settings className="h-5 w-5 shrink-0" />
                   {open && <span className="animate-fade-in">Cài đặt</span>}
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -99,9 +99,9 @@ export function DriverSidebar() {
                 <SidebarMenuButton
                   onClick={handleLogout}
                   tooltip="Đăng xuất"
-                  className="text-white/90 hover:text-white hover:bg-red-500/20 transition-all duration-200 cursor-pointer"
+                  className="text-slate-700 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 transition-all duration-200 cursor-pointer"
                 >
-                  <LogOut className="h-5 w-5" />
+                  <LogOut className="h-5 w-5 shrink-0" />
                   {open && <span className="animate-fade-in">Đăng xuất</span>}
                 </SidebarMenuButton>
               </SidebarMenuItem>
