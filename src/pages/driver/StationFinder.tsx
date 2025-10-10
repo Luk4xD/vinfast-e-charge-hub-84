@@ -105,7 +105,14 @@ const StationFinder = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="bg-white dark:bg-slate-900 border-b">
+        <div className="container mx-auto px-6 py-6">
+          <h1 className="text-3xl font-bold text-foreground">Tìm trạm</h1>
+        </div>
+      </header>
+      
       {/* Main Content with Better Spacing */}
       <div className="container mx-auto px-6 py-8 max-w-7xl">
         <div className="grid lg:grid-cols-3 gap-8">

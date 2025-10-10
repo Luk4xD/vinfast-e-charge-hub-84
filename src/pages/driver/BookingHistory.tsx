@@ -165,7 +165,14 @@ const BookingHistory = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="bg-white dark:bg-slate-900 border-b">
+        <div className="container mx-auto px-6 py-6">
+          <h1 className="text-3xl font-bold text-foreground">Lịch sử đặt pin</h1>
+        </div>
+      </header>
+      
       <div className="container mx-auto px-6 py-8 max-w-7xl">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
