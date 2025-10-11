@@ -12,7 +12,7 @@ import { vi } from "date-fns/locale";
 const Reservation = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [selectedTime, setSelectedTime] = useState("");
-  const [selectedStation, setSelectedStation] = useState("");
+  const [selectedStation] = useState("1"); // Default selected station
 
   const timeSlots = [
     "08:00", "08:30", "09:00", "09:30", "10:00", "10:30",
@@ -72,7 +72,7 @@ const Reservation = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Booking Form */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Station Selection */}
+            {/* Station Info */}
             <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-fade-in">
               <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
               <CardHeader>
@@ -82,76 +82,46 @@ const Reservation = () => {
                   </div>
                   Thông tin trạm đã chọn
                 </CardTitle>
-                <CardDescription className="text-gray-600">Chọn trạm phù hợp với vị trí của bạn</CardDescription>
               </CardHeader>
               <CardContent>
-                <Select onValueChange={setSelectedStation}>
-                  <SelectTrigger className="h-12 bg-gray-50 border-gray-200 focus:border-blue-500 rounded-xl">
-                    <SelectValue placeholder="Chọn trạm" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {stations.map((station) => (
-                      <SelectItem key={station.id} value={station.id} className="py-4">
-                        <div className="flex flex-col space-y-1">
-                          <div className="flex items-center space-x-2">
-                            <span className="font-semibold">{station.name}</span>
-                            <div className="flex items-center">
-                              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                              <span className="text-sm text-yellow-600 ml-1">{station.rating}</span>
-                            </div>
-                          </div>
-                          <span className="text-sm text-gray-600">{station.address}</span>
-                          <div className="flex items-center space-x-4 text-xs">
-                            <span className="text-green-600 font-semibold">{station.available} pin có sẵn</span>
-                            <Badge variant="secondary" className="text-xs">Sạc nhanh</Badge>
-                          </div>
+                <div className="p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">
+                          {stations.find(s => s.id === selectedStation)?.name}
+                        </h3>
+                        <div className="flex items-center space-x-2 text-gray-600 mb-3">
+                          <MapPin className="h-4 w-4" />
+                          <span className="text-sm">{stations.find(s => s.id === selectedStation)?.address}</span>
                         </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                
-                {/* Display selected station info */}
-                {selectedStation && (
-                  <div className="mt-6 p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold text-gray-800 mb-2">
-                            {stations.find(s => s.id === selectedStation)?.name}
-                          </h3>
-                          <div className="flex items-center space-x-2 text-gray-600 mb-3">
-                            <MapPin className="h-4 w-4" />
-                            <span className="text-sm">{stations.find(s => s.id === selectedStation)?.address}</span>
+                        <div className="flex items-center space-x-4">
+                          <div className="flex items-center">
+                            <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                            <span className="text-sm font-semibold text-yellow-600 ml-1">
+                              {stations.find(s => s.id === selectedStation)?.rating} đánh giá
+                            </span>
                           </div>
-                          <div className="flex items-center space-x-4">
-                            <div className="flex items-center">
-                              <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                              <span className="text-sm font-semibold text-yellow-600 ml-1">
-                                {stations.find(s => s.id === selectedStation)?.rating} đánh giá
-                              </span>
-                            </div>
-                            <Badge className="bg-green-500">
-                              <Battery className="h-3 w-3 mr-1" />
-                              {stations.find(s => s.id === selectedStation)?.available} pin có sẵn
-                            </Badge>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-3 pt-4 border-t border-blue-200">
-                        <div className="p-3 bg-white rounded-lg">
-                          <p className="text-xs text-gray-500 mb-1">Thời gian hoạt động</p>
-                          <p className="text-sm font-semibold text-gray-800">24/7</p>
-                        </div>
-                        <div className="p-3 bg-white rounded-lg">
-                          <p className="text-xs text-gray-500 mb-1">Sạc nhanh</p>
-                          <p className="text-sm font-semibold text-green-600">Có sẵn</p>
+                          <Badge className="bg-green-500">
+                            <Battery className="h-3 w-3 mr-1" />
+                            {stations.find(s => s.id === selectedStation)?.available} pin có sẵn
+                          </Badge>
                         </div>
                       </div>
                     </div>
+                    
+                    <div className="grid grid-cols-2 gap-3 pt-4 border-t border-blue-200">
+                      <div className="p-3 bg-white rounded-lg">
+                        <p className="text-xs text-gray-500 mb-1">Thời gian hoạt động</p>
+                        <p className="text-sm font-semibold text-gray-800">24/7</p>
+                      </div>
+                      <div className="p-3 bg-white rounded-lg">
+                        <p className="text-xs text-gray-500 mb-1">Sạc nhanh</p>
+                        <p className="text-sm font-semibold text-green-600">Có sẵn</p>
+                      </div>
+                    </div>
                   </div>
-                )}
+                </div>
               </CardContent>
             </Card>
 
