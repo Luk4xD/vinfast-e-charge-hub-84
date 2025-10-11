@@ -13,7 +13,6 @@ const Reservation = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedStation, setSelectedStation] = useState("");
-  const [selectedBatteryType, setSelectedBatteryType] = useState("");
 
   const timeSlots = [
     "08:00", "08:30", "09:00", "09:30", "10:00", "10:30",
@@ -81,7 +80,7 @@ const Reservation = () => {
                   <div className="p-2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg mr-3">
                     <MapPin className="h-5 w-5 text-white" />
                   </div>
-                  Chọn trạm đổi pin
+                  Thông tin trạm đã chọn
                 </CardTitle>
                 <CardDescription className="text-gray-600">Chọn trạm phù hợp với vị trí của bạn</CardDescription>
               </CardHeader>
@@ -111,6 +110,48 @@ const Reservation = () => {
                     ))}
                   </SelectContent>
                 </Select>
+                
+                {/* Display selected station info */}
+                {selectedStation && (
+                  <div className="mt-6 p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
+                    <div className="space-y-4">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-gray-800 mb-2">
+                            {stations.find(s => s.id === selectedStation)?.name}
+                          </h3>
+                          <div className="flex items-center space-x-2 text-gray-600 mb-3">
+                            <MapPin className="h-4 w-4" />
+                            <span className="text-sm">{stations.find(s => s.id === selectedStation)?.address}</span>
+                          </div>
+                          <div className="flex items-center space-x-4">
+                            <div className="flex items-center">
+                              <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                              <span className="text-sm font-semibold text-yellow-600 ml-1">
+                                {stations.find(s => s.id === selectedStation)?.rating} đánh giá
+                              </span>
+                            </div>
+                            <Badge className="bg-green-500">
+                              <Battery className="h-3 w-3 mr-1" />
+                              {stations.find(s => s.id === selectedStation)?.available} pin có sẵn
+                            </Badge>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-3 pt-4 border-t border-blue-200">
+                        <div className="p-3 bg-white rounded-lg">
+                          <p className="text-xs text-gray-500 mb-1">Thời gian hoạt động</p>
+                          <p className="text-sm font-semibold text-gray-800">24/7</p>
+                        </div>
+                        <div className="p-3 bg-white rounded-lg">
+                          <p className="text-xs text-gray-500 mb-1">Sạc nhanh</p>
+                          <p className="text-sm font-semibold text-green-600">Có sẵn</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
 
@@ -171,61 +212,6 @@ const Reservation = () => {
               </CardContent>
             </Card>
 
-            {/* Battery Type Selection */}
-            <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm animate-slide-up">
-              <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
-              <CardHeader>
-                <CardTitle className="flex items-center text-xl font-bold text-gray-800">
-                  <div className="p-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg mr-3">
-                    <Battery className="h-5 w-5 text-white" />
-                  </div>
-                  Chọn loại pin
-                </CardTitle>
-                <CardDescription className="text-gray-600">Chọn loại pin phù hợp với xe của bạn</CardDescription>
-              </CardHeader>
-              <CardContent>
-                {selectedStation ? (
-                  <div className="space-y-4">
-                    {Object.entries(stations.find(s => s.id === selectedStation)?.batteryTypes || {}).map(([type, count]) => (
-                      count > 0 && (
-                        <div
-                          key={type}
-                          className={`flex items-center justify-between p-4 border-2 rounded-xl cursor-pointer transition-all duration-300 hover:shadow-lg ${
-                            selectedBatteryType === type 
-                              ? 'border-green-500 bg-green-50 shadow-md' 
-                              : 'border-gray-200 hover:border-gray-300'
-                          }`}
-                          onClick={() => setSelectedBatteryType(type)}
-                        >
-                          <div className="flex items-center space-x-4">
-                            <div className={`p-3 bg-gradient-to-r ${type === "Lithium-ion" ? "from-blue-500 to-indigo-500" : "from-green-500 to-emerald-500"} rounded-xl`}>
-                              <Battery className="h-6 w-6 text-white" />
-                            </div>
-                            <div>
-                              <p className="text-lg font-semibold text-gray-800">
-                                {type}
-                                {type === "Lithium-ion" && " ⭐ Khuyến nghị"}
-                              </p>
-                              <p className="text-sm text-gray-600">{count} pin có sẵn</p>
-                            </div>
-                          </div>
-                          {selectedBatteryType === type && (
-                            <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
-                              <div className="w-3 h-3 rounded-full bg-white"></div>
-                            </div>
-                          )}
-                        </div>
-                      )
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-8">
-                    <Battery className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-                    <p className="text-gray-500">Vui lòng chọn trạm trước</p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
           </div>
 
           {/* Booking Summary */}
@@ -275,15 +261,6 @@ const Reservation = () => {
                   </div>
                 )}
 
-                {selectedBatteryType && (
-                  <div className="flex items-center space-x-4 p-4 bg-green-50 rounded-xl">
-                    <Battery className="h-6 w-6 text-green-600" />
-                    <div>
-                      <p className="font-semibold text-gray-800">Loại pin</p>
-                      <p className="text-sm text-gray-600">{selectedBatteryType}</p>
-                    </div>
-                  </div>
-                )}
 
                 <div className="border-t border-gray-200 pt-6">
                   <div className="flex justify-between mb-3">
@@ -300,7 +277,7 @@ const Reservation = () => {
                   <Link to="/driver/payment" className="block">
                     <Button 
                       className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
-                      disabled={!selectedStation || !selectedDate || !selectedTime || !selectedBatteryType}
+                      disabled={!selectedStation || !selectedDate || !selectedTime}
                     >
                       <Zap className="h-5 w-5 mr-2" />
                       Tiến hành thanh toán
