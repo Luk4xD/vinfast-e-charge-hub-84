@@ -110,14 +110,22 @@ const Reservation = () => {
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-3 pt-4 border-t border-blue-200">
-                      <div className="p-3 bg-white rounded-lg">
-                        <p className="text-xs text-gray-500 mb-1">Thời gian hoạt động</p>
-                        <p className="text-sm font-semibold text-gray-800">24/7</p>
-                      </div>
-                      <div className="p-3 bg-white rounded-lg">
-                        <p className="text-xs text-gray-500 mb-1">Sạc nhanh</p>
-                        <p className="text-sm font-semibold text-green-600">Có sẵn</p>
+                    <div className="pt-4 border-t border-blue-200">
+                      <div className="p-4 bg-gradient-to-br from-white to-blue-50 rounded-lg border border-blue-100 shadow-sm">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <div className="p-2 bg-blue-500 rounded-lg">
+                              <Zap className="h-4 w-4 text-white" />
+                            </div>
+                            <p className="text-sm font-medium text-gray-700">Pin đã đặt tại trạm</p>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                              {Math.floor(Math.random() * 15) + 5}
+                            </span>
+                            <span className="text-sm text-gray-500">pin</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
