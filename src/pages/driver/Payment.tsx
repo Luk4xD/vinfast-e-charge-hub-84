@@ -13,6 +13,8 @@ const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("full");
   const [selectedMethod, setSelectedMethod] = useState("card");
   const [showCardForm, setShowCardForm] = useState(false);
+  const [selectedWallet, setSelectedWallet] = useState<string | null>(null);
+  const [showQRCode, setShowQRCode] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
@@ -27,10 +29,18 @@ const Payment = () => {
   const handlePayment = () => {
     if (selectedMethod === "card") {
       setShowCardForm(true);
+    } else if (selectedMethod === "wallet" && selectedWallet) {
+      setShowQRCode(true);
+    } else if (selectedMethod === "qr") {
+      setShowQRCode(true);
     } else {
-      // Handle other payment methods
       processPayment();
     }
+  };
+
+  const handleWalletSelect = (wallet: string) => {
+    setSelectedWallet(wallet);
+    setShowQRCode(true);
   };
 
   const processPayment = async () => {
@@ -89,24 +99,63 @@ const Payment = () => {
                       { value: "card", icon: CreditCard, label: "Thẻ tín dụng/ghi nợ", desc: "Visa, Mastercard, JCB", color: "from-blue-500 to-indigo-500" },
                       { value: "wallet", icon: Wallet, label: "Ví điện tử", desc: "MoMo, ZaloPay, ViettelPay", color: "from-green-500 to-emerald-500" },
                       { value: "qr", icon: QrCode, label: "QR Banking", desc: "Quét mã QR để thanh toán", color: "from-purple-500 to-pink-500" }
-                    ].map((method) => (
-                      <div key={method.value} className={`flex items-center space-x-4 p-6 border-2 rounded-2xl cursor-pointer transition-all duration-300 hover:shadow-lg ${
-                        selectedMethod === method.value 
-                          ? 'border-blue-500 bg-blue-50 shadow-md' 
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}>
-                        <RadioGroupItem value={method.value} id={method.value} className="w-5 h-5" />
-                        <div className={`p-3 bg-gradient-to-r ${method.color} rounded-xl`}>
-                          <method.icon className="h-6 w-6 text-white" />
+                     ].map((method) => (
+                      <div key={method.value}>
+                        <div 
+                          className={`flex items-center space-x-4 p-6 border-2 rounded-2xl cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                            selectedMethod === method.value 
+                              ? 'border-blue-500 bg-blue-50 shadow-md' 
+                              : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                          onClick={() => {
+                            setSelectedMethod(method.value);
+                            if (method.value !== "wallet") {
+                              setSelectedWallet(null);
+                            }
+                          }}
+                        >
+                          <RadioGroupItem value={method.value} id={method.value} className="w-5 h-5" />
+                          <div className={`p-3 bg-gradient-to-r ${method.color} rounded-xl`}>
+                            <method.icon className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <Label htmlFor={method.value} className="text-lg font-semibold text-gray-800 cursor-pointer">
+                              {method.label}
+                            </Label>
+                            <p className="text-sm text-gray-600 mt-1">{method.desc}</p>
+                          </div>
+                          {selectedMethod === method.value && (
+                            <CheckCircle className="h-6 w-6 text-blue-500" />
+                          )}
                         </div>
-                        <div className="flex-1">
-                          <Label htmlFor={method.value} className="text-lg font-semibold text-gray-800 cursor-pointer">
-                            {method.label}
-                          </Label>
-                          <p className="text-sm text-gray-600 mt-1">{method.desc}</p>
-                        </div>
-                        {selectedMethod === method.value && (
-                          <CheckCircle className="h-6 w-6 text-blue-500" />
+                        
+                        {/* E-wallet options */}
+                        {method.value === "wallet" && selectedMethod === "wallet" && (
+                          <div className="ml-4 mt-4 space-y-3 animate-slide-up">
+                            {[
+                              { name: "MoMo", color: "from-pink-500 to-rose-500" },
+                              { name: "ZaloPay", color: "from-blue-500 to-cyan-500" },
+                              { name: "ViettelPay", color: "from-red-500 to-orange-500" }
+                            ].map((wallet) => (
+                              <div
+                                key={wallet.name}
+                                onClick={() => handleWalletSelect(wallet.name)}
+                                className={`flex items-center space-x-3 p-4 border-2 rounded-xl cursor-pointer transition-all duration-300 hover:shadow-md ${
+                                  selectedWallet === wallet.name
+                                    ? 'border-blue-500 bg-blue-50'
+                                    : 'border-gray-200 hover:border-gray-300'
+                                }`}
+                              >
+                                <div className={`p-2 bg-gradient-to-r ${wallet.color} rounded-lg`}>
+                                  <Wallet className="h-5 w-5 text-white" />
+                                </div>
+                                <span className="font-semibold text-gray-800">{wallet.name}</span>
+                                {selectedWallet === wallet.name && (
+                                  <CheckCircle className="h-5 w-5 text-blue-500 ml-auto" />
+                                )}
+                              </div>
+                            ))}
+                          </div>
                         )}
                       </div>
                     ))}
@@ -291,6 +340,75 @@ const Payment = () => {
                     </Button>
                   </div>
                 </form>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* QR Code Modal */}
+        {showQRCode && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <Card className="w-full max-w-md bg-white shadow-2xl animate-scale-in">
+              <CardHeader>
+                <CardTitle className="flex items-center text-xl font-bold text-gray-800">
+                  <QrCode className="h-6 w-6 mr-2 text-blue-600" />
+                  {selectedMethod === "wallet" && selectedWallet 
+                    ? `Thanh toán qua ${selectedWallet}`
+                    : "Quét mã QR để thanh toán"}
+                </CardTitle>
+                <CardDescription>
+                  Sử dụng ứng dụng {selectedWallet || "ngân hàng"} để quét mã QR
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* QR Code Display */}
+                <div className="flex justify-center p-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl">
+                  <div className="bg-white p-6 rounded-xl shadow-lg">
+                    <div className="w-64 h-64 bg-gray-100 flex items-center justify-center rounded-lg">
+                      <QrCode className="h-32 w-32 text-gray-400" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Payment Info */}
+                <div className="space-y-3 p-4 bg-gray-50 rounded-xl">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Số tiền:</span>
+                    <span className="font-bold text-lg text-blue-600">150,000 VNĐ</span>
+                  </div>
+                  {selectedWallet && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Ví:</span>
+                      <span className="font-semibold text-gray-800">{selectedWallet}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Nội dung:</span>
+                    <span className="font-semibold text-gray-800">EVSWAP DOI PIN</span>
+                  </div>
+                </div>
+
+                {/* Instructions */}
+                <div className="space-y-2 text-sm text-gray-600">
+                  <p className="font-semibold text-gray-800">Hướng dẫn:</p>
+                  <ol className="list-decimal list-inside space-y-1 ml-2">
+                    <li>Mở ứng dụng {selectedWallet || "ngân hàng"}</li>
+                    <li>Chọn chức năng quét mã QR</li>
+                    <li>Quét mã QR phía trên</li>
+                    <li>Xác nhận thanh toán</li>
+                  </ol>
+                </div>
+
+                <Button
+                  onClick={() => {
+                    setShowQRCode(false);
+                    setSelectedWallet(null);
+                  }}
+                  variant="outline"
+                  className="w-full"
+                >
+                  Đóng
+                </Button>
               </CardContent>
             </Card>
           </div>
